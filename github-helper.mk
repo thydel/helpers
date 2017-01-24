@@ -80,7 +80,7 @@ create/%:; @$(call get-repos,$*) > /dev/null || $(strip $(call create-repos,$*))
 
 ####
 
-clone = git clone git@$(user).github.com:$*.git
+clone = git clone git@$(user).github.com:$(user)/$*.git
 clone/%:; $($(@D))
 
 ####
@@ -97,6 +97,7 @@ echo 'git config tag.sort version:refname';
 echo 'echo '*~' >> .gitignore';
 echo 'echo '*~' >> .git/info/exclude';
 echo 'echo 'tmp/' >> .git/info/exclude';
+echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
 echo "git commit -m 'Makes firts commit'";
 echo "git status";
 echo "git diff";
