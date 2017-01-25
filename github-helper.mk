@@ -17,8 +17,9 @@ user   ?= thydel
 ####
 
 infra-clone := Clone a new node
+misc-play   := Various playbooks
 
-new := infra-clone
+new := infra-clone misc-play
 
 ####
 
