@@ -1,0 +1,60 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- hosts: localhost
+  gather_facts: False
+  
+  vars:
+    hgrc: '{{ hg }}/.hg/hgrc'
+    gitconfig: '{{ git }}/.git/config'
+    gitremotename: git
+
+  tasks:
+
+    - apt:
+        name: mercurial-git
+      become: true
+      when: False
+
+    - block:
+
+        - stat: { path: '{{ item }}' }
+          register: st
+          with_items:
+            - '{{ hgrc }}'
+            - '{{ gitconfig }}'
+          loop_control: { label: '{{ item.split("/")[-1] }}' }
+
+        - when: st.results | map(attribute='stat.exists') | list | unique != [ True ]
+          fail: { msg: '{{ "one of these files does not exists: " + (st.results | map(attribute="item") | list | join(", ")) }}' }
+          name: check that files exist
+
+        - with_items: '{{ st.results | json_query("[*].{ file: item, isreg: stat.isreg }") }}'
+          loop_control: { label: '{{ item.file.split("/")[-1] }}' }
+          fail: { msg: '{{ item.file + " is not a regular file" }}' }
+          when: not item.isreg
+          name: check that files are regular
+
+    - name: Configure hg extensions
+      blockinfile:
+        dest: '{{ hgrc }}'
+        content: |
+          [extensions]
+          hgext.bookmarks =
+          hgext.git =
+
+    - block:
+
+      - name: get git config remote url
+        command: git config --get remote.origin.url
+        args:
+          chdir: '{{ gitconfig | dirname | dirname }}'
+        check_mode: False
+        changed_when: False
+        register: git_url
+  
+      - name: Add git url to hgrc
+        lineinfile:
+          dest: '{{ hgrc }}'
+          line: '{{ gitremotename + " = git+ssh://" + git_url.stdout }}'
+          insertafter: '^\[paths\]'
