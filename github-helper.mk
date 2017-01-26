@@ -39,6 +39,10 @@ $(eval $(shell $(gpg-agent-info-export)))
 pass-dummy:; @$(check-pass)
 .PHONY: pass-dummy
 
+# Ensure we won't fail because my agent reach his maximum lifetime
+
+$(if $(filter $(shell ssh-add -l > /dev/null || echo T),T),$(error your agent has no keys))
+
 ####
 
 list-repos.api   = $(github)/users/$(user)/repos
