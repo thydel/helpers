@@ -16,10 +16,11 @@ user   ?= thydel
 
 ####
 
-infra-clone := Clone a new node
-misc-play   := Various playbooks
+infra-clone         := Clone a new node
+misc-play           := Various playbooks
+innobackupx-wrapper := Use innobackupx via cron
 
-new := infra-clone misc-play
+new := infra-clone misc-play innobackupx-wrapper
 
 ####
 
