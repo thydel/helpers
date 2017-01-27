@@ -11,8 +11,7 @@
 
   tasks:
 
-    - apt:
-        name: mercurial-git
+    - apt: { name: mercurial-git }
       become: true
       when: False
 
@@ -47,8 +46,7 @@
 
       - name: get git config remote url
         command: git config --get remote.origin.url
-        args:
-          chdir: '{{ gitconfig | dirname | dirname }}'
+        args: { chdir: '{{ gitconfig | dirname | dirname }}' }
         check_mode: False
         changed_when: False
         register: git_url
@@ -58,3 +56,17 @@
           dest: '{{ hgrc }}'
           line: '{{ gitremotename + " = git+ssh://" + git_url.stdout }}'
           insertafter: '^\[paths\]'
+
+    - block:
+
+      - name: get hg bookmarks
+        command: hg bookmarks
+        args: { chdir: '{{ hgrc | dirname | dirname }}' }
+        check_mode: False
+        changed_when: False
+        register: hg_bookmarks
+
+      - name: set hg bookmarks
+        command: hg bookmarks -r default master
+        args: { chdir: '{{ hgrc | dirname | dirname }}' }
+        when: hg_bookmarks.stdout == 'no bookmarks set'
