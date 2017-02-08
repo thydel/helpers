@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 make := $(lastword $(MAKEFILE_LIST))
-$(make): pass-dummy;
+$(make):;
 SHELL := bash
 .DEFAULT_GOAL := main
 
@@ -33,10 +33,11 @@ gpg-agent-info-export = < ~/.gpg-agent-info xargs -i echo export {}
 gpg-agent-info-export:; @echo 'source <($(gpg-agent-info-export))'
 help += gpg-agent-info-export
 
-check-pass := timeout 1 pass dummy < /dev/null > /dev/null
+check-pass := timeout 1 pass dummy < /dev/null > /dev/null 2>&1 || date
 check-pass:; @echo '$(check-pass)'
 help += check-pass
 $(eval $(shell $(gpg-agent-info-export)))
+$(and $(shell $(check-pass)),$(info source <($(gpg-agent-info-export)))$(error check-pass failed))
 pass-dummy:; @$(check-pass)
 .PHONY: pass-dummy
 
