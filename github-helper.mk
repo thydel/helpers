@@ -27,6 +27,7 @@ infra-clone         := Clone a new node
 misc-play           := Various playbooks
 innobackupx-wrapper := Use innobackupx via cron
 ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then partition, mkfs and crypt.
+amr-disk-part       := Ansible role to export disk partitioning ansible modules.
 
 epi-repos := infra-clone misc-play innobackupx-wrapper ar-vsphere-disk-add
 
