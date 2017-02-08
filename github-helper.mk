@@ -42,6 +42,11 @@ epi-repos += infra-clone
 epi-repos += innobackupx-wrapper
 epi-repos += misc-play
 
+one-liner := Curated bash history
+
+thy-repos :=
+thy-repos += one-liner
+
 ####
 
 help :=
