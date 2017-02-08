@@ -14,13 +14,21 @@ users  := thydel thyepi
 user   ?= thydel
 .      := $(or $(filter $(user),$(users)),$(error $(user) not in $(users)))
 
+vartar :=
+varset :=
+epi     = user := thyepi
+thy     = user := thydel
+vartar += epi thy
+varset += user
+
 ####
 
 infra-clone         := Clone a new node
 misc-play           := Various playbooks
 innobackupx-wrapper := Use innobackupx via cron
+ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then partition, mkfs and crypt.
 
-new := infra-clone misc-play innobackupx-wrapper
+epi-repos := infra-clone misc-play innobackupx-wrapper ar-vsphere-disk-add
 
 ####
 
@@ -47,19 +55,35 @@ $(if $(filter $(shell ssh-add -l > /dev/null || echo T),T),$(error your agent ha
 
 ####
 
+show   ?= show-name+desc
+name    = show := show-name
+desc    = show := show-desc
+vartar += name desc
+varset += show
+
+show-name.jq      := .name
+show-name.sh      := cat
+show-desc.jq      := .description
+show-desc.sh      := cat
+show-name+desc.jq := (.name, .description)
+show-name+desc.sh := paste - - | column -ts$$'\t'
+
 list-repos.api   = $(github)/users/$(user)/repos
-all-repos.jq    := .[] | .name
-forked-repos.jq := .[] | select(.fork) | .name
-mine-repos.jq   := .[] | select(.fork | not) | .name
+all-repos.jq    := .[] | $($(show).jq)
+forked-repos.jq := .[] | select(.fork) | $($(show).jq)
+mine-repos.jq    = .[] | select(.fork | not) | $($(show).jq)
 repos-sets      += all forked mine
 
-list-repos = curl -s $(list-repos.api) | jq -r '$($1-repos.jq)'
+list-repos = curl -s $(list-repos.api) | jq -r '$($1-repos.jq)' | $($(show).sh)
 $(repos-sets:%=list/%):; $(call list-repos,$(@F))
+
+ws :=
+ws +=
 
 define list-repos-help
 echo;
 echo 'github [epi|thy] list/[all|forked|mine]';
-echo 'github [epi|thy] create/$new-repo';
+echo 'github [epi|thy] create/[$(subst $(ws),|,$($(user)-repos))]';
 echo 'github [epi|thy] clone/$existing-repo';
 echo;
 endef
@@ -131,8 +155,5 @@ help: $(help);
 
 ####
 
-epi     = user := thyepi
-thy     = user := thydel
-vartar := epi thy
-
 $(vartar):; @: $(eval $($@))
+$(varset:%=show/%):; @echo $($(@F))
