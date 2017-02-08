@@ -56,6 +56,16 @@ repos-sets      += all forked mine
 list-repos = curl -s $(list-repos.api) | jq -r '$($1-repos.jq)'
 $(repos-sets:%=list/%):; $(call list-repos,$(@F))
 
+define list-repos-help
+echo;
+echo 'github [thyepi|thydel] list/[all|forked|mine]';
+echo 'github [thyepi|thydel] create/$new-repo';
+echo 'github [thyepi|thydel] clone/$existing-repo';
+echo;
+endef
+list-repos-help:; @$(strip $($@))
+help += list-repos-help
+
 ####
 
 get-repos.api  = $(github)/repos/$(user)/$1
