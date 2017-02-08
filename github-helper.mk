@@ -26,9 +26,9 @@ varset += user
 amr-disk-part       := Ansible role to export disk partitioning ansible modules.
 ar-common-tools     := Ansible role to install basics pkgs after clone, wrapped by route add and del.
 ar-if-rename-first  := Ansible role to rename first eth iface, then fix its config.
+ar-vsphere-clone    := Ansible role to Clone a new VM via pysphere, then setup DHCPd and reconfigure VM id.
 ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then partition, mkfs and crypt.
 ar-vsphere-if-add   := Ansible role to add an eth iface to a VM via pysphere, then configure it.
-infra-clone         := Clone a new node
 innobackupx-wrapper := Use innobackupx via cron
 misc-play           := Various playbooks
 
@@ -36,9 +36,9 @@ epi-repos :=
 epi-repos += amr-disk-part
 epi-repos += ar-common-tools
 epi-repos += ar-if-rename-first
+epi-repos += ar-vsphere-clone
 epi-repos += ar-vsphere-disk-add
 epi-repos += ar-vsphere-if-add
-epi-repos += infra-clone
 epi-repos += innobackupx-wrapper
 epi-repos += misc-play
 
