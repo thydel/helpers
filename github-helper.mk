@@ -58,9 +58,9 @@ $(repos-sets:%=list/%):; $(call list-repos,$(@F))
 
 define list-repos-help
 echo;
-echo 'github [thyepi|thydel] list/[all|forked|mine]';
-echo 'github [thyepi|thydel] create/$new-repo';
-echo 'github [thyepi|thydel] clone/$existing-repo';
+echo 'github [epi|thy] list/[all|forked|mine]';
+echo 'github [epi|thy] create/$new-repo';
+echo 'github [epi|thy] clone/$existing-repo';
 echo;
 endef
 list-repos-help:; @$(strip $($@))
