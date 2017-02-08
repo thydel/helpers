@@ -23,13 +23,22 @@ varset += user
 
 ####
 
-infra-clone         := Clone a new node
-misc-play           := Various playbooks
-innobackupx-wrapper := Use innobackupx via cron
-ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then partition, mkfs and crypt.
 amr-disk-part       := Ansible role to export disk partitioning ansible modules.
+ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then partition, mkfs and crypt.
+ar-vsphere-if-add   := Ansible role to add an eth iface to a VM via pysphere, then configure it.
+ar-if-rename-first  := Ansible role to rename first eth iface, then fix its config.
+infra-clone         := Clone a new node
+innobackupx-wrapper := Use innobackupx via cron
+misc-play           := Various playbooks
 
-epi-repos := infra-clone misc-play innobackupx-wrapper ar-vsphere-disk-add
+epi-repos :=
+epi-repos += amr-disk-part
+epi-repos += ar-vsphere-disk-add
+epi-repos += ar-vsphere-if-add
+epi-repos += ar-if-rename-first
+epi-repos += infra-clone
+epi-repos += innobackupx-wrapper
+epi-repos += misc-play
 
 ####
 
