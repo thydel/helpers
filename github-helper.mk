@@ -42,10 +42,12 @@ epi-repos += ar-vsphere-if-add
 epi-repos += innobackupx-wrapper
 epi-repos += misc-play
 
-one-liner := Curated bash history
+one-liner           := Curated bash history
+debconf-preferences := Configure debconf
 
 thy-repos :=
 thy-repos += one-liner
+thy-repos += debconf-preferences
 
 ####
 
