@@ -42,12 +42,16 @@ epi-repos += ar-vsphere-if-add
 epi-repos += innobackupx-wrapper
 epi-repos += misc-play
 
+ar-hg-etc-com       := Ansible role to commit etc mercurial repo
 one-liner           := Curated bash history
 debconf-preferences := Configure debconf
+reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 
 thy-repos :=
 thy-repos += one-liner
 thy-repos += debconf-preferences
+thy-repos += reset-known_hosts
+thy-repos += ar-hg-etc-com
 
 ####
 
