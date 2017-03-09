@@ -32,26 +32,30 @@ ar-vsphere-if-add   := Ansible role to add an eth iface to a VM via pysphere, th
 innobackupx-wrapper := Use innobackupx via cron
 misc-play           := Various playbooks
 
-epi-repos :=
-epi-repos += amr-disk-part
-epi-repos += ar-common-tools
-epi-repos += ar-if-rename-first
-epi-repos += ar-vsphere-clone
-epi-repos += ar-vsphere-disk-add
-epi-repos += ar-vsphere-if-add
-epi-repos += innobackupx-wrapper
-epi-repos += misc-play
+~  := epi-repos
+$~ :=
+$~ += amr-disk-part
+$~ += ar-common-tools
+$~ += ar-if-rename-first
+$~ += ar-vsphere-clone
+$~ += ar-vsphere-disk-add
+$~ += ar-vsphere-if-add
+$~ += innobackupx-wrapper
+$~ += misc-play
 
 ar-hg-etc-com       := Ansible role to commit etc mercurial repo
 one-liner           := Curated bash history
 debconf-preferences := Configure debconf
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
+ar-jsonnet          := Ansible role to compile and install jsonnet
 
-thy-repos :=
-thy-repos += one-liner
-thy-repos += debconf-preferences
-thy-repos += reset-known_hosts
-thy-repos += ar-hg-etc-com
+~  := thy-repos
+$~ :=
+$~ += one-liner
+$~ += debconf-preferences
+$~ += reset-known_hosts
+$~ += ar-hg-etc-com
+$~ += ar-jsonnet
 
 ####
 
@@ -165,6 +169,7 @@ echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
 echo "git commit -m 'Makes firts commit'";
 echo "git status";
 echo "git diff";
+echo "git add .";
 echo "git add . -n";
 echo "git log --oneline";
 endef
