@@ -48,6 +48,8 @@ one-liner           := Curated bash history
 debconf-preferences := Configure debconf
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 ar-jsonnet          := Ansible role to compile and install jsonnet
+ar-ntpdate	    := Ansible role to install and configure ntpdate
+ar-make		    := Ansible role to run make
 
 ~  := thy-repos
 $~ :=
@@ -56,6 +58,8 @@ $~ += debconf-preferences
 $~ += reset-known_hosts
 $~ += ar-hg-etc-com
 $~ += ar-jsonnet
+$~ += ar-ntpdate
+$~ += ar-make
 
 ####
 
@@ -166,7 +170,7 @@ echo 'echo '*~' >> .gitignore';
 echo 'echo '*~' >> .git/info/exclude';
 echo 'echo 'tmp/' >> .git/info/exclude';
 echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
-echo "git commit -m 'Makes firts commit'";
+echo "git commit -m 'Makes first commit'";
 echo "git status";
 echo "git diff";
 echo "git add .";
