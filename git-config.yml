@@ -1,0 +1,41 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- hosts: localhost
+  tags: show
+  tasks:
+    - git_config:
+        scope: local
+        repo: '{{ repo | default(".") }}'
+        name: '{{ name | default("user.email") }}'
+      register: git_config
+    - debug: { var: git_config.config_value }
+
+- hosts: localhost
+  tags: log
+  tasks:
+    - git_config:
+        scope: local
+        repo: '{{ repo | default(".") }}'
+        name: '{{ item.key }}'
+        value: '{{ item.value }}'
+      with_dict:
+        log.date: relative
+        format.pretty: >-
+          tformat:%C(auto,yellow)%h%C(auto,magenta)% G?
+          %C(auto,blue)%>(12,trunc)%ad
+          %C(auto,green)%<(8,trunc)%aN%C(auto,reset)%s%C(auto,red)% %d
+          %C(auto,reset)
+
+- hosts: localhost
+  tags: mailmap
+  tasks:
+    - lineinfile:
+        path: '{{ repo | default(playbook_dir) }}/.mailmap'
+        line: '{{ item }}'
+        create: True
+      with_items:
+        - thyepi <t.delamare@epiconcept.fr> Thierry Delamare
+        - thydel <t.delamare@laposte.net>   Thierry Delamare
+        - evens  <e.solignac@epiconcept.fr> Evens Solignac
+        - cedric <c.girard@epiconcept.fr>   Cédric Girard
