@@ -109,7 +109,7 @@ show-desc.sh      := cat
 show-name+desc.jq := (.name, .description)
 show-name+desc.sh := paste - - | column -ts$$'\t'
 
-list-repos.api   = $(github)/users/$(user)/repos
+list-repos.api   = $(github)/users/$(user)/repos?per_page=100
 all-repos.jq    := .[] | $($(show).jq)
 forked-repos.jq := .[] | select(.fork) | $($(show).jq)
 mine-repos.jq    = .[] | select(.fork | not) | $($(show).jq)
