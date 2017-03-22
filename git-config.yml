@@ -1,6 +1,21 @@
 #!/usr/bin/env ansible-playbook
 ---
 
+- name: &check Check ansible version
+  hosts: all
+  gather_facts: False
+  tags: check-version
+  vars: { min_ansible_version: 2.3.0 }
+  tasks:
+    - fail:
+        msg: min ansible version is {{ min_ansible_version }}, ansible version is {{ ansible_version.string }}
+      when: ansible_version.string | version_compare(min_ansible_version, 'lt')
+      check_mode: False
+      run_once: True
+      delegate_to: localhost
+      tags: always
+      name: *check
+
 - hosts: localhost
   tags: show
   tasks:
@@ -39,3 +54,7 @@
         - thydel <t.delamare@laposte.net>   Thierry Delamare
         - evens  <e.solignac@epiconcept.fr> Evens Solignac
         - cedric <c.girard@epiconcept.fr>   Cédric Girard
+    - lineinfile:
+        path: '{{ repo | default(playbook_dir) }}/.gitignore'
+        line: .mailmap
+        insertafter: '^\*~$'
