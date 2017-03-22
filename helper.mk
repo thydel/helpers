@@ -23,7 +23,7 @@ $(install_dir)/git-config.yml:;
 endif
 
 git-config: .git/config;
-.git/config: $(install_dir)/git-config.yml; $(<F) -e repo=$(CURDIR)
+.git/config: $(install_dir)/git-config.yml; $(<F) -i localhost, -c local -e repo=$(CURDIR)
 
 ansible:; use-ansible help
 
