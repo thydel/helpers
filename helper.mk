@@ -10,18 +10,20 @@ $(self) := $(basename $(self))
 helper  := $(notdir $(self))
 $(self):;
 
+use-ansible.mk:;
 use-ansible.mk := use-ansible
 
-ifeq ($(dir $(self)),./)
 install_dir  := /usr/local/bin
+ifeq ($(dir $(self)),./)
 install_list := $(self) git-config.yml use-ansible.mk
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); ln -sf $* $($*)))
 install: $(install_list:%=$(install_dir)/%);
+else
+$(install_dir)/git-config.yml:;
 endif
 
 git-config: .git/config;
 .git/config: $(install_dir)/git-config.yml; $(<F) -e repo=$(CURDIR)
-$(install_dir)/git-config.yml:;
 
 ansible:; use-ansible help
 
