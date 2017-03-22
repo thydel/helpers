@@ -125,7 +125,7 @@ define list-repos-help
 echo;
 echo 'github [epi|thy] list/[all|forked|mine]';
 echo 'github [epi|thy] create/[$(subst $(ws),|,$($(user)-repos))]';
-echo 'github [epi|thy] clone/$existing-repo';
+echo 'github [epi|thy] clone/$$existing-repo';
 echo;
 endef
 list-repos-help:; @$(strip $($@))
