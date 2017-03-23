@@ -50,6 +50,11 @@ reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 ar-jsonnet          := Ansible role to compile and install jsonnet
 ar-ntpdate	    := Ansible role to install and configure ntpdate
 ar-make		    := Ansible role to run make
+ar-user-account	    := Ansible role to create a user account and manage user keys
+ar-add-users-to-group := Ansible role to add users to a group
+helpers             := Various helpers
+ar-reset-known_hosts-entry := Ansible role to reset a known_hosts entry on controller
+ar-remote-reset-known_hosts-entry := Ansible role to reset a known_hosts entry
 
 ~  := thy-repos
 $~ :=
@@ -60,6 +65,11 @@ $~ += ar-hg-etc-com
 $~ += ar-jsonnet
 $~ += ar-ntpdate
 $~ += ar-make
+$~ += ar-user-account
+$~ += ar-add-users-to-group
+$~ += helpers
+$~ += ar-reset-known_hosts-entry
+$~ += ar-remote-reset-known_hosts-entry
 
 ####
 
