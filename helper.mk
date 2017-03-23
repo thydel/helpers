@@ -13,9 +13,12 @@ $(self):;
 use-ansible.mk:;
 use-ansible.mk := use-ansible
 
+github-helper.mk:;
+github-helper.mk := github
+
 install_dir  := /usr/local/bin
 ifeq ($(dir $(self)),./)
-install_list := $(self) git-config.yml use-ansible.mk
+install_list := $(self) git-config.yml use-ansible.mk github-helper.mk
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); ln -sf $* $($*)))
 install: $(install_list:%=$(install_dir)/%);
 else
