@@ -55,6 +55,7 @@ ar-add-users-to-group := Ansible role to add users to a group
 helpers             := Various helpers
 ar-reset-known_hosts-entry := Ansible role to reset a known_hosts entry on controller
 ar-remote-reset-known_hosts-entry := Ansible role to reset a known_hosts entry
+ar-duplicity        := Ansible role to install and configure duplicity
 
 ~  := thy-repos
 $~ :=
@@ -70,6 +71,7 @@ $~ += ar-add-users-to-group
 $~ += helpers
 $~ += ar-reset-known_hosts-entry
 $~ += ar-remote-reset-known_hosts-entry
+$~ += ar-duplicity
 
 ####
 
