@@ -30,7 +30,7 @@ git-config: .git/config;
 .stone/git-config: .stone; touch $@
 .stone:; mkdir $@
 
-ansible:; use-ansible help
+ansible:; use-ansible short
 
 define self-help
 echo '$(helper) env';
