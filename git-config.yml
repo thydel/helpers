@@ -56,5 +56,6 @@
         - cedric <c.girard@epiconcept.fr>   Cédric Girard
     - lineinfile:
         path: '{{ repo | default(playbook_dir) }}/.gitignore'
-        line: .mailmap
+        line: '{{ item }}'
         insertafter: '^\*~$'
+      with_items: [ .mailmap, .stone ]
