@@ -167,35 +167,5 @@ clone/%:; $($(@D))
 
 ####
 
-define lines
-echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
-echo 'export GIT_PAGER=cat';
-echo "export GIT_EDITOR='emacsclient -s epi -c'";
-echo "export GIT_EDITOR='emacsclient -s thy -c'";
-echo 'git config push.default simple';
-echo 'git config user.email t.delamare@epiconcept.fr';
-echo 'git config user.email t.delamare@laposte.net';
-echo 'git config tag.sort version:refname';
-echo 'echo '*~' >> .gitignore';
-echo 'echo '*~' >> .git/info/exclude';
-echo 'echo 'tmp/' >> .git/info/exclude';
-echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
-echo "git commit -m 'Makes first commit'";
-echo "git status";
-echo "git diff";
-echo "git add .";
-echo "git add . -n";
-echo "git log --oneline";
-endef
-help += lines
-lines:; @$(strip $($@))
-
-####
-
-help: $(help);
-.PHONY: help $(help)
-
-####
-
 $(vartar):; @: $(eval $($@))
 $(varset:%=show/%):; @echo $($(@F))
