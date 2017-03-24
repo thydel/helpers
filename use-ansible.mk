@@ -32,6 +32,11 @@ help:
 	@echo
 	@echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
 
+short:
+	@$(foreach version,$(version),echo '$(pull)';)
+	@$(foreach version,$(version),echo '$(setup)';)
+	@echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
+
 clone pull setup:; @echo '$($@)'
 
 roles:; ansible-galaxy install -i -r requirements.yml
