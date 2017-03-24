@@ -23,7 +23,9 @@ $(install_dir)/git-config.yml:;
 endif
 
 git-config: .git/config;
-.git/config: $(install_dir)/git-config.yml; $(<F) -i localhost, -c local -e repo=$(CURDIR)
+.git/config: $(install_dir)/git-config.yml .stone/git-config; $(<F) -i localhost, -c local -e repo=$(CURDIR)
+.stone/git-config: .stone; touch $@
+.stone:; mkdir $@
 
 ansible:; use-ansible help
 
