@@ -1,0 +1,119 @@
+#!/usr/bin/env ansible-playbook
+---
+
+- hosts: localhost
+  gather_facts: True
+
+  vars:
+    use_filter_plugins: False
+    use_ssh_config: False
+    ansible_managed_for_copy: Ansible managed
+    roles_dir: roles
+    galaxy_requirement_file: galaxy.yml
+    created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', log, tmp, ext ]
+    generated_files: [ ansible.cfg, ssh-config ]
+
+  tasks:
+
+    - file:
+        path: '{{ repo | default(".") }}/{{ item }}'
+        state: directory
+      with_items: '{{ created_dirs + [ ".cache/ansible" ] }}'
+      name: Create empty dirs
+
+    - lineinfile:
+        path: '{{ repo | default(".") }}/.gitignore'
+        line: '{{ item }}'
+      with_items: '{{ created_dirs + generated_files }}'
+      name: Fill gitignore
+
+    - copy:
+        content: |
+          #!/usr/bin/python
+          
+          import sys, subprocess
+          
+          sys.stdout.write(subprocess.check_output(['pass', 'vault/epi']))
+        dest: '{{ repo | default(".") }}/vault-pass.py'
+        mode: 0755
+      name: Create ansible vault-pass
+
+    - copy:
+        content: |
+          # -*- Mode: conf; -*-
+          # {{ ansible_managed_for_copy }}
+          
+          [defaults]
+          
+          # column -t
+          inventory                = inventory
+          hosts                    = default
+          vault_password_file      = vault-pass.py
+          roles_path               = {{ roles_dir }}
+          {% if use_filter_plugins %}
+          filter_plugins           = plugins/filter
+          {% endif %}
+          log_path                 = log/ansible.log
+          gathering                = smart
+          fact_caching             = jsonfile
+          fact_caching_connection  = .cache/ansible
+          fact_caching_timeout     = 86400
+          
+          retry_files_enabled      = True
+          retry_files_save_path    = .retry
+          
+          merge_multiple_cli_tags  = True
+
+          stdout_callback          = debug
+
+          jinja2_extensions        = jinja2.ext.do
+          
+          ansible_managed = Ansible managed: {file} modified by {uid} on {host}
+          
+          [ssh_connection]
+          
+          {% if use_ssh_config %}
+          ssh_args   = -F ssh-config
+          {% endif %}
+          pipelining = True
+        dest: '{{ repo | default(".") }}/ansible.cfg'
+        mode: 0444
+      name: Create ansible config
+
+    - copy:
+        content: |
+          # -*- Mode: conf; -*-
+          # {{ ansible_managed_for_copy }}
+          {% raw %}
+          local ansible_connection=local ansible_become_pass="{{ lookup('pipe', 'pass node/local') }}"
+          {% endraw %}
+        dest: '{{ repo | default(".") }}/inventory/local'
+        mode: 0444
+      name: Create mininal local inventory
+      when: False
+
+    - block:
+
+      - stat: { path: '{{ galaxy_requirement_file }}' }
+        register: galaxy_requirement
+  
+      - set_fact:
+          galaxy_requirement_data: |
+            {{ lookup('file', galaxy_requirement_file) | from_yaml }}
+        when: galaxy_requirement.stat.exists
+          
+      - command: ansible-galaxy install {{ item.src }}
+        args: { creates: '{{ roles_dir }}/{{ item.src }}/README.md' }
+        with_items: '{{ galaxy_requirement_data }}'
+        loop_control: { label: '{{ item.src }}' }
+        when: galaxy_requirement_data is defined
+        name: install roles from galaxy
+
+      - file:
+          src: "{{ item.src }}"
+          path: '{{ repo | default(".") }}/{{ roles_dir }}/{{ item.name }}'
+          state: link
+        with_items: '{{ galaxy_requirement_data }}'
+        loop_control: { label: '{{ item.name }}' }
+        when: galaxy_requirement_data is defined
+        name: link usage name to galaxy name

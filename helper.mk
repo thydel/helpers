@@ -10,15 +10,23 @@ $(self) := $(basename $(self))
 helper  := $(notdir $(self))
 $(self):;
 
+mk :=
+
 use-ansible.mk:;
 use-ansible.mk := use-ansible
+mk += use-ansible.mk
 
 github-helper.mk:;
 github-helper.mk := github
+mk += github-helper.mk
+
+yml :=
+yml += git-config.yml
+yml += init-play-dir.yml
 
 install_dir  := /usr/local/bin
 ifeq ($(dir $(self)),./)
-install_list := $(self) git-config.yml use-ansible.mk github-helper.mk
+install_list := $(self) $(yml) $(mk)
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); ln -sf $* $($*)))
 install: $(install_list:%=$(install_dir)/%);
 else
@@ -32,11 +40,16 @@ git-config: .git/config;
 
 ansible:; use-ansible short
 
+init-play-dir: .ansible.cfg
+.ansible.cfg = $(<F) -i localhost, -c local -e repo=$(CURDIR) -e use_ssh_config=True $(DRY) $(DIF)
+.ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
+
 define self-help
 echo '$(helper) env';
 echo '$(helper) ansible';
 echo '$(helper) git';
 echo '$(helper) git-config';
+echo '$(helper) init-play-dir';
 echo '$(helper) help';
 endef
 help += self-help
@@ -73,5 +86,13 @@ help: $(help);
 
 .PHONY: top install git-config ansible help $(help)
 %.yml:
+
+DRY := -C
+DIF :=
+
+run := DRY :=
+dif := DIF := -D
+
+vartar := run dif
 
 $(vartar):; @: $(eval $($@))
