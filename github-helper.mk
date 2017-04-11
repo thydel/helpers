@@ -56,6 +56,7 @@ helpers             := Various helpers
 ar-reset-known_hosts-entry := Ansible role to reset a known_hosts entry on controller
 ar-remote-reset-known_hosts-entry := Ansible role to reset a known_hosts entry
 ar-duplicity        := Ansible role to install and configure duplicity
+ar-filter_plugins-misc := Ansible role to provide misc filter plugins
 
 ~  := thy-repos
 $~ :=
@@ -72,6 +73,7 @@ $~ += helpers
 $~ += ar-reset-known_hosts-entry
 $~ += ar-remote-reset-known_hosts-entry
 $~ += ar-duplicity
+$~ += ar-filter_plugins-misc
 
 ####
 
