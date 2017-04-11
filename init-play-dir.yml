@@ -68,6 +68,10 @@
 
           jinja2_extensions        = jinja2.ext.do
           
+          {% if merge %}
+          hash_behaviour           = merge
+          {% endif %}
+
           ansible_managed = Ansible managed: {file} modified by {uid} on {host}
           
           [ssh_connection]
