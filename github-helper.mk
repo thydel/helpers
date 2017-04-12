@@ -166,7 +166,7 @@ create/%:; @$(call get-repos,$*) > /dev/null || $(strip $(call create-repos,$*))
 
 ####
 
-clone = git clone git@$(user).github.com:$(user)/$*.git
+clone = test -d $* || git clone git@$(user).github.com:$(user)/$*.git
 clone/%:; $($(@D))
 
 ####
