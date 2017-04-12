@@ -171,5 +171,9 @@ clone/%:; $($(@D))
 
 ####
 
+help: $(help);
+
+####
+
 $(vartar):; @: $(eval $($@))
 $(varset:%=show/%):; @echo $($(@F))
