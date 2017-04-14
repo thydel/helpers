@@ -7,11 +7,12 @@
   vars:
     use_filter_plugins: False
     use_ssh_config: False
+    use_merge_hash: False
     ansible_managed_for_copy: Ansible managed
     roles_dir: roles
     galaxy_requirement_file: galaxy.yml
     created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', log, tmp, ext ]
-    generated_files: [ ansible.cfg, ssh-config ]
+    generated_files: [ ansible.cfg, ssh-config, vault-pass.py ]
 
   tasks:
 
@@ -68,7 +69,7 @@
 
           jinja2_extensions        = jinja2.ext.do
           
-          {% if merge %}
+          {% if use_merge_hash %}
           hash_behaviour           = merge
           {% endif %}
 
