@@ -58,6 +58,7 @@ ar-remote-reset-known_hosts-entry := Ansible role to reset a known_hosts entry
 ar-duplicity        := Ansible role to install and configure duplicity
 ar-filter_plugins-misc := Ansible role to provide misc filter plugins
 ap-vmware-utils     := Various ansible playbooks for vmware
+ar-automysqlbackup  := Ansible role to install and configure automysqlbackup
 
 ~  := thy-repos
 $~ :=
@@ -76,6 +77,7 @@ $~ += ar-remote-reset-known_hosts-entry
 $~ += ar-duplicity
 $~ += ar-filter_plugins-misc
 $~ += ap-vmware-utils
+$~ += ar-automysqlbackup
 
 ####
 
