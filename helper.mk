@@ -56,7 +56,8 @@ help += self-help
 
 define env
 echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
-echo 'export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
+echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
+echo 'echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 echo 'export TERM=eterm-color';
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
