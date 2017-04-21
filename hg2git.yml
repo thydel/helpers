@@ -51,10 +51,14 @@
         changed_when: False
         register: git_url
   
+      - name: set git prefix
+        set_fact:
+          gitprefix: "{{ (git_url.stdout[:4] == 'git@') | ternary('git+ssh://', '') }}"
+
       - name: Add git url to hgrc
         lineinfile:
           dest: '{{ hgrc }}'
-          line: '{{ gitremotename + " = git+ssh://" + git_url.stdout }}'
+          line: '{{ gitremotename + " = " + gitprefix + git_url.stdout }}'
           insertafter: '^\[paths\]'
 
     - block:
