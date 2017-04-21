@@ -60,6 +60,7 @@ ar-filter_plugins-misc := Ansible role to provide misc filter plugins
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-automysqlbackup  := Ansible role to install and configure automysqlbackup
 ar-revaliases-ssmtp := Ansible role for configuring the revaliases file of sSMTP
+ar-bsd-mailx        := Ansible role to install and configure bsd-mailx
 
 ~  := thy-repos
 $~ :=
@@ -80,6 +81,7 @@ $~ += ar-filter_plugins-misc
 $~ += ap-vmware-utils
 $~ += ar-automysqlbackup
 $~ += ar-revaliases-ssmtp
+$~ += ar-bsd-mailx
 
 ####
 
