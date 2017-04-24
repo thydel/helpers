@@ -20,6 +20,11 @@ github-helper.mk:;
 github-helper.mk := github
 mk += github-helper.mk
 
+git-index-filter.mk:;
+git-index-filter.mk := git-move-whole-tree-in-subdir
+git-index-filter.mk += git-rename-top-subdir
+mk += git-index-filter.mk
+
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
@@ -27,7 +32,7 @@ yml += init-play-dir.yml
 install_dir  := /usr/local/bin
 ifeq ($(dir $(self)),./)
 install_list := $(self) $(yml) $(mk)
-$(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); ln -sf $* $($*)))
+$(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); $(strip $(foreach _, $($*), ln -sf $* $_;))))
 install: $(install_list:%=$(install_dir)/%);
 else
 $(install_dir)/git-config.yml:;
@@ -48,6 +53,7 @@ define self-help
 echo '$(helper) env';
 echo '$(helper) ansible';
 echo '$(helper) git';
+echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) init-play-dir';
 echo '$(helper) help';
@@ -64,6 +70,14 @@ echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo "export GIT_EDITOR='emacsclient -s thy -c'";
 endef
 help += env
+
+define git-index-filter
+echo 'git-move-whole-tree-in-subdir $$subdir show=1';
+echo 'git-move-whole-tree-in-subdir $$subdir';
+echo 'git-rename-top-subdir $$newname renamed=$$oldname show=1';
+echo 'git-rename-top-subdir $$newname renamed=$$oldname';
+endef
+help += git-index-filter
 
 define git
 echo 'git config push.default simple';
