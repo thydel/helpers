@@ -28,6 +28,7 @@ mk += git-index-filter.mk
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
+yml += hg2git.yml
 
 install_dir  := /usr/local/bin
 ifeq ($(dir $(self)),./)
@@ -49,6 +50,11 @@ init-play-dir: .ansible.cfg
 .ansible.cfg = $(<F) -i localhost, -c local -e repo=$(CURDIR) -e use_ssh_config=True $(DRY) $(DIF)
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
 
+hg2git  =    test -d "$(hg)"
+hg2git += && test -d "$(git)"
+hg2git += && $@.yml -i localhost, -c local -e hg=$(hg) -e git=$(git) $(DRY) $(DIF)
+hg2git:; $($@)
+
 define self-help
 echo '$(helper) env';
 echo '$(helper) ansible';
@@ -56,6 +62,7 @@ echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) init-play-dir';
+echo '$(helper) hg2git';
 echo '$(helper) help';
 endef
 help += self-help
