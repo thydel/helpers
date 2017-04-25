@@ -21,6 +21,9 @@ $~  = s;\t;\t$*/;
 ~ := git-rename-top-subdir
 $~ = s;\t$(renamed)/;\t$*/;
 
+~ := git-merge-top-subdir
+$~ = s;\t$*/;\t;
+
 ls-file-sed = git ls-files -s | sed "$($(cmd))"
 
 ~  := index-filter
@@ -30,7 +33,9 @@ $~ +=   && mv $$GIT_INDEX_FILE.new $$GIT_INDEX_FILE
 
 filter-branch = git filter-branch --index-filter '$(index-filter)' HEAD
 
-%::; $(strip $(if $(show), $(ls-file-sed), $(filter-branch)))
+%:: _; $(strip $(if $(show), $(ls-file-sed), $(filter-branch)))
+_:
+
 
 # from git-filter-branch(1)
 #

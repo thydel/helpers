@@ -23,6 +23,7 @@ mk += github-helper.mk
 git-index-filter.mk:;
 git-index-filter.mk := git-move-whole-tree-in-subdir
 git-index-filter.mk += git-rename-top-subdir
+git-index-filter.mk += git-merge-top-subdir
 mk += git-index-filter.mk
 
 yml :=
@@ -83,6 +84,8 @@ echo 'git-move-whole-tree-in-subdir $$subdir show=1';
 echo 'git-move-whole-tree-in-subdir $$subdir';
 echo 'git-rename-top-subdir $$newname renamed=$$oldname show=1';
 echo 'git-rename-top-subdir $$newname renamed=$$oldname';
+echo 'git-merge-top-subdir $$subdir show=1';
+echo 'git-merge-top-subdir $$subdir';
 endef
 help += git-index-filter
 
