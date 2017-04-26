@@ -52,8 +52,8 @@ init-play-dir: .ansible.cfg
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
 
 hg2git  =    test -d "$(hg)"
-hg2git += && test -d "$(git)"
-hg2git += && $@.yml -i localhost, -c local -e hg=$(hg) -e git=$(git) $(DRY) $(DIF)
+hg2git += && test -d "$(2git)"
+hg2git += && $@.yml -i localhost, -c local -e hg=$(hg) -e git=$(2git) $(DRY) $(DIF)
 hg2git:; $($@)
 
 define self-help
@@ -63,7 +63,7 @@ echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) init-play-dir';
-echo '$(helper) hg2git';
+echo '$(helper) hg2git hg="" 2git=""';
 echo '$(helper) help';
 endef
 help += self-help
