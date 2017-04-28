@@ -35,6 +35,8 @@
         name: '{{ item.key }}'
         value: '{{ item.value }}'
       with_dict:
+        push.default: simple
+        tag.sort: 'version:refname'
         log.date: relative
         format.pretty: >-
           tformat:%C(auto,yellow)%h%C(auto,magenta)% G?
