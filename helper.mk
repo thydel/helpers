@@ -46,6 +46,7 @@ git-config: .git/config;
 .stone:; mkdir $@
 
 ansible:; use-ansible short
+ansible/help:; use-ansible $(@F)
 
 init-play-dir: .ansible.cfg
 .ansible.cfg = $(<F) -i localhost, -c local -e repo=$(CURDIR) -e use_ssh_config=True $(DRY) $(DIF)
@@ -61,6 +62,7 @@ echo '$(helper) env';
 echo '$(helper) git_env';
 echo '$(helper) ansible_env';
 echo '$(helper) ansible';
+echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';

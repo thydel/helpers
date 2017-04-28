@@ -8,7 +8,7 @@ $(self):;
 
 # get various ansible versions
 
-base := ~/usr/ext
+base := $(or $(GIT_CLONE_BASE), ~/usr/ext)
 version := devel
 version := stable-2.2
 version := stable-2.3
