@@ -58,6 +58,8 @@ hg2git:; $($@)
 
 define self-help
 echo '$(helper) env';
+echo '$(helper) git_env';
+echo '$(helper) ansible_env';
 echo '$(helper) ansible';
 echo '$(helper) git';
 echo '$(helper) git-index-filter';
@@ -73,11 +75,27 @@ echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
 echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 echo 'export TERM=eterm-color';
+endef
+help += env
+
+define git_env
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo "export GIT_EDITOR='emacsclient -s thy -c'";
 endef
-help += env
+help += git_env
+
+define ansible_env
+echo 'export ANSIBLE_STDOUT_CALLBACK=debug';
+echo 'export ANSIBLE_STDOUT_CALLBACK=default';
+echo 'export ANSIBLE_STDOUT_CALLBACK=dense';
+echo 'export ANSIBLE_STDOUT_CALLBACK=json';
+echo 'export ANSIBLE_STDOUT_CALLBACK=minimal';
+echo 'export ANSIBLE_STDOUT_CALLBACK=oneline';
+echo 'export ANSIBLE_STDOUT_CALLBACK=selective';
+echo 'unset ANSIBLE_STDOUT_CALLBACK';
+endef
+help += ansible_env
 
 define git-index-filter
 echo 'git-move-whole-tree-in-subdir $$subdir show=1';
