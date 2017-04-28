@@ -52,7 +52,7 @@ helper ansible
 
 To invoke `ansible` env-setup for default version 
 
-### config
+### Config
 
 ```bash
 helper git
@@ -73,10 +73,26 @@ helper init-play-dir
 
 To create a playbook dir skeleton using a playbook
 
-### migration tool
+## Migration tool
 
 ```bash
 helper hg2git hg="" 2git=""
 ```
-
 To prepare a Mercurial to git migration using a playbook
+
+## Github helper
+
+`github-helper.mk` Provides:
+
+	- github [epi|thy] list/[all|forked|mine]
+	- github [epi|thy] create/[]
+	- github [epi|thy] clone/$existing-repo
+
+## Git index-filter wrapper
+
+`git-index-filter.mk` Provides:
+
+	- git-move-whole-tree-in-subdir
+	- git-rename-top-subdir
+	- git-merge-top-subdir
+	
