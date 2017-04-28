@@ -2,3 +2,7 @@
 .mailmap
 .stone
 tmp/
+.adam
+gh-md-toc
+*html
+README-toc.md

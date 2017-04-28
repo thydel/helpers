@@ -1,19 +1,4 @@
-
-Table of Contents
-=================
-
-   * [Usage](#usage)
-      * [To generate TOC](#to-generate-toc)
-      * [Install helpers](#install-helpers)
-      * [Meta help](#meta-help)
-      * [Typical sequence for a new playbook repos](#typical-sequence-for-a-new-playbook-repos)
-         * [environment](#environment)
-         * [Config](#config)
-      * [Migration tool](#migration-tool)
-      * [Github helper](#github-helper)
-      * [Git index-filter wrapper](#git-index-filter-wrapper)
-
-Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+#include README-toc.md
 
 # Usage
 
