@@ -129,6 +129,13 @@ echo "git log --oneline";
 endef
 help += git
 
+define start
+echo 'gpg-agent --daemon --write-env-file';
+echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
+echo 'pass dummy';
+endef
+help += start
+
 $(help):; @$(strip $($@))
 help: $(help);
 
