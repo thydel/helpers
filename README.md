@@ -103,6 +103,7 @@ To create a playbook dir skeleton using a playbook
 
 ```bash
 helper hg2git hg="" 2git=""
+helper run hg2git hg="" 2git=""
 ```
 To prepare a Mercurial to git migration using a playbook
 

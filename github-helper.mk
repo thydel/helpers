@@ -61,6 +61,7 @@ ap-vmware-utils     := Various ansible playbooks for vmware
 ar-automysqlbackup  := Ansible role to install and configure automysqlbackup
 ar-revaliases-ssmtp := Ansible role for configuring the revaliases file of sSMTP
 ar-bsd-mailx        := Ansible role to install and configure bsd-mailx
+ar-my-bash-rc       := Ansible role to install my bashrc
 
 ~  := thy-repos
 $~ :=
@@ -82,6 +83,7 @@ $~ += ap-vmware-utils
 $~ += ar-automysqlbackup
 $~ += ar-revaliases-ssmtp
 $~ += ar-bsd-mailx
+$~ += ar-my-bash-rc
 
 ####
 
