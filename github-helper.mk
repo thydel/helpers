@@ -62,6 +62,7 @@ ar-automysqlbackup  := Ansible role to install and configure automysqlbackup
 ar-revaliases-ssmtp := Ansible role for configuring the revaliases file of sSMTP
 ar-bsd-mailx        := Ansible role to install and configure bsd-mailx
 ar-my-bash-rc       := Ansible role to install my bashrc
+ar-my-dotemacs      := Ansible role to install my dotemacs
 
 ~  := thy-repos
 $~ :=
@@ -84,6 +85,7 @@ $~ += ar-automysqlbackup
 $~ += ar-revaliases-ssmtp
 $~ += ar-bsd-mailx
 $~ += ar-my-bash-rc
+$~ += ar-my-dotemacs
 
 ####
 
