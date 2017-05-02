@@ -105,3 +105,14 @@ To prepare a Mercurial to git migration using a playbook
 	- git-rename-top-subdir
 	- git-merge-top-subdir
 	
+# Misc
+
+[Grip]: https://github.com/joeyespo/grip "github"
+
+## GitHub Readme Instant Preview
+
+See [Grip][Grip]
+
+```bash
+grip -b
+```

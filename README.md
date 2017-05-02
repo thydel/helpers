@@ -12,6 +12,8 @@ Table of Contents
       * [Migration tool](#migration-tool)
       * [Github helper](#github-helper)
       * [Git index-filter wrapper](#git-index-filter-wrapper)
+   * [Misc](#misc)
+      * [GitHub Readme Instant Preview](#github-readme-instant-preview)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
@@ -120,3 +122,14 @@ To prepare a Mercurial to git migration using a playbook
 	- git-rename-top-subdir
 	- git-merge-top-subdir
 	
+# Misc
+
+[Grip]: https://github.com/joeyespo/grip "github"
+
+## GitHub Readme Instant Preview
+
+See [Grip][Grip]
+
+```bash
+grip -b
+```
