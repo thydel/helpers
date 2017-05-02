@@ -63,6 +63,7 @@ ar-revaliases-ssmtp := Ansible role for configuring the revaliases file of sSMTP
 ar-bsd-mailx        := Ansible role to install and configure bsd-mailx
 ar-my-bash-rc       := Ansible role to install my bashrc
 ar-my-dotemacs      := Ansible role to install my dotemacs
+ar-my-screenrc      := Ansible role to install my screenrc
 
 ~  := thy-repos
 $~ :=
@@ -86,6 +87,7 @@ $~ += ar-revaliases-ssmtp
 $~ += ar-bsd-mailx
 $~ += ar-my-bash-rc
 $~ += ar-my-dotemacs
+$~ += ar-my-screenrc
 
 ####
 
