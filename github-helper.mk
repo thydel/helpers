@@ -64,6 +64,7 @@ ar-bsd-mailx        := Ansible role to install and configure bsd-mailx
 ar-my-bash-rc       := Ansible role to install my bashrc
 ar-my-dotemacs      := Ansible role to install my dotemacs
 ar-my-screenrc      := Ansible role to install my screenrc
+mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
 
 ~  := thy-repos
 $~ :=
@@ -88,6 +89,7 @@ $~ += ar-bsd-mailx
 $~ += ar-my-bash-rc
 $~ += ar-my-dotemacs
 $~ += ar-my-screenrc
+$~ += mail-wrapper
 
 ####
 
