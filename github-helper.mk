@@ -65,6 +65,8 @@ ar-my-bash-rc       := Ansible role to install my bashrc
 ar-my-dotemacs      := Ansible role to install my dotemacs
 ar-my-screenrc      := Ansible role to install my screenrc
 mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
+misc-script	    := Various scripts
+ar-regenerate-host-keys := Ansible role to regenerate host keys for cloned nodes
 
 ~  := thy-repos
 $~ :=
@@ -90,6 +92,8 @@ $~ += ar-my-bash-rc
 $~ += ar-my-dotemacs
 $~ += ar-my-screenrc
 $~ += mail-wrapper
+$~ += misc-script
+$~ += ar-regenerate-host-keys
 
 ####
 
