@@ -117,3 +117,48 @@ See [Grip][Grip]
 ```bash
 grip -b
 ```
+
+# Build ansible
+
+[build-ansible.mk](build-ansible.mk) allow to build and install a ansible debian package
+
+The First run on a worksation where all needed packages to build
+ansible are already installed will also generate a list of packages
+to install to successfully build ansible on a fresh debian install
+with similar debian release.
+
+e.g.
+
+- [build-ansible-stable-2.3-jessie-8.8-deb-src.mk](build-ansible-stable-2.3-jessie-8.8-deb-src.mk)
+- [build-ansible-stable-2.3-jessie-8.8-buildpackage.mk](build-ansible-stable-2.3-jessie-8.8-buildpackage.mk)
+
+First, clone or pull an ansible version
+
+```bash
+use-ansible help
+(cd ~/usr/ext; git clone --branch stable-2.3 --recursive git://github.com/ansible/ansible.git ansible-stable-2.3)
+(cd ~/usr/ext/ansible-stable-2.3; git pull --rebase; git submodule update --init --recursive)
+```
+
+Then, instead of running fromt sources
+
+```bash
+source ~/usr/ext/ansible-stable-2.3/hacking/env-setup -q
+```
+
+Use `build-ansible.mk`
+
+```bash
+build-ansible.mk once
+build-ansible.mk deb-src
+build-ansible.mk buildpackage
+build-ansible.mk install
+```
+
+Or
+
+```
+build-ansible.mk main
+```
+
+You can set `GIT_CLONE_BASE` and `GIT_ANSIBLE_VERSION`
