@@ -26,6 +26,10 @@ git-index-filter.mk += git-rename-top-subdir
 git-index-filter.mk += git-merge-top-subdir
 mk += git-index-filter.mk
 
+git-dates.mk:;
+git-dates.mk := git-dates
+mk += git-dates.mk
+
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
