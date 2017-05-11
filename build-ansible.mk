@@ -1,5 +1,23 @@
 #!/usr/bin/make -f
 
+.DEFAULT_GOAL := help
+Help = $(eval HELP := T)
+. := $(if $(MAKECMDGOALS),,$(Help))
+. := $(and $(filter $(MAKECMDGOALS), help), $(Help))
+ifdef HELP
+
+help:
+	@echo 'make -k deps      # may required to ignore errrors on first run'
+	@echo 'make deb-src      # must be run once'
+	@echo 'make buildpackage # second stage'
+	@echo 'make build        # run loop after bootstrap'
+	@echo 'make install      # use gdebi to install newly build package'
+	@echo 'make once         # populate .gitignore'
+	@echo 'make clean        # remove dpkg-depcheck output'
+	@echo 'make top          # trigger dpkg-depcheck processing'
+
+else
+
 top:; @date
 .PHONY: top
 
@@ -38,7 +56,8 @@ out2mk += echo -n '$1 := ';
 out2mk += < $<
 out2mk +=   grep '^  '
 out2mk += | sed -e 's/^  //' -e 's/:.*//'
-out2mk += | sort | tr '\n' ' '
+out2mk += | sort | tr '\n' ' ';
+out2mk += echo;
 out2mk += )
 out2mk += > $@
 
@@ -54,6 +73,9 @@ $(self): $(prefix)-deb-src.mk $(prefix)-buildpackage.mk
 include $(prefix)-deb-src.mk
 include $(prefix)-buildpackage.mk
 
+clean:; rm $(out)
+.PHONY: clean
+
 ####
 
 lineinfile.mk:;
@@ -67,7 +89,7 @@ gitignore: .gitignore
 
 ####
 
-deps := gdebi build-essential $(sort $(deb-src) $(buildpackage))
+deps := gdebi build-essential asciidoc $(sort $(deb-src) $(buildpackage))
 deps:; sudo aptitude install $($@)
 once: .gitignore deps;
 
@@ -80,8 +102,10 @@ build: deb-src buildpackage;
 
 deb := $(abspath $(wildcard $(buildpackage.cwd)/../*.deb))
 install := sudo gdebi $(deb)
-install:; $(@)
+install:; $($@)
 
 main: build install
 
 .PHONY: install main
+
+endif
