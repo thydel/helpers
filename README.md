@@ -15,6 +15,12 @@ Table of Contents
    * [Misc](#misc)
       * [GitHub Readme Instant Preview](#github-readme-instant-preview)
    * [Build ansible](#build-ansible)
+   * [Reset git date](#reset-git-date)
+      * [Install git-dates](#install-git-dates)
+      * [See help](#see-help)
+   * [Add TOC to mardown files](#add-toc-to-mardown-files)
+      * [install git-md](#install-git-md)
+         * [Usage](#usage-1)
 
 Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
 
@@ -180,3 +186,51 @@ build-ansible.mk main
 ```
 
 You can set `GIT_CLONE_BASE` and `GIT_ANSIBLE_VERSION`
+
+# Reset git date
+
+## Install `git-dates`
+
+```bash
+./helper.mk install
+```
+
+## See help
+
+`git-dates help`
+
+```
+ targets: restore-dates touch-dirs propagate-date config help
+ targets: targets (including phony ones) run commands
+
+	restore-dates: Set modification time of working files to either commiter (default) or author date
+	touch-dirs: Set modification time of working dir to begining of time So that propagate-date works correctly
+	propagate-date: propagate date of newest entry of each dirs up to top dir
+	config: Do not quote non ascii char in file name
+	help: This help
+
+ meta-targets: dates
+ meta-targets: meta-targets are sequence of targets
+
+	dates: restore-dates touch-dirs propagate-date
+
+ pseudo-targets: run author
+ pseudo-targets: pseudo-targets set paramaters and must be given before targets
+
+	run: All targets default to dry-run mode, run modifier go run-mode
+	author: Use git author date instead of committer date
+```
+
+# Add TOC to mardown files
+
+## install `git-md`
+
+```bash
+./helper.mk install
+```
+
+### Usage
+
+- `git-md once` to get [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+- `git-md README.md` to add a TOC to `README.md` where genrated TOC
+  will replace `#include README-toc.md` line
