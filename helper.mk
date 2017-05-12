@@ -10,36 +10,43 @@ $(self) := $(basename $(self))
 helper  := $(notdir $(self))
 $(self):;
 
+define add-mk
+$(eval $1.mk:;)
+$(eval $1.mk := $(firstword $2))
+$(foreach _, $(wordlist 2, $(words $2), $2), $(eval $1.mk += $_))
+$(eval mk += $1.mk)
+endef
+
 mk :=
+mks := use-ansible github-helper git-index-filter git-dates git-md
+github-helper := github
+git-index-filter := git-move-whole-tree-in-subdir
+git-index-filter += git-rename-top-subdir
+git-index-filter += git-merge-top-subdir
 
-use-ansible.mk:;
-use-ansible.mk := use-ansible
-mk += use-ansible.mk
+$(strip $(foreach _, $(mks), $(call add-mk, $_, $(or $($_), $_))))
 
-github-helper.mk:;
-github-helper.mk := github
-mk += github-helper.mk
-
-git-index-filter.mk:;
-git-index-filter.mk := git-move-whole-tree-in-subdir
-git-index-filter.mk += git-rename-top-subdir
-git-index-filter.mk += git-merge-top-subdir
-mk += git-index-filter.mk
-
-git-dates.mk:;
-git-dates.mk := git-dates
-mk += git-dates.mk
+awk :=
+include.awk:;
+include.awk := include
+awk += include.awk
 
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
 yml += hg2git.yml
 
-install_dir  := /usr/local/bin
+sharedir := /usr/local/share/make
+$(sharedir):; mkdir -p $@
+$(sharedir)/lineinfile.mk: lineinfile.mk $(sharedir); install -m 0644 $< $@
+install-share: $(sharedir)/lineinfile.mk
+.PHONY: install-share
+
+install_dir := /usr/local/bin
 ifeq ($(dir $(self)),./)
-install_list := $(self) $(yml) $(mk)
+install_list := $(self) $(yml) $(mk) $(awk)
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); $(strip $(foreach _, $($*), ln -sf $* $_;))))
-install: $(install_list:%=$(install_dir)/%);
+install: install-share $(install_list:%=$(install_dir)/%);
 else
 $(install_dir)/git-config.yml:;
 endif
