@@ -1,4 +1,4 @@
-# To server as actions templates
+# To serve as action templates
 
 ## Migrate `nsf-pair`
 
@@ -26,7 +26,7 @@ hg --cwd nfs-pair push git;
 	cd $thydel/ar-nfs-pair;
 	git pull;
 	git mv .hgignore .gitignore;
-	# edit$thydel/ar-nfs-pair/.gitignore
+	# edit .gitignore
 	git add .;
 	git commit -m 'Imports from mercurial';
 	git push;
