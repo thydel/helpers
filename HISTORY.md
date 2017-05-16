@@ -2,7 +2,8 @@
 
 ## Migrate `nsf-pair`
 
-- Edit [github-helper.mk][] a5018f17318f07960d2c020379f6a6aea2d3a19c
+- Edit [github-helper.mk](https://github.com/thydel/helpers/commit/a5018f17318f07960d2c020379f6a6aea2d3a19c)
+- Edit [github-helper.mk](a5018f17318f07960d2c020379f6a6aea2d3a19c)
 
 ```bash
 ./helper.mk install
