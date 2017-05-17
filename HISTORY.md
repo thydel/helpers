@@ -87,3 +87,27 @@ export dst=gitrepo;
 export file=afile;
 git -C $src-git format-patch --stdout --root $file | git -C $dst am
 ```
+
+## Synchronize git repo set on primary and secondary workstation
+
+### Make a new tool
+
+[mk-thydel.mk](mk-thydel.mk) include [mk-git-list.mk](mk-git-list.mk)
+to generate [thydel.mk](thydel.mk)
+  
+### On primary workstation
+
+```bash
+mk-thydel.mk clean main
+git add thydel.mk; git commit; git push
+```
+
+### On secondary workstation
+
+```bash
+git pull
+mk-thydel.mk clean main
+make -C ~/usr/thydel.d -f helpers/thydel.mk thydel
+```
+
+### Swap primary and secondary and synchronize again
