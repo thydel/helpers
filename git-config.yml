@@ -96,7 +96,7 @@
         - evens  <e.solignac@epiconcept.fr> Evens Solignac
         - cedric <c.girard@epiconcept.fr>   Cédric Girard
     - lineinfile:
-        path: '{{ repo | default(playbook_dir) }}/.gitignore'
+        path: '{{ repo | default(playbook_dir) }}/.git/info/exclude'
         line: '{{ item }}'
         insertafter: '^\*~$'
       with_items: [ .mailmap, .stone ]
