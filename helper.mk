@@ -155,7 +155,7 @@ echo "git add . -n";
 echo "git add .";
 echo "git commit -m 'Makes first commit'";
 echo "git log --oneline";
-echo "ls -d */.git | cut -d/ -f1 | xargs -i git -C {} status"
+echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash"
 endef
 help += git
 
