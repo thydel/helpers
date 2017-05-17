@@ -36,10 +36,21 @@ yml += git-config.yml
 yml += init-play-dir.yml
 yml += hg2git.yml
 
-sharedir := /usr/local/share/make
-$(sharedir):; mkdir -p $@
-$(sharedir)/lineinfile.mk: lineinfile.mk $(sharedir); install -m 0644 $< $@
-install-share: $(sharedir)/lineinfile.mk
+sharedir  := /usr/local/share
+sharedirs := make ansible
+install-share :=
+
+$(sharedirs:%=$(sharedir)/%/.stone):; mkdir -p $(@D); touch $@
+
+define Install-Share
+$(eval $(sharedir)/$1/$2: $2 $(sharedir)/$1/.stone; install -m 0644 $$< $$@)
+$(eval install-share += $(sharedir)/$1/$2)
+endef
+
+$(strip $(call Install-Share,make,lineinfile.mk))
+$(strip $(foreach _, ansible git,$(call Install-Share,ansible,check-$_-version.yml)))
+
+install-share: $(install-share)
 .PHONY: install-share
 
 install_dir := /usr/local/bin

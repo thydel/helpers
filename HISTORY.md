@@ -95,6 +95,12 @@ git -C $src-git format-patch --stdout --root $file | git -C $dst am
 [mk-thydel.mk](mk-thydel.mk) include [mk-git-list.mk](mk-git-list.mk)
 to generate [thydel.mk](thydel.mk)
   
+### Which require a recent git version
+
+```bash
+aptitude -t jessie-backports install git
+```
+
 ### On primary workstation
 
 ```bash

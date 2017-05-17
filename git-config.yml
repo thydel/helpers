@@ -1,37 +1,75 @@
 #!/usr/bin/env ansible-playbook
 ---
 
-- name: &check Check ansible version
-  hosts: all
-  gather_facts: False
-  tags: check-version
-  vars: { min_ansible_version: 2.3.0 }
+- include: /usr/local/share/ansible/check-ansible-version.yml
+- include: /usr/local/share/ansible/check-git-version.yml
+
+- hosts: localhost
+  tags: global
+  name: Set git basic global config default
   tasks:
-    - fail:
-        msg: min ansible version is {{ min_ansible_version }}, ansible version is {{ ansible_version.string }}
-      when: ansible_version.string | version_compare(min_ansible_version, 'lt')
-      check_mode: False
-      run_once: True
-      delegate_to: localhost
-      tags: always
-      name: *check
+    - git_config:
+        scope: global
+        name: '{{ item.key }}'
+        value: '{{ item.value }}'
+      with_dict:
+        push.default: simple
+        user.mail: t.delamare@laposte.net
+        user.name: Thierry Delamare
+
+- hosts: localhost
+  tags: aliases
+  name: Set git basic global aliases default
+  tasks:
+    - git_config:
+        scope: global
+        name: alias.{{ item.key }}
+        value: '{{ item.value }}'
+      with_dict:
+        br: branch
+        ci: commit
+        co: checkout
+        fe: fetch
+        st: status -s
 
 - hosts: localhost
   tags: show
+  name: Show configured git user email
   tasks:
     - git_config:
         scope: local
-        repo: '{{ repo | default(".") }}'
+        repo: &repo '{{ repo | default(".") }}'
         name: '{{ name | default("user.email") }}'
       register: git_config
     - debug: { var: git_config.config_value }
 
 - hosts: localhost
+  tags: email
+  name: Set local git user email from remote origin
+  tasks:
+    - command: git remote get-url origin
+      args: { chdir: *repo }
+      check_mode: False
+      changed_when: False
+      register: url
+    - set_fact: { pseudo: '{{ url.stdout.split(":")[0] }}' }
+    - set_fact:
+        pseudos:
+          git@thydel.github.com: t.delamare@laposte.net
+          git@thyepi.github.com: t.delamare@epiconcept.fr
+    - git_config:
+        scope: local
+        repo: *repo
+        name: user.email
+        value: '{{ pseudos[pseudo] }}'
+
+- hosts: localhost
   tags: log
+  name: Set local git config
   tasks:
     - git_config:
         scope: local
-        repo: '{{ repo | default(".") }}'
+        repo: *repo
         name: '{{ item.key }}'
         value: '{{ item.value }}'
       with_dict:
@@ -46,6 +84,7 @@
 
 - hosts: localhost
   tags: mailmap
+  name: Set git mailmap
   tasks:
     - lineinfile:
         path: '{{ repo | default(playbook_dir) }}/.mailmap'

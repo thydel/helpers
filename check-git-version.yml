@@ -1,0 +1,29 @@
+---
+
+- name: &check Check git version
+  hosts: all
+  gather_facts: False
+  tags: check-version
+
+  vars:
+
+    default_min_git_version: 2.11.0
+    local_min_git_version: '{{ min_git_version | default(default_min_git_version) }}'
+
+  tasks:
+
+    - command: git --version
+      register: reg_git_version
+      check_mode: False
+      changed_when: False
+
+    - set_fact: { git_version: '{{ reg_git_version.stdout.split(" ")[2] }}' }
+
+    - fail:
+        msg: min git version is {{ local_min_git_version }}, git version is {{ git_version }}
+      when: git_version | version_compare(local_min_git_version, 'lt')
+      check_mode: False
+      run_once: True
+      delegate_to: localhost
+      tags: always
+      name: *check
