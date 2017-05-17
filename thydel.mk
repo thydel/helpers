@@ -1,0 +1,107 @@
+# generated via include mk-git-list.mk
+
+top:; @date
+
+~ := thydel
+$~ =
+$~ += ar-isync
+$~ += ar-r-base
+$~ += sort-error-log
+$~ += propagate-date
+$~ += innobackupx-wrapper
+$~ += mail-wrapper
+$~ += ar-user-account
+$~ += misc-notes
+$~ += ar-hg-etc-com
+$~ += ar-regenerate-host-keys
+$~ += ar-reset-known_hosts-entry
+$~ += dispatch-log
+$~ += misc-play
+$~ += ar-vagrant-wheezy-box
+$~ += ar-jsonnet
+$~ += ar-nfs-pair
+$~ += ar-add-users-to-group
+$~ += reset-known_hosts
+$~ += ar-bsd-mailx
+$~ += misc-script
+$~ += ar-misc
+$~ += ar-remote-reset-known_hosts-entry
+$~ += mk-repos
+$~ += automysqlbackup-copy
+$~ += ar-emacs24
+$~ += ar-automysqlbackup
+$~ += ar-revaliases-ssmtp
+$~ += ar-my-account
+$~ += ar-my-dotemacs
+$~ += ar-pysphere-misc
+$~ += ar-runp
+$~ += ar-my-bash-rc
+$~ += ar-filter_plugins-misc
+$~ += ar-patch
+$~ += ar-apt-hold
+$~ += ar-make
+$~ += ar-fix-bash-bug
+$~ += ar-my-screenrc
+$~ += ar-duplicity
+$~ += ap-vmware-utils
+$~ += ar-ntpdate
+$~ += ar-my-sudoers
+$~ += debconf-preferences
+$~ += rsync-pair
+$~ += ar-vagrant
+$~ += one-liner
+$~ += ar-ansible-version
+$~ += helpers
+
+ar-isync                           :=  git@thydel.github.com:thydel/ar-isync.git
+ar-r-base                          :=  git@thydel.github.com:thydel/ar-r-base.git
+sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git
+propagate-date                     :=  git@thydel.github.com:thydel/propagate-date.git
+innobackupx-wrapper                :=  git@thydel.github.com:thydel/innobackupx-wrapper.git
+mail-wrapper                       :=  git@thydel.github.com:thydel/mail-wrapper.git
+ar-user-account                    :=  git@thydel.github.com:thydel/ar-user-account.git
+misc-notes                         :=  git@thydel.github.com:thydel/misc-notes.git
+ar-hg-etc-com                      :=  git@thydel.github.com:thydel/ar-hg-etc-com.git
+ar-regenerate-host-keys            :=  git@thydel.github.com:thydel/ar-regenerate-host-keys.git
+ar-reset-known_hosts-entry         :=  git@thydel.github.com:thydel/ar-reset-known_hosts-entry.git
+dispatch-log                       :=  git@thydel.github.com:thydel/dispatch-log.git
+misc-play                          :=  git@thydel.github.com:thydel/misc-play.git
+ar-vagrant-wheezy-box              :=  git@thydel.github.com:thydel/ar-vagrant-wheezy-box.git
+ar-jsonnet                         :=  git@thydel.github.com:thydel/ar-jsonnet.git
+ar-nfs-pair                        :=  git@thydel.github.com:thydel/ar-nfs-pair.git
+ar-add-users-to-group              :=  git@thydel.github.com:thydel/ar-add-users-to-group.git
+reset-known_hosts                  :=  git@thydel.github.com:thydel/reset-known_hosts.git
+ar-bsd-mailx                       :=  git@thydel.github.com:thydel/ar-bsd-mailx.git
+misc-script                        :=  git@thydel.github.com:thydel/misc-script.git
+ar-misc                            :=  git@thydel.github.com:thydel/ar-misc.git
+ar-remote-reset-known_hosts-entry  :=  git@thydel.github.com:thydel/ar-remote-reset-known_hosts-entry.git
+mk-repos                           :=  git@thydel.github.com:thydel/mk-repos.git
+automysqlbackup-copy               :=  git@thydel.github.com:thydel/automysqlbackup-copy.git
+ar-emacs24                         :=  git@thydel.github.com:thydel/ar-emacs24.git
+ar-automysqlbackup                 :=  git@thydel.github.com:thydel/ar-automysqlbackup.git
+ar-revaliases-ssmtp                :=  git@thydel.github.com:thydel/ar-revaliases-ssmtp.git
+ar-my-account                      :=  git@thydel.github.com:thydel/ar-my-account.git
+ar-my-dotemacs                     :=  git@thydel.github.com:thydel/ar-my-dotemacs.git
+ar-pysphere-misc                   :=  git@thydel.github.com:thydel/ar-pysphere-misc.git
+ar-runp                            :=  git@thydel.github.com:thydel/ar-runp.git
+ar-my-bash-rc                      :=  git@thydel.github.com:thydel/ar-my-bash-rc.git
+ar-filter_plugins-misc             :=  git@thydel.github.com:thydel/ar-filter_plugins-misc.git
+ar-patch                           :=  git@thydel.github.com:thydel/ar-patch.git
+ar-apt-hold                        :=  git@thydel.github.com:thydel/ar-apt-hold.git
+ar-make                            :=  git@thydel.github.com:thydel/ar-make.git
+ar-fix-bash-bug                    :=  git@thydel.github.com:thydel/ar-fix-bash-bug.git
+ar-my-screenrc                     :=  git@thydel.github.com:thydel/ar-my-screenrc.git
+ar-duplicity                       :=  git@thydel.github.com:thydel/ar-duplicity.git
+ap-vmware-utils                    :=  git@thydel.github.com:thydel/ap-vmware-utils.git
+ar-ntpdate                         :=  git@thydel.github.com:thydel/ar-ntpdate.git
+ar-my-sudoers                      :=  git@thydel.github.com:thydel/ar-my-sudoers.git
+debconf-preferences                :=  git@thydel.github.com:thydel/debconf-preferences.git
+rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.git
+ar-vagrant                         :=  git@thydel.github.com:thydel/ar-vagrant.git
+one-liner                          :=  git@thydel.github.com:thydel/one-liner.git
+ar-ansible-version                 :=  git@thydel.github.com:thydel/ar-ansible-version.git
+helpers                            :=  git@thydel.github.com:thydel/helpers.git
+
+$(thydel):; git clone $($@)
+thydel: $(thydel);
+.PHONY: thydel
