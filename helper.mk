@@ -145,7 +145,7 @@ echo 'git config tag.sort version:refname';
 echo "echo '*~' >> .gitignore";
 echo "echo '*~' >> .git/info/exclude";
 echo "echo 'tmp/' >> .git/info/exclude";
-echo "mkdir meta; echo -e '---\n\ndependencies:' >> meta/main.yml";
+echo "mkdir meta; echo -e '---\\\n\\\ndependencies:' >> meta/main.yml";
 echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
 echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
 echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
