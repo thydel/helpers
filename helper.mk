@@ -1,5 +1,8 @@
 #!/usr/bin/make -f
 
+MAKEFLAGS += -Rr
+#SHELL := $(shell which bash)
+
 top: self-help;
 
 staff := staff
@@ -27,14 +30,15 @@ git-index-filter += git-merge-top-subdir
 $(strip $(foreach _, $(mks), $(call add-mk, $_, $(or $($_), $_))))
 
 awk :=
-include.awk:;
 include.awk := include
 awk += include.awk
+$(awk):;
 
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
 yml += hg2git.yml
+$(yml):;
 
 sharedir  := /usr/local/share
 sharedirs := make ansible
@@ -43,6 +47,7 @@ install-share :=
 $(sharedirs:%=$(sharedir)/%/.stone):; mkdir -p $(@D); touch $@
 
 define Install-Share
+$(eval $2:;)
 $(eval $(sharedir)/$1/$2: $2 $(sharedir)/$1/.stone; install -m 0644 $$< $$@)
 $(eval install-share += $(sharedir)/$1/$2)
 endef
@@ -140,6 +145,7 @@ echo 'git config tag.sort version:refname';
 echo "echo '*~' >> .gitignore";
 echo "echo '*~' >> .git/info/exclude";
 echo "echo 'tmp/' >> .git/info/exclude";
+echo "mkdir meta; echo -e '---\n\ndependencies:' >> meta/main.yml";
 echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
 echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
 echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
