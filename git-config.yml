@@ -30,7 +30,7 @@
         ci: commit
         co: checkout
         fe: fetch
-        st: status -s
+        st: status
 
 - hosts: localhost
   tags: show
