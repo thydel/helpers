@@ -43,7 +43,7 @@ targets += touch-dirs
 touch-dirs  =
 touch-dirs +=   find -name .git -prune -o -type d ! -name . -print0
 touch-dirs += | grep -vz '^./.git$$'
-touch-dirs += | xargs -0 echo touch -d @0
+touch-dirs += | xargs -r0 echo touch -d @0
 touch-dirs += | $(RUN)
 
 propagate-date.help := propagate date of newest entry of each dirs up to top dir
