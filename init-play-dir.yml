@@ -78,7 +78,7 @@
           [ssh_connection]
           
           {% if use_ssh_config %}
-          ssh_args   = -F ssh-config
+          ssh_args   = -o ControlMaster=auto -o ControlPersist=60s -F ssh-config
           {% endif %}
           pipelining = True
         dest: '{{ repo | default(".") }}/ansible.cfg'
