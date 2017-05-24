@@ -11,7 +11,8 @@ $(self) := $(basename $(self))
 name    := $(notdir $($(self)))
 $(self):;
 
-. := $(and $(shell test -d .git || date),$(error not in a git dir))
+repo ?= .
+. := $(and $(shell test -d $(repo)/.git || date),$(error not in a git dir))
 
 targets := 
 targets.help := targets (including phony ones) run commands
@@ -32,8 +33,8 @@ Committer := @%ct
 Committer := %ci
 
 restore-dates  =
-restore-dates +=   git ls-files -z
-restore-dates += | xargs -0i git log -1 --format='touch -d "$($(DATE))" "{}";' {}
+restore-dates +=   git -C $(repo) ls-files -z
+restore-dates += | xargs -0i git -C $(repo) log -1 --format='touch -d "$($(DATE))" "$(repo)/{}";' {}
 restore-dates += | $(RUN)
 
 touch-dirs.help := Set modification time of working dir to begining of time
@@ -41,7 +42,7 @@ touch-dirs.help += So that propagate-date works correctly
 targets += touch-dirs
 
 touch-dirs  =
-touch-dirs +=   find -name .git -prune -o -type d ! -name . -print0
+touch-dirs +=   find $(repo) -name .git -prune -o -type d ! -name . -print0
 touch-dirs += | grep -vz '^./.git$$'
 touch-dirs += | xargs -r0 echo touch -d @0
 touch-dirs += | $(RUN)
@@ -49,7 +50,7 @@ touch-dirs += | $(RUN)
 propagate-date.help := propagate date of newest entry of each dirs up to top dir
 targets += propagate-date
 
-propagate-date = propagate-date $(EXEC) --skipd .git $(VERB) .
+propagate-date = propagate-date $(EXEC) --skipd .git $(VERB) $(repo)
 
 dates := restore-dates touch-dirs propagate-date
 
