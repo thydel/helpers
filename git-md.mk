@@ -42,5 +42,11 @@ noto2toc += && chmod a-w $@
 main: once README.md
 .PHONY: main
 
+help:
+	@echo git-md once
+	@echo git mv afile.md afile-notoc.md
+	@echo "echo -e '1i\n#include afile-toc.md\n.\nwq' | ed afile-notoc.md"
+	@echo git-md afile.md
+
 grip:; ls *.md | xargs -i echo grip -b {}
 .PHONY: grip

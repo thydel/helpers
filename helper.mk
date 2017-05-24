@@ -93,6 +93,8 @@ echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
+echo '$(helper) git-dates';
+echo '$(helper) git-md help';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
 echo '$(helper) help';
