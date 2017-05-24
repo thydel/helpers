@@ -155,9 +155,9 @@ echo "git add . -n";
 echo "git add .";
 echo "git commit -m 'Makes first commit'";
 echo "git log --oneline";
-echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash"
-echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash"
-echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash"
+echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash";
+echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash";
+echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 endef
 help += git
 
