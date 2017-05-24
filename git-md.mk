@@ -12,7 +12,8 @@ $(self) := $(basename $(self))
 name    := $(notdir $($(self)))
 $(self):;
 
-. := $(and $(shell test -d .git || date),$(error not in a git dir))
+git-test := git rev-parse --is-inside-work-tree > /dev/null 2>&1 || date
+. := $(and $(shell $(git-test)),$(error not in a git dir))
 
 %.html: %.md; pandoc -s -o $@ $<
 html: $(patsubst %.md,%.html,$(wildcard *.md));
