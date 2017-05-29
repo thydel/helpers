@@ -55,6 +55,7 @@
     - set_fact: { pseudo: '{{ url.stdout.split(":")[0] }}' }
     - set_fact:
         pseudos:
+          wato.ssh: t.delamare@laposte.net
           git@thydel.github.com: t.delamare@laposte.net
           git@thyepi.github.com: t.delamare@epiconcept.fr
     - git_config:
