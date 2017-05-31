@@ -21,12 +21,12 @@ lines := .adam gh-md-toc *html README-toc.md
 once: gh-md-toc .gitignore
 .PHONY: once
 
-README-toc.md: README-notoc.md; gh-md-toc $< > $@
+%-toc.md: %-notoc.md; gh-md-toc $< > $@
 
-README.md  = test -f $@ && chmod u+w $@;
-README.md += include.awk $< > $@ 
-README.md += && chmod a-w $@
-README.md: README-notoc.md README-toc.md; $($@)
+2toc  = test -f $@ && chmod u+w $@;
+2toc += include.awk $< > $@ 
+2toc += && chmod a-w $@
+%.md: %-notoc.md %-toc.md; $(2toc)
 
-main: once README.md
+main: once README.md HISTORY.md
 .PHONY: main
