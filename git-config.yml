@@ -55,14 +55,15 @@
     - set_fact: { pseudo: '{{ url.stdout.split(":")[0] }}' }
     - set_fact:
         pseudos:
-          wato.ssh: t.delamare@laposte.net
-          git@thydel.github.com: t.delamare@laposte.net
+          default: &default t.delamare@laposte.net
+          wato.ssh: *default
+          git@thydel.github.com: *default
           git@thyepi.github.com: t.delamare@epiconcept.fr
     - git_config:
         scope: local
         repo: *repo
         name: user.email
-        value: '{{ pseudos[pseudo] }}'
+        value: '{{ pseudos[pseudo] | default(pseudos.default) }}'
 
 - hosts: localhost
   tags: log
