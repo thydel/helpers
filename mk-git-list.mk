@@ -2,7 +2,7 @@
 
 name ?= thydel
 base ?= $(HOME)/usr/$(name).d
-list := $(sort $(patsubst $(base)/%/.git, %, $(wildcard $(base)/*/.git)))
+list := $(filter-out $(exclude), $(sort $(patsubst $(base)/%/.git, %, $(wildcard $(base)/*/.git))))
 
 get-url = $(shell git -C $(base)/$(strip $1) remote get-url origin)
 $(strip $(foreach _, $(list), $(eval $_ := $(call get-url, $_))))
