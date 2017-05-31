@@ -10,6 +10,9 @@ $(strip $(foreach _, $(list), $(eval $_ := $(call get-url, $_))))
 define print
 echo '# generated via include mk-git-list.mk';
 echo;
+echo 'MAKEFLAGS += -Rr';
+echo 'Makefile:;';
+echo;
 echo 'top:; @date';
 echo;
 echo '~  := $1';
@@ -23,7 +26,7 @@ echo '$1: $$($1);';
 echo '.PHONY: $1';
 endef
 
-$(name).mk:; @($(strip $(call print,$(name)))) > $@; chmod 444 $@
+$(name).mk: mk-$(name).mk mk-git-list.mk; @chmod 644 $@; ($(strip $(call print,$(name)))) > $@; chmod 444 $@;
 main: $(name).mk;
 clean:; @rm -f $(name).mk
 .PHONY: main clean

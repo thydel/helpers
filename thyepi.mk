@@ -1,5 +1,8 @@
 # generated via include mk-git-list.mk
 
+MAKEFLAGS += -Rr
+Makefile:;
+
 top:; @date
 
 ~ := thyepi
