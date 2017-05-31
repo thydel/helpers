@@ -232,5 +232,5 @@ You can set `GIT_CLONE_BASE` and `GIT_ANSIBLE_VERSION`
 ### Usage
 
 - `git-md once` to get [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
-- `git-md README.md` to add a TOC to `README.md` where genrated TOC
-  will replace `#include README-toc.md` line
+- `git-md README.md` to add a TOC to `README-notoc.md` where generated
+  TOC will replace `#include README-toc.md` line
