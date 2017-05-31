@@ -98,7 +98,7 @@ echo '$(helper) git-md help';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
 echo '$(helper) help';
-echo 'source <(heper env)';
+echo 'source <(helper env)';
 endef
 help += self-help
 
@@ -110,7 +110,6 @@ echo 'export PAGER=cat';
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
-echo 'source <(heper env)';
 endef
 help += env
 
