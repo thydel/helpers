@@ -105,6 +105,15 @@ export file=afile;
 git -C $src-git format-patch --stdout --root $file | git -C $dst am
 ```
 
+- Alternative, merge all in subdir
+
+```bash
+export src=hgrepo;
+export dst=gitrepo;
+export file=adir;
+git -C $src-git format-patch --stdout --root | git -C $dst am --directory $adir
+```
+
 ## Synchronize git repo set on primary and secondary workstation
 
 ### Make a new tool
