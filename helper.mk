@@ -75,6 +75,8 @@ git-config: .git/config;
 ansible:; use-ansible short
 ansible/help:; use-ansible $(@F)
 
+git-md git-dates:; $@ help
+
 init-play-dir: .ansible.cfg
 .ansible.cfg = $(<F) -i localhost, -c local -e repo=$(CURDIR) -e use_ssh_config=True $(DRY) $(DIF)
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
@@ -94,7 +96,7 @@ echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) git-dates';
-echo '$(helper) git-md help';
+echo '$(helper) git-md';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
 echo '$(helper) help';
