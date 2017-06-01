@@ -12,7 +12,12 @@ name    := $(notdir $($(self)))
 $(self):;
 
 repo ?= .
+ifdef NEVER
 . := $(and $(shell test -d $(repo)/.git || date),$(error not in a git dir))
+endif
+git-test := git rev-parse --is-inside-work-tree > /dev/null 2>&1 || date
+. := $(and $(shell $(git-test)),$(error not in a git dir))
+
 
 targets := 
 targets.help := targets (including phony ones) run commands
