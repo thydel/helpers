@@ -73,7 +73,7 @@
           hash_behaviour           = merge
           {% endif %}
 
-          {% if use_ansible_managed %}
+          {% if use_ansible_managed | default(False) %}
           ansible_managed = Ansible managed: {file} modified by {uid} on {host}
           {% else %}
           ansible_managed = Ansible managed
