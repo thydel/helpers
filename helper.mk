@@ -87,6 +87,7 @@ hg2git += && $@.yml -i localhost, -c local -e hg=$(hg) -e git=$(2git) $(DRY) $(D
 hg2git:; $($@)
 
 define self-help
+echo '$(helper) start';
 echo '$(helper) env';
 echo '$(helper) git_env';
 echo '$(helper) ansible_env';
