@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 MAKEFLAGS += -Rr
-#SHELL := $(shell which bash)
+SHELL := $(shell which bash)
 
 top: self-help;
 
@@ -99,6 +99,7 @@ echo '$(helper) git-dates';
 echo '$(helper) git-md';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
+echo '$(helper) hist';
 echo '$(helper) help';
 echo 'source <(helper env)';
 endef
@@ -114,6 +115,13 @@ echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 endef
 help += env
+
+define hist
+echo 'hist-file() { echo history | env -i HISTFILE="$$1" HISTTIMEFORMAT="%F+%T " bash --norc -i 2> /dev/null; }';
+echo 'histhost() { if test "$$1"; then echo $$HISTDIR/../$$1; else echo $$HISTDIR; fi; }';
+echo $$'hh() { source <(find $$(histhost $$2) -type f | xargs grep -l "$$1" | xargs -i echo "hist-file {} | grep \'$$1\'") | sort -k2; }';
+endef
+help += hist
 
 define git_env
 echo 'export GIT_PAGER=cat';
