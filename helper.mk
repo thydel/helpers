@@ -89,10 +89,7 @@ hg2git:; $($@)
 define self-help
 echo '$(helper) start';
 echo '$(helper) env';
-echo '$(helper) git_env';
-echo '$(helper) ansible_env';
 echo '$(helper) ansible';
-echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) git';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
@@ -100,11 +97,20 @@ echo '$(helper) git-dates';
 echo '$(helper) git-md';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
-echo '$(helper) hist';
 echo '$(helper) help';
+echo '$(helper) more-help';
 echo 'source <(helper env)';
 endef
 help += self-help
+
+define more-help
+echo '$(helper) git_env';
+echo '$(helper) ansible_env';
+echo '$(helper) ansible/help GIT_CLONE_BASE=';
+echo '$(helper) hist';
+echo '$(helper) xrandr';
+endef
+help += more-help
 
 define env
 echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
@@ -123,6 +129,11 @@ echo 'histhost() { if test "$$1"; then echo $$HISTDIR/../$$1; else echo $$HISTDI
 echo $$'hh() { source <(find $$(histhost $$2) -type f | xargs grep -l "$$1" | xargs -i echo "hist-file {} | grep \'$$1\'") | sort -k2; }';
 endef
 help += hist
+
+define xrandr
+echo 'xrandr --output HDMI1 --primary # tdelt2';
+endef
+help += xrandr
 
 define git_env
 echo 'export GIT_PAGER=cat';

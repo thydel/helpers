@@ -21,7 +21,7 @@ url := git://github.com/ansible/ansible.git
 clone = (cd $(base); git clone --branch $(version) --recursive $(url) ansible-$(version))
 pull  = (cd $(base)/ansible-$(version); git pull --rebase; git submodule update --init --recursive)
 setup = source $(base)/ansible-$(version)/hacking/env-setup -q
-pkgs  = sudo aptitude install python-netaddr
+pkgs  = sudo aptitude install python-jinja2 python-netaddr
 
 help:
 	@$(foreach version,$(versions),echo '$(clone)';)
