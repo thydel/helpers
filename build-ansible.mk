@@ -6,6 +6,9 @@ Help = $(eval HELP := T)
 . := $(and $(filter $(MAKECMDGOALS), help), $(Help))
 ifdef HELP
 
+fix:
+	@echo 'sudo aptitude install make-guile asciidoc'
+
 help:
 	@echo 'make -k deps      # may required to ignore errrors on first run'
 	@echo 'make deb-src      # must be run once'

@@ -132,6 +132,11 @@ help += hist
 
 define xrandr
 echo 'xrandr --output HDMI1 --primary # tdelt2';
+echo;
+echo 'cvt 1280 1024 60 # some unrecognized monitor';
+echo 'xrandr --newmode "1280x1024_60.00"  109.00  1280 1368 1496 1712  1024 1027 1034 1063 -hsync +vsync # wato';
+echo 'xrandr --addmode DisplayPort-0 "1280x1024_60.00" # wato';
+echo 'xrandr --output DisplayPort-0 --mode "1280x1024_60.00" # wato';
 endef
 help += xrandr
 
