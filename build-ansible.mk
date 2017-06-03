@@ -6,8 +6,8 @@ Help = $(eval HELP := T)
 . := $(and $(filter $(MAKECMDGOALS), help), $(Help))
 ifdef HELP
 
-fix:
-	@echo 'sudo aptitude install make-guile asciidoc'
+prefix:
+	@echo 'sudo aptitude install make-guile asciidoc python-sphinx'
 
 help:
 	@echo 'make -k deps      # may required to ignore errrors on first run'
