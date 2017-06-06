@@ -78,7 +78,9 @@ ansible/help:; use-ansible $(@F)
 git-md git-dates:; $@ help
 
 init-play-dir: .ansible.cfg
-.ansible.cfg = $(<F) -i localhost, -c local -e repo=$(CURDIR) -e use_ssh_config=True $(DRY) $(DIF)
+.ansible.cfg  = $(<F) -i localhost, -c local -e repo=$(CURDIR)
+.ansible.cfg += -e use_ssh_config=True -e vault_pass=$(or $(vault_pass),vault/epi)
+.ansible.cfg += $(DRY) $(DIF)
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
 
 hg2git  =    test -d "$(hg)"
@@ -199,6 +201,24 @@ echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'pass dummy';
 endef
 help += start
+
+define once
+echo 'ssh mine gpg2 --export --armor thy | gpg2 --import';
+echo 'ssh mine gpg2 --export-secret-keys --armor thy | gpg2 --import';
+echo 'ssh mine gpg2 --export-ownertrust | gpg2 --import-ownertrust';
+echo;
+echo 'sudo aptitude install pinentry-curses pinentry-tty';
+echo 'echo pinentry-program /usr/bin/pinentry-tty >> ~/.gnupg/gpg-agent.conf';
+echo 'echo default-cache-ttl $((3600 * 24)) >> ~/.gnupg/gpg-agent.conf';
+echo 'echo max-cache-ttl $((3600 * 24 * 7)) >> ~/.gnupg/gpg-agent.conf';
+echo;
+echo 'sudo aptitude install pass';
+echo 'git -C ~/usr/perso.d clone pass-store';
+echo 'ln -s ~/usr/perso.d/pass-store ~/.password-store';
+echo 'pass git pull';
+
+endef
+help += once
 
 $(help):; @$(strip $($@))
 help: $(help);
