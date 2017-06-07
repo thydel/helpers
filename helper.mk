@@ -148,7 +148,8 @@ define aptitude
 echo 'aptitude --disable-columns search $$search';
 echo 'aptitude --disable-columns search -F '%p_%V_%d' $$search | column -t -s_';
 echo 'while deborphan | line; do deborphan | xargs -r aptitude -y remove; done';
-endef += aptitude
+endef
+help += aptitude
 
 ################
 
