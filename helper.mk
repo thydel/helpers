@@ -204,8 +204,8 @@ define git
 echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
 echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
 echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
-echo "git -C $src-git format-patch --stdout --root $file | git am -p1";
-echo "git -C $src-git format-patch --stdout --root       | git am -p1 --directory $adir"
+echo 'git -C $$src-git format-patch --stdout --root $$file | git am -p1';
+echo 'git -C $$src-git format-patch --stdout --root | git am -p1 --directory $$adir';
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
