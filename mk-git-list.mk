@@ -26,7 +26,7 @@ echo '$1: $$($1);';
 echo '.PHONY: $1';
 endef
 
-$(name).mk: mk-$(name).mk mk-git-list.mk; @chmod 644 $@; ($(strip $(call print,$(name)))) > $@; chmod 444 $@;
+$(name).mk: mk-$(name).mk mk-git-list.mk; @test -f $@ && chmod 644 $@; ($(strip $(call print,$(name)))) > $@; chmod 444 $@;
 main: $(name).mk;
 clean:; @rm -f $(name).mk
 .PHONY: main clean
