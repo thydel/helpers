@@ -2,15 +2,15 @@
 **Table of Contents**
 
 - [To serve as action templates](#to-serve-as-action-templates)
-    - [Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`](#migrate-local-mercurial-nsf-pair-to-github-ar-nfs-pair)
-    - [Migrate a local mercurial repo to local git repo](#migrate-a-local-mercurial-repo-to-local-git-repo)
-    - [Merge selected files from local migrated repo into reorganized git repo](#merge-selected-files-from-local-migrated-repo-into-reorganized-git-repo)
-    - [Synchronize git repo set on primary and secondary workstation](#synchronize-git-repo-set-on-primary-and-secondary-workstation)
-        - [Make a new tool](#make-a-new-tool)
-        - [Which require a recent git version](#which-require-a-recent-git-version)
-        - [On primary workstation](#on-primary-workstation)
-        - [On secondary workstation](#on-secondary-workstation)
-        - [Swap primary and secondary and synchronize again](#swap-primary-and-secondary-and-synchronize-again)
+- [Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`](#migrate-local-mercurial-nsf-pair-to-github-ar-nfs-pair)
+- [Migrate a local mercurial repo to local git repo](#migrate-a-local-mercurial-repo-to-local-git-repo)
+- [Merge selected files from local migrated repo into reorganized git repo](#merge-selected-files-from-local-migrated-repo-into-reorganized-git-repo)
+- [Synchronize git repo set on primary and secondary workstation](#synchronize-git-repo-set-on-primary-and-secondary-workstation)
+    - [Make a new tool](#make-a-new-tool)
+    - [Which require a recent git version](#which-require-a-recent-git-version)
+    - [On primary workstation](#on-primary-workstation)
+    - [On secondary workstation](#on-secondary-workstation)
+    - [Swap primary and secondary and synchronize again](#swap-primary-and-secondary-and-synchronize-again)
 
 <!-- markdown-toc end -->
 
