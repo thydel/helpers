@@ -202,10 +202,14 @@ help += git+
 
 define git
 echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
+echo;
 echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
-echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
-echo 'git -C $$src-git format-patch --stdout --root $$file | git am -p1';
-echo 'git -C $$src-git format-patch --stdout --root | git am -p1 --directory $$adir';
+echo "git filter-branch -f --msg-filter 'sed \"s/\$$from/\$$to/\"'";
+echo 'git update-ref -d refs/original/refs/heads/master';
+echo;
+echo 'git -C $$src format-patch --stdout --root $$file | git am -p1';
+echo 'git -C $$src format-patch --stdout --root | git am -p1 --directory $$adir';
+echo;
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
@@ -216,7 +220,6 @@ define ssh-agent
 echo 'ls /tmp/ssh-*/* | cut -d. -f2 | xargs ps';
 echo 'ls /tmp/ssh-*/* | xargs -i echo env SSH_AUTH_SOCK={} ssh-add -l';
 echo 'ls /tmp/ssh-*/* | xargs -i echo export SSH_AUTH_SOCK={}';
-echo '';
 endef
 help += ssh-agent
 
