@@ -112,6 +112,7 @@ echo '$(helper) ansible_env';
 echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) hist';
 echo '$(helper) xrandr';
+echo '$(helper) aptitude';
 endef
 help += more-help
 
@@ -143,6 +144,14 @@ echo 'xrandr --output DisplayPort-0 --mode "1280x1024_60.00" # wato';
 endef
 help += xrandr
 
+define aptitude
+echo 'aptitude --disable-columns search $$search';
+echo 'aptitude --disable-columns search -F '%p_%V_%d' $$search | column -t -s_';
+echo 'while deborphan | line; do deborphan | xargs -r aptitude -y remove; done';
+endef += aptitude
+
+################
+
 define git_env
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
@@ -172,7 +181,8 @@ echo 'git-merge-top-subdir $$subdir';
 endef
 help += git-index-filter
 
-define git
+define git+
+echo "mkdir meta; echo -e '---\\\n\\\ndependencies:' >> meta/main.yml";
 echo 'git config push.default simple';
 echo 'git config user.email t.delamare@epiconcept.fr';
 echo 'git config user.email t.delamare@laposte.net';
@@ -180,16 +190,21 @@ echo 'git config tag.sort version:refname';
 echo "echo '*~' >> .gitignore";
 echo "echo '*~' >> .git/info/exclude";
 echo "echo 'tmp/' >> .git/info/exclude";
-echo "mkdir meta; echo -e '---\\\n\\\ndependencies:' >> meta/main.yml";
-echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
-echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
-echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
 echo "git status";
 echo "git diff";
 echo "git add . -n";
 echo "git add .";
 echo "git commit -m 'Makes first commit'";
 echo "git log --oneline";
+endef
+help += git+
+
+define git
+echo 'env DISPLAY=:0.0 git rebase -i HEAD~2';
+echo "git filter-branch --msg-filter 'echo -n \"\$$prefix \" && cat'";
+echo "git filter-branch --msg-filter 'sed \"s/\$$from/\$$to/\"'";
+echo "git -C $src-git format-patch --stdout --root $file | git am -p1";
+echo "git -C $src-git format-patch --stdout --root       | git am -p1 --directory $adir"
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
