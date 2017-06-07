@@ -1,23 +1,22 @@
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+**Table of Contents**
 
-Table of Contents
-=================
+- [To serve as action templates](#to-serve-as-action-templates)
+    - [Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`](#migrate-local-mercurial-nsf-pair-to-github-ar-nfs-pair)
+    - [Migrate a local mercurial repo to local git repo](#migrate-a-local-mercurial-repo-to-local-git-repo)
+    - [Merge selected files from local migrated repo into reorganized git repo](#merge-selected-files-from-local-migrated-repo-into-reorganized-git-repo)
+    - [Synchronize git repo set on primary and secondary workstation](#synchronize-git-repo-set-on-primary-and-secondary-workstation)
+        - [Make a new tool](#make-a-new-tool)
+        - [Which require a recent git version](#which-require-a-recent-git-version)
+        - [On primary workstation](#on-primary-workstation)
+        - [On secondary workstation](#on-secondary-workstation)
+        - [Swap primary and secondary and synchronize again](#swap-primary-and-secondary-and-synchronize-again)
 
-   * [To serve as action templates](#to-serve-as-action-templates)
-      * [Migrate local mercurial nsf-pair to github <code>ar-nfs-pair</code>](#migrate-local-mercurial-nsf-pair-to-github-ar-nfs-pair)
-      * [Migrate a local mercurial repo to local git repo](#migrate-a-local-mercurial-repo-to-local-git-repo)
-      * [Merge selected files from local migrated repo into reorganized git repo](#merge-selected-files-from-local-migrated-repo-into-reorganized-git-repo)
-      * [Synchronize git repo set on primary and secondary workstation](#synchronize-git-repo-set-on-primary-and-secondary-workstation)
-         * [Make a new tool](#make-a-new-tool)
-         * [Which require a recent git version](#which-require-a-recent-git-version)
-         * [On primary workstation](#on-primary-workstation)
-         * [On secondary workstation](#on-secondary-workstation)
-         * [Swap primary and secondary and synchronize again](#swap-primary-and-secondary-and-synchronize-again)
-
-Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+<!-- markdown-toc end -->
 
 # To serve as action templates
 
-## Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`
+# Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`
 
 - Edit [github-helper.mk](https://github.com/thydel/helpers/commit/a5018f17318f07960d2c020379f6a6aea2d3a19c)
 
@@ -50,7 +49,7 @@ hg --cwd nfs-pair push git;
 )
 ```
 
-## Migrate a local mercurial repo to local git repo
+# Migrate a local mercurial repo to local git repo
 
 - Prepare a local git repo
 
@@ -67,7 +66,7 @@ helper run hg2git hg=$(pwd)/$name 2git=$(pwd)/$name-git;
 hg --cwd $name push git;
 ```
 
-## Merge selected files from local migrated repo into reorganized git repo
+# Merge selected files from local migrated repo into reorganized git repo
 
 - Get new repo
 
@@ -114,27 +113,27 @@ export file=adir;
 git -C $src-git format-patch --stdout --root | git -C $dst am --directory $adir
 ```
 
-## Synchronize git repo set on primary and secondary workstation
+# Synchronize git repo set on primary and secondary workstation
 
-### Make a new tool
+## Make a new tool
 
 [mk-thydel.mk](mk-thydel.mk) include [mk-git-list.mk](mk-git-list.mk)
 to generate [thydel.mk](thydel.mk)
   
-### Which require a recent git version
+## Which require a recent git version
 
 ```bash
 aptitude -t jessie-backports install git
 ```
 
-### On primary workstation
+## On primary workstation
 
 ```bash
 mk-thydel.mk clean main
 git add thydel.mk; git commit; git push
 ```
 
-### On secondary workstation
+## On secondary workstation
 
 ```bash
 git pull
@@ -142,4 +141,4 @@ mk-thydel.mk clean main
 make -C ~/usr/thydel.d -f helpers/thydel.mk thydel
 ```
 
-### Swap primary and secondary and synchronize again
+## Swap primary and secondary and synchronize again
