@@ -90,6 +90,7 @@ hg2git:; $($@)
 
 define self-help
 echo '$(helper) start';
+echo '$(helper) ssh-agent';
 echo '$(helper) env';
 echo '$(helper) ansible';
 echo '$(helper) git';
@@ -194,6 +195,14 @@ echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | das
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 endef
 help += git
+
+define ssh-agent
+echo 'ls /tmp/ssh-*/* | cut -d. -f2 | xargs ps';
+echo 'ls /tmp/ssh-*/* | xargs -i echo env SSH_AUTH_SOCK={} ssh-add -l';
+echo 'ls /tmp/ssh-*/* | xargs -i echo export SSH_AUTH_SOCK={}';
+echo '';
+endef
+help += ssh-agent
 
 define start
 echo 'gpg-agent --daemon --write-env-file';
