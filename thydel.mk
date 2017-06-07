@@ -1,5 +1,8 @@
 # generated via include mk-git-list.mk
 
+MAKEFLAGS += -Rr
+Makefile:;
+
 top:; @date
 
 ~ := thydel
@@ -19,6 +22,7 @@ $~ += ar-isync
 $~ += ar-jsonnet
 $~ += ar-make
 $~ += ar-misc
+$~ += ar-multi-screenrc
 $~ += ar-my-account
 $~ += ar-my-bash-rc
 $~ += ar-my-dotemacs
@@ -47,7 +51,6 @@ $~ += misc-notes
 $~ += misc-play
 $~ += misc-script
 $~ += mk-repos
-$~ += one-liner
 $~ += propagate-date
 $~ += rsync-pair
 $~ += sort-error-log
@@ -67,6 +70,7 @@ ar-isync                           :=  git@thydel.github.com:thydel/ar-isync.git
 ar-jsonnet                         :=  git@thydel.github.com:thydel/ar-jsonnet.git
 ar-make                            :=  git@thydel.github.com:thydel/ar-make.git
 ar-misc                            :=  git@thydel.github.com:thydel/ar-misc.git
+ar-multi-screenrc                  :=  git@thydel.github.com:thydel/ar-multi-screenrc.git
 ar-my-account                      :=  git@thydel.github.com:thydel/ar-my-account.git
 ar-my-bash-rc                      :=  git@thydel.github.com:thydel/ar-my-bash-rc.git
 ar-my-dotemacs                     :=  git@thydel.github.com:thydel/ar-my-dotemacs.git
@@ -95,7 +99,6 @@ misc-notes                         :=  git@thydel.github.com:thydel/misc-notes.g
 misc-play                          :=  git@thydel.github.com:thydel/misc-play.git
 misc-script                        :=  git@thydel.github.com:thydel/misc-script.git
 mk-repos                           :=  git@thydel.github.com:thydel/mk-repos.git
-one-liner                          :=  git@thydel.github.com:thydel/one-liner.git
 propagate-date                     :=  git@thydel.github.com:thydel/propagate-date.git
 rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.git
 sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git

@@ -68,7 +68,9 @@ debconf-preferences := Configure debconf
 helpers             := Various helpers
 mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
 misc-script	    := Various scripts
+ifdef NEVER
 one-liner           := Curated bash history
+endif
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 
 ~  := thy-repos
@@ -98,7 +100,9 @@ $~ += debconf-preferences
 $~ += helpers
 $~ += mail-wrapper
 $~ += misc-script
+ifdef NEVER
 $~ += one-liner
+endif
 $~ += reset-known_hosts
 
 ####
