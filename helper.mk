@@ -89,6 +89,13 @@ hg2git += && $@.yml -i localhost, -c local -e hg=$(hg) -e git=$(2git) $(DRY) $(D
 hg2git:; $($@)
 
 define self-help
+echo '$(helper) base-help';
+echo '$(helper) more-help';
+echo 'source <(helper env)';
+endef
+help += self-help
+
+define base-help
 echo '$(helper) start';
 echo '$(helper) ssh-agent';
 echo '$(helper) env';
@@ -101,10 +108,8 @@ echo '$(helper) git-md';
 echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
 echo '$(helper) help';
-echo '$(helper) more-help';
-echo 'source <(helper env)';
 endef
-help += self-help
+help += base-help
 
 define more-help
 echo '$(helper) git_env';
@@ -113,6 +118,7 @@ echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) hist';
 echo '$(helper) xrandr';
 echo '$(helper) aptitude';
+echo '$(helper) screen';
 endef
 help += more-help
 
@@ -150,6 +156,11 @@ echo 'aptitude --disable-columns search -F '%p_%V_%d' $$search | column -t -s_';
 echo 'while deborphan | line; do deborphan | xargs -r aptitude -y remove; done';
 endef
 help += aptitude
+
+define screen
+echo 'pgrep screen | xargs ps hukstart_time | tail -n+2';
+endef
+help += screen
 
 ################
 
