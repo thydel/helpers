@@ -79,7 +79,9 @@ git-md git-dates:; $@ help
 
 init-play-dir: .ansible.cfg
 .ansible.cfg  = $(<F) -i localhost, -c local -e repo=$(CURDIR)
-.ansible.cfg += -e use_ssh_config=True -e vault_pass=$(or $(vault_pass),vault/epi)
+.ansible.cfg += -e use_ssh_config=True
+.ansible.cfg += -e use_filter_plugins=True
+.ansible.cfg += -e vault_pass=$(or $(vault_pass),vault/epi)
 .ansible.cfg += $(DRY) $(DIF)
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
 
