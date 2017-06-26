@@ -82,6 +82,7 @@ init-play-dir: .ansible.cfg
 .ansible.cfg += -e use_ssh_config=True
 .ansible.cfg += -e vault_pass=$(or $(vault_pass),vault/epi)
 .ansible.cfg += $(if $(use_merge_hash), -e use_merge_hash=True)
+.ansible.cfg += -e use_filter_plugins=True
 .ansible.cfg += $(DRY) $(DIF)
 .ansible.cfg: $(install_dir)/init-play-dir.yml; $($@)
 
@@ -129,8 +130,10 @@ echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
 echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'export TERM=eterm-color';
 echo 'export PAGER=cat';
+echo "export EDITOR='emacsclient -s thy -c'";
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
+echo "export PASSWORD_STORE_DIR=~/.password-store/";
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 endef
 help += env
