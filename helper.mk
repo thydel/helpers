@@ -129,8 +129,10 @@ echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
 echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'export TERM=eterm-color';
 echo 'export PAGER=cat';
+echo "export EDITOR='emacsclient -s thy -c'";
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
+echo "export PASSWORD_STORE_DIR=~/.password-store/";
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 endef
 help += env
