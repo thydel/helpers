@@ -25,6 +25,7 @@
     - lineinfile:
         path: '{{ repo | default(".") }}/.gitignore'
         line: '{{ item }}'
+        create: True
       with_items: '{{ created_dirs + generated_files }}'
       name: Fill gitignore
 
