@@ -34,6 +34,11 @@ include.awk := include
 awk += include.awk
 $(awk):;
 
+python :=
+chdir.py := chdir
+python += chdir.py
+$(python):;
+
 yml :=
 yml += git-config.yml
 yml += init-play-dir.yml
@@ -60,7 +65,7 @@ install-share: $(install-share)
 
 install_dir := /usr/local/bin
 ifeq ($(dir $(self)),./)
-install_list := $(self) $(yml) $(mk) $(awk)
+install_list := $(self) $(yml) $(mk) $(awk) $(python)
 $(install_dir)/%: %; install $< $@; $(if $($*),(cd $(@D); $(strip $(foreach _, $($*), ln -sf $* $_;))))
 install: install-share $(install_list:%=$(install_dir)/%);
 else
