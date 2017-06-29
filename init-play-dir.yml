@@ -11,6 +11,7 @@
     ansible_managed_for_copy: Ansible managed
     roles_dir: roles
     galaxy_requirement_file: galaxy.yml
+    always_ignore: [ '*~' ]
     created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', log, tmp, ext ]
     generated_files: [ ansible.cfg, ssh-config, vault-pass.py ]
 
@@ -26,7 +27,7 @@
         path: '{{ repo | default(".") }}/.gitignore'
         line: '{{ item }}'
         create: True
-      with_items: '{{ created_dirs + generated_files }}'
+      with_items: '{{ always_ignore + created_dirs + generated_files }}'
       name: Fill gitignore
 
     - copy:
