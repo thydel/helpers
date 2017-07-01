@@ -21,7 +21,7 @@ $(eval mk += $1.mk)
 endef
 
 mk :=
-mks := use-ansible github-helper git-index-filter git-dates git-md
+mks := use-ansible github-helper git-index-filter git-dates git-md barchart
 github-helper := github
 git-index-filter := git-move-whole-tree-in-subdir
 git-index-filter += git-rename-top-subdir
