@@ -265,6 +265,14 @@ echo 'sudo aptitude install pass';
 echo 'git -C ~/usr/perso.d clone pass-store';
 echo 'ln -s ~/usr/perso.d/pass-store ~/.password-store';
 echo 'pass git pull';
+echo;
+echo 'ssh -o PreferredAuthentications=password some'
+echo 'ssh-copy-id -o PreferredAuthentications=password some'
+echo 'ssh some'
+echo;
+echo 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PreferredAuthentications=password multi-boot'
+echo 'ssh-copy-id -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o PreferredAuthentications=password multi-boot'
+echo 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no multi-boot'
 
 endef
 help += once
