@@ -5,8 +5,9 @@ SHELL := $(shell which bash)
 
 top: self-help;
 
+USER  ?= no_user
 staff := staff
-$(if $(shell getent group $(staff) | grep -q $(USER) || date),$(error $(USER) not in group $(staff)))
+$(if $(shell test $(USER) == root || getent group $(staff) | grep -q $(USER) || date),$(error $(USER) not in group $(staff)))
 
 self    := $(lastword $(MAKEFILE_LIST))
 $(self) := $(basename $(self))
@@ -99,6 +100,7 @@ hg2git:; $($@)
 define self-help
 echo '$(helper) base-help';
 echo '$(helper) more-help';
+echo '$(helper) env';
 echo 'source <(helper env)';
 endef
 help += self-help
