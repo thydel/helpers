@@ -240,7 +240,7 @@ endef
 help += git
 
 define ssh-agent
-echo 'SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/keyring/ssh';
+echo 'SSH_AUTH_SOCK=$$XDG_RUNTIME_DIR/keyring/ssh';
 echo 'ls /tmp/ssh-*/* | cut -d. -f2 | xargs ps';
 echo 'ls /tmp/ssh-*/* | xargs -i echo env SSH_AUTH_SOCK={} ssh-add -l';
 echo 'ls /tmp/ssh-*/* | xargs -i echo export SSH_AUTH_SOCK={}';
