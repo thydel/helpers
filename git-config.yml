@@ -84,6 +84,7 @@
           %C(auto,blue)%>(12,trunc)%ad
           %C(auto,green)%<(8,trunc)%aN%C(auto,reset)%s%C(auto,red)% %d
           %C(auto,reset)
+        core.quotePath: 'false'
 
 - hosts: localhost
   tags: mailmap
