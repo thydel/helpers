@@ -68,6 +68,7 @@ debconf-preferences := Configure debconf
 helpers             := Various helpers
 mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
 misc-script	    := Various scripts
+git-store-dates	    := Store and restore files modification date
 ifdef NEVER
 one-liner           := Curated bash history
 endif
@@ -100,6 +101,7 @@ $~ += debconf-preferences
 $~ += helpers
 $~ += mail-wrapper
 $~ += misc-script
+$~ += git-store-dates
 ifdef NEVER
 $~ += one-liner
 endif
