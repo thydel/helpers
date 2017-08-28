@@ -211,6 +211,7 @@ echo 'git config push.default simple';
 echo 'git config user.email t.delamare@epiconcept.fr';
 echo 'git config user.email t.delamare@laposte.net';
 echo 'git config tag.sort version:refname';
+echo 'git config --local core.quotePath False';
 echo "echo '*~' >> .gitignore";
 echo "echo '*~' >> .git/info/exclude";
 echo "echo 'tmp/' >> .git/info/exclude";
