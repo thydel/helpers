@@ -95,13 +95,17 @@
         content: |
           # -*- Mode: conf; -*-
           # {{ ansible_managed_for_copy }}
-          {% raw %}
-          local ansible_connection=local ansible_become_pass="{{ lookup('pipe', 'pass node/local') }}"
+          [local]
+          localhost
+          
+          [local:vars]
+          ansible_connection  = local
+          {% raw -%}
+          ansible_become_pass = "{{ lookup('pipe', 'pass node/' + lookup('pipe', 'id -un') + '@' + lookup('pipe', 'hostname -s')) }}"
           {% endraw %}
         dest: '{{ repo | default(".") }}/inventory/local'
         mode: 0444
       name: Create mininal local inventory
-      when: False
 
     - block:
 
