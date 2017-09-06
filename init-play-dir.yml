@@ -12,7 +12,7 @@
     roles_dir: roles
     galaxy_requirement_file: galaxy.yml
     always_ignore: [ '*~' ]
-    created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', log, tmp, ext ]
+    created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', inventory, log, tmp, ext ]
     generated_files: [ ansible.cfg, ssh-config, vault-pass.py ]
 
   tasks:
