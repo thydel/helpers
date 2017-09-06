@@ -12,7 +12,7 @@
     roles_dir: roles
     galaxy_requirement_file: galaxy.yml
     always_ignore: [ '*~' ]
-    created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', inventory, log, tmp, ext ]
+    created_dirs: [ .cache, .retry, .hide, '{{ roles_dir }}', log, tmp, ext ]
     generated_files: [ ansible.cfg, ssh-config, vault-pass.py ]
 
   tasks:
@@ -91,21 +91,30 @@
         mode: 0444
       name: Create ansible config
 
-    - copy:
-        content: |
-          # -*- Mode: conf; -*-
-          # {{ ansible_managed_for_copy }}
-          [local]
-          localhost
-          
-          [local:vars]
-          ansible_connection  = local
-          {% raw -%}
-          ansible_become_pass = "{{ lookup('pipe', 'pass node/' + lookup('pipe', 'id -un') + '@' + lookup('pipe', 'hostname -s')) }}"
-          {% endraw %}
-        dest: '{{ repo | default(".") }}/inventory/local'
-        mode: 0444
-      name: Create mininal local inventory
+    - block:
+      - file:
+          path: inventory
+          state: directory
+          name: Creates inventory dir
+      - copy:
+          content: |
+            # -*- Mode: conf; -*-
+            # {{ ansible_managed_for_copy }}
+            [g_local]
+            local
+
+            [g_local:vars]
+            ansible_connection  = local
+            {% raw -%}
+            ansible_become_pass = "{{ lookup('pipe', 'pass node/' + lookup('pipe', 'id -un') + '@' + lookup('pipe', 'hostname -s')) }}"
+            {% endraw %}
+          dest: '{{ repo | default(".") }}/inventory/local'
+          mode: 0444
+        name: Creates mininal local inventory
+      - lineinfile:
+          path: '{{ repo | default(".") }}/.gitignore'
+          line: inventory/local
+        name: Adds created inventory to gitignore
 
     - block:
 
