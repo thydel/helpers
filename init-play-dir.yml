@@ -93,9 +93,9 @@
 
     - block:
       - file:
-          path: inventory
+          path: '{{ repo | default(".") }}/inventory'
           state: directory
-          name: Creates inventory dir
+        name: Creates inventory dir
       - copy:
           content: |
             # -*- Mode: conf; -*-
