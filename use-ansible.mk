@@ -12,8 +12,10 @@ base := $(or $(GIT_CLONE_BASE), ~/usr/ext)
 version := devel
 version := stable-2.2
 version := stable-2.3
+version := stable-2.4
+version := stable-2.3 stable-2.4 devel
 
-stables  := 1.9 2.0 2.1 2.2 2.3
+stables  := 1.9 2.0 2.1 2.2 2.3 2.4
 versions := $(stables:%=stable-%) devel
 
 url := git://github.com/ansible/ansible.git
