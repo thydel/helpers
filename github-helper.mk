@@ -73,6 +73,7 @@ ifdef NEVER
 one-liner           := Curated bash history
 endif
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
+WIP                 := Work in progress
 
 ~  := thy-repos
 $~ :=
@@ -106,6 +107,7 @@ ifdef NEVER
 $~ += one-liner
 endif
 $~ += reset-known_hosts
+$~ += WIP
 
 ####
 

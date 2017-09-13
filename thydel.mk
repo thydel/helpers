@@ -7,6 +7,7 @@ top:; @date
 
 ~ := thydel
 $~ =
+$~ += WIP
 $~ += ap-vmware-utils
 $~ += ar-add-users-to-group
 $~ += ar-ansible-version
@@ -23,6 +24,7 @@ $~ += ar-isync
 $~ += ar-jsonnet
 $~ += ar-make
 $~ += ar-misc
+$~ += ar-multi-screenrc
 $~ += ar-my-account
 $~ += ar-my-bash-rc
 $~ += ar-my-dotemacs
@@ -56,6 +58,7 @@ $~ += propagate-date
 $~ += rsync-pair
 $~ += sort-error-log
 
+WIP                                :=  git@thydel.github.com:thydel/WIP.git
 ap-vmware-utils                    :=  git@thydel.github.com:thydel/ap-vmware-utils.git
 ar-add-users-to-group              :=  git@thydel.github.com:thydel/ar-add-users-to-group.git
 ar-ansible-version                 :=  git@thydel.github.com:thydel/ar-ansible-version.git
@@ -72,6 +75,7 @@ ar-isync                           :=  git@thydel.github.com:thydel/ar-isync.git
 ar-jsonnet                         :=  git@thydel.github.com:thydel/ar-jsonnet.git
 ar-make                            :=  git@thydel.github.com:thydel/ar-make.git
 ar-misc                            :=  git@thydel.github.com:thydel/ar-misc.git
+ar-multi-screenrc                  :=  git@thydel.github.com:thydel/ar-multi-screenrc.git
 ar-my-account                      :=  git@thydel.github.com:thydel/ar-my-account.git
 ar-my-bash-rc                      :=  git@thydel.github.com:thydel/ar-my-bash-rc.git
 ar-my-dotemacs                     :=  git@thydel.github.com:thydel/ar-my-dotemacs.git
