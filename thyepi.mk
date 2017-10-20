@@ -30,12 +30,12 @@ ar-if-rename-first   :=  git@thyepi.github.com:thyepi/ar-if-rename-first.git
 ar-vsphere-clone     :=  git@thyepi.github.com:thyepi/ar-vsphere-clone.git
 ar-vsphere-disk-add  :=  git@thyepi.github.com:thyepi/ar-vsphere-disk-add.git
 ar-vsphere-if-add    :=  git@thyepi.github.com:thyepi/ar-vsphere-if-add.git
-dispatch-log         :=  git@thydel.github.com:thydel/dispatch-log.git
+dispatch-log         :=  git@thyepi.github.com:thyepi/dispatch-log.git
 infra-misc           :=  git@thyepi.github.com:thyepi/infra-misc.git
 infra-misc-plays     :=  git@thyepi.github.com:thyepi/infra-misc-plays.git
 infra-upgrade        :=  git@thyepi.github.com:thyepi/infra-upgrade.git
-rsync-pair           :=  git@thydel.github.com:thydel/rsync-pair.git
-sort-error-log       :=  git@thydel.github.com:thydel/sort-error-log.git
+rsync-pair           :=  git@thyepi.github.com:thyepi/rsync-pair.git
+sort-error-log       :=  git@thyepi.github.com:thyepi/sort-error-log.git
 
 $(thyepi):; git clone $($@)
 thyepi: $(thyepi);
