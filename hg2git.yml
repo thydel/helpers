@@ -40,7 +40,7 @@
         content: |
           [extensions]
           hgext.bookmarks =
-          hgext.git =
+          hgext.git = ~/.local/lib/python2.7/site-packages/hggit
 
     - block:
 
