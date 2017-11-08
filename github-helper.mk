@@ -78,6 +78,7 @@ one-liner           := Curated bash history
 endif
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 WIP                 := Work in progress
+packer-infra        := Uses packer to build vmware debian images
 
 ~  := thy-repos
 $~ :=
@@ -116,6 +117,7 @@ $~ += one-liner
 endif
 $~ += reset-known_hosts
 $~ += WIP
+$~ += packer-infra
 
 ####
 
