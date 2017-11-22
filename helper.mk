@@ -241,6 +241,9 @@ endef
 help += git
 
 define ssh-agent
+echo 'env SSH_AUTH_SOCK=/run/user/$(id -u thy)/ssh-agent.socket ssh-add -l';
+echo 'export SSH_AUTH_SOCK=/run/user/$(id -u thy)/ssh-agent.socket';
+echo;
 echo 'env SSH_AUTH_SOCK=$$XDG_RUNTIME_DIR/keyring/ssh ssh-add -l';
 echo 'export SSH_AUTH_SOCK=$$XDG_RUNTIME_DIR/keyring/ssh';
 echo 'ls /tmp/ssh-*/* | cut -d. -f2 | xargs ps';
