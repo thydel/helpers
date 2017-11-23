@@ -141,6 +141,7 @@ echo "export EDITOR='emacsclient -s thy -c'";
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo "export PASSWORD_STORE_DIR=~/.password-store/";
+echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u thy)/user-ssh-agent.socket';
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
 endef
 help += env
@@ -241,8 +242,8 @@ endef
 help += git
 
 define ssh-agent
-echo 'env SSH_AUTH_SOCK=/run/user/$(id -u thy)/ssh-agent.socket ssh-add -l';
-echo 'export SSH_AUTH_SOCK=/run/user/$(id -u thy)/ssh-agent.socket';
+echo 'env SSH_AUTH_SOCK=/run/user/$$(id -u thy)/user-ssh-agent.socket ssh-add -l';
+echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u thy)/user-ssh-agent.socket';
 echo;
 echo 'env SSH_AUTH_SOCK=$$XDG_RUNTIME_DIR/keyring/ssh ssh-add -l';
 echo 'export SSH_AUTH_SOCK=$$XDG_RUNTIME_DIR/keyring/ssh';
