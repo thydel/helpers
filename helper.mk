@@ -133,8 +133,8 @@ endef
 help += more-help
 
 define env
-echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:.';
-echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})';
+echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:~/.local/bin:.';
+echo '# source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'export TERM=eterm-color';
 echo 'export PAGER=cat';
 echo "export EDITOR='emacsclient -s thy -c'";
