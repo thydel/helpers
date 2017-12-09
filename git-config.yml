@@ -1,8 +1,8 @@
 #!/usr/bin/env ansible-playbook
 ---
 
-- include: /usr/local/share/ansible/check-ansible-version.yml
-- include: /usr/local/share/ansible/check-git-version.yml
+- import_playbook: /usr/local/share/ansible/check-ansible-version.yml
+- import_playbook: /usr/local/share/ansible/check-git-version.yml
 
 - hosts: localhost
   tags: global
