@@ -79,6 +79,7 @@ endif
 reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 WIP                 := Work in progress
 packer-infra        := Uses packer to build vmware debian images
+ar-rename-user      := Ansible role to rename a user account
 
 ~  := thy-repos
 $~ :=
@@ -118,6 +119,7 @@ endif
 $~ += reset-known_hosts
 $~ += WIP
 $~ += packer-infra
+$~ += ar-rename-user
 
 ####
 
