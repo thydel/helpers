@@ -24,6 +24,10 @@ clone = (cd $(base); git clone --branch $(version) --recursive $(url) ansible-$(
 pull  = (cd $(base)/ansible-$(version); git pull --rebase; git submodule update --init --recursive)
 setup = source $(base)/ansible-$(version)/hacking/env-setup -q
 pkgs  = sudo aptitude install python-jinja2 python-netaddr
+emacs  = (progn
+emacs +=   (setenv "ANSIBLE_HOME" (expand-file-name "$(base)/ansible-$(version)"))
+emacs +=   (setenv "PYTHONPATH" (expand-file-name "$(base)/ansible-$(version)/lib"))
+emacs +=   (setenv "PATH" (concat (expand-file-name "$(base)/ansible-$(version)/bin:") (getenv "PATH"))))
 
 help:
 	@$(foreach version,$(versions),echo '$(clone)';)
@@ -31,6 +35,8 @@ help:
 	@$(foreach version,$(versions),echo '$(pull)';)
 	@echo
 	@$(foreach version,$(versions),echo '$(setup)';)
+	@echo
+	@$(foreach version,$(versions),echo '$(strip $(emacs))';)
 	@echo
 	@echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
 
