@@ -68,7 +68,7 @@ ar-user-account	    := Ansible role to create a user account and manage user key
 debconf-preferences := Configure debconf
 helpers             := Various helpers
 journals            := Various notes
-journals-indexed    := Various notes warpped up
+journals-indexed    := Various notes wrapped up
 legacy-infra        := Obsolet tools, may contains useful traces
 mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
 misc-script	    := Various scripts
@@ -80,6 +80,8 @@ reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 WIP                 := Work in progress
 packer-infra        := Uses packer to build vmware debian images
 ar-rename-user      := Ansible role to rename a user account
+private-journals    := Various private notes
+private-journals-indexed := Various private notes wrapped up
 
 ~  := thy-repos
 $~ :=
@@ -120,6 +122,8 @@ $~ += reset-known_hosts
 $~ += WIP
 $~ += packer-infra
 $~ += ar-rename-user
+$~ += private-journals
+$~ += private-journals-indexed
 
 ####
 
