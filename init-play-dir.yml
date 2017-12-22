@@ -113,6 +113,7 @@
         name: Creates mininal local inventory
       - lineinfile:
           path: '{{ repo | default(".") }}/.gitignore'
+          creates: True
           line: inventory/local
         name: Adds created inventory to gitignore
 
