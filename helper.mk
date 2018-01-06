@@ -129,6 +129,7 @@ echo '$(helper) hist';
 echo '$(helper) xrandr';
 echo '$(helper) aptitude';
 echo '$(helper) screen';
+echo '$(helper) x2x';
 endef
 help += more-help
 
@@ -287,6 +288,12 @@ echo 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no multi-boot
 
 endef
 help += once
+
+define x2x
+echo 'ssh -X right.lan x2x -to :0 -east';
+echo 'ssh -X left.lan  x2x -to :0 -west';
+endef
+help += x2x
 
 $(help):; @$(strip $($@))
 help: $(help);
