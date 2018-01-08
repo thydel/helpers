@@ -240,6 +240,7 @@ echo 'git -C $$src format-patch --stdout --root | git am -p1 --directory $$adir'
 echo;
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | dash";
+echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} pull | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 endef
 help += git
