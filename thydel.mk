@@ -65,6 +65,7 @@ $~ += private-journals-indexed
 $~ += propagate-date
 $~ += rsync-pair
 $~ += sort-error-log
+$~ += ssh-config
 
 WIP                                :=  git@thydel.github.com:thydel/WIP.git
 ap-vmware-utils                    :=  git@thydel.github.com:thydel/ap-vmware-utils.git
@@ -124,6 +125,7 @@ private-journals-indexed           :=  git@thydel.github.com:thydel/private-jour
 propagate-date                     :=  git@thydel.github.com:thydel/propagate-date.git
 rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.git
 sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git
+ssh-config                         :=  git@thydel.github.com:thydel/ssh-config.git
 
 $(thydel):; git clone $($@)
 thydel: $(thydel);
