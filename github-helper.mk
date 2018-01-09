@@ -82,6 +82,7 @@ packer-infra        := Uses packer to build vmware debian images
 ar-rename-user      := Ansible role to rename a user account
 private-journals    := Various private notes
 private-journals-indexed := Various private notes wrapped up
+ssh-config          := Try to factorize ssh configs 
 
 ~  := thy-repos
 $~ :=
@@ -124,6 +125,7 @@ $~ += packer-infra
 $~ += ar-rename-user
 $~ += private-journals
 $~ += private-journals-indexed
+$~ += ssh-config
 
 ####
 
