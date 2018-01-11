@@ -135,8 +135,11 @@ help += more-help
 
 # line(1) is missing from ubuntu
 #echo 'echo $$PATH | grep ":\.:*" | line > /dev/null || export PATH=$$PATH:~/.local/bin:.';
+# but "head -1" is not similar to "line" because it always exit 0
+#echo 'echo $$PATH | grep ":\.:*" | head -1 > /dev/null || export PATH=$$PATH:~/.local/bin:.';
+
 define env
-echo 'echo $$PATH | grep ":\.:*" | head -1 > /dev/null || export PATH=$$PATH:~/.local/bin:.';
+echo 'echo $$PATH | grep ":\.:*" | read || export PATH=$$PATH:~/.local/bin:.';
 echo '# source <(< ~/.gpg-agent-info xargs -i echo export {})';
 echo 'export TERM=eterm-color';
 echo 'export PAGER=cat';
