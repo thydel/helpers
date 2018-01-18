@@ -80,6 +80,10 @@ reset-known_hosts   := Reset ~/.ssh/known_hosts for a rem node on local node
 WIP                 := Work in progress
 packer-infra        := Uses packer to build vmware debian images
 ar-rename-user      := Ansible role to rename a user account
+mini-play	    := misc tentatively autonomous plays
+
+# Privates repos
+
 private-journals    := Various private notes
 private-journals-indexed := Various private notes wrapped up
 ssh-config          := Try to factorize ssh configs 
@@ -123,6 +127,10 @@ $~ += reset-known_hosts
 $~ += WIP
 $~ += packer-infra
 $~ += ar-rename-user
+$~ += mini-play
+
+# Privates repos
+
 $~ += private-journals
 $~ += private-journals-indexed
 $~ += ssh-config
