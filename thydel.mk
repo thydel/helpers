@@ -67,6 +67,7 @@ $~ += propagate-date
 $~ += rsync-pair
 $~ += sort-error-log
 $~ += ssh-config
+$~ += tmp
 
 WIP                                :=  git@thydel.github.com:thydel/WIP.git
 ap-vmware-utils                    :=  git@thydel.github.com:thydel/ap-vmware-utils.git
@@ -128,6 +129,7 @@ propagate-date                     :=  git@thydel.github.com:thydel/propagate-da
 rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.git
 sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git
 ssh-config                         :=  git@thydel.github.com:thydel/ssh-config.git
+tmp                                :=  git@thydel.github.com:thydel/tmp.git
 
 $(thydel):; git clone $($@)
 thydel: $(thydel);

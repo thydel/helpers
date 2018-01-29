@@ -35,13 +35,22 @@ misc-play           := Various playbooks
 ~  := epi-repos
 $~ :=
 $~ += amr-disk-part
+$~ += amr-pysphere-misc
+$~ += ansible-hg-modules
 $~ += ar-common-tools
 $~ += ar-if-rename-first
 $~ += ar-vsphere-clone
 $~ += ar-vsphere-disk-add
 $~ += ar-vsphere-if-add
+$~ += dispatch-log
+$~ += infra-misc
+$~ += infra-misc-plays
+$~ += infra-upgrade
+$~ += infra-upgrade.wiki
 $~ += innobackupx-wrapper
 $~ += misc-play
+$~ += rsync-pair
+$~ += sort-error-log
 
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-add-users-to-group := Ansible role to add users to a group
@@ -86,7 +95,8 @@ mini-play	    := misc tentatively autonomous plays
 
 private-journals    := Various private notes
 private-journals-indexed := Various private notes wrapped up
-ssh-config          := Try to factorize ssh configs 
+ssh-config          := Try to factorize ssh configs
+tmp                 := Temporary zone
 
 ~  := thy-repos
 $~ :=
@@ -134,6 +144,7 @@ $~ += mini-play
 $~ += private-journals
 $~ += private-journals-indexed
 $~ += ssh-config
+$~ += tmp
 
 ####
 
