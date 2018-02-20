@@ -14,8 +14,11 @@
         value: '{{ item.value }}'
       with_dict:
         push.default: simple
-        user.mail: t.delamare@laposte.net
+        user.email: &thymail t.delamare@laposte.net
         user.name: Thierry Delamare
+        user.signingkey: &thykey Thierry Delamare (thy) <t.delamare@laposte.net>
+        commit.gpgsign: 'true'
+
 
 - hosts: localhost
   tags: aliases
@@ -46,7 +49,7 @@
 
 - hosts: localhost
   tags: email
-  name: Set local git user email from remote origin
+  name: Set local git user email and signingkey from remote origin
   tasks:
     - command: git remote get-url origin
       args: { chdir: *repo }
@@ -56,15 +59,26 @@
     - set_fact: { pseudo: '{{ url.stdout.split(":")[0] }}' }
     - set_fact:
         pseudos:
-          default: &default t.delamare@laposte.net
-          wato.ssh: *default
-          git@thydel.github.com: *default
+          default: *thymail
+          wato.ssh: *thymail
+          git@thydel.github.com: *thymail
           git@thyepi.github.com: t.delamare@epiconcept.fr
     - git_config:
         scope: local
         repo: *repo
         name: user.email
         value: '{{ pseudos[pseudo] | default(pseudos.default) }}'
+    - set_fact:
+        signingkeys:
+          default: *thykey
+          wato.ssh: *thykey
+          git@thydel.github.com: *thykey
+          git@thyepi.github.com: Thierry Delamare (tde) <t.delamare@epiconcept.fr>
+    - git_config:
+        scope: local
+        repo: *repo
+        name: user.signingkey
+        value: '{{ signingkeys[pseudo] | default(signingkeys.default) }}'
 
 - hosts: localhost
   tags: log
