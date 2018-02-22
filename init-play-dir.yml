@@ -106,7 +106,7 @@
             [g_local:vars]
             ansible_connection  = local
             {% raw -%}
-            ansible_become_pass = "{{ lookup('pipe', 'pass node/' + lookup('pipe', 'id -un') + '@' + lookup('pipe', 'hostname -s')) }}"
+            ansible_become_pass = "{{ lookup('passwordstore', 'node/' ~ lookup('pipe', 'id -un') ~ '@' ~ lookup('pipe', 'hostname -s')) }}"
             {% endraw %}
           dest: '{{ repo | default(".") }}/inventory/local'
           mode: 0444
