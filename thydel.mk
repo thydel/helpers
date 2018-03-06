@@ -61,6 +61,7 @@ $~ += misc-play
 $~ += misc-script
 $~ += mk-repos
 $~ += packer-infra
+$~ += private-bookmarks
 $~ += private-journals
 $~ += private-journals-indexed
 $~ += propagate-date
@@ -68,6 +69,7 @@ $~ += rsync-pair
 $~ += sort-error-log
 $~ += ssh-config
 $~ += tmp
+$~ += tst
 
 WIP                                :=  git@thydel.github.com:thydel/WIP.git
 ap-vmware-utils                    :=  git@thydel.github.com:thydel/ap-vmware-utils.git
@@ -123,6 +125,7 @@ misc-play                          :=  git@thydel.github.com:thydel/misc-play.gi
 misc-script                        :=  git@thydel.github.com:thydel/misc-script.git
 mk-repos                           :=  git@thydel.github.com:thydel/mk-repos.git
 packer-infra                       :=  git@thydel.github.com:thydel/packer-infra.git
+private-bookmarks                  :=  git@thydel.github.com:thydel/private-bookmarks.git
 private-journals                   :=  git@thydel.github.com:thydel/private-journals.git
 private-journals-indexed           :=  git@thydel.github.com:thydel/private-journals-indexed.git
 propagate-date                     :=  git@thydel.github.com:thydel/propagate-date.git
@@ -130,6 +133,7 @@ rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.g
 sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git
 ssh-config                         :=  git@thydel.github.com:thydel/ssh-config.git
 tmp                                :=  git@thydel.github.com:thydel/tmp.git
+tst                                :=  git@thydel.github.com:thydel/tst.git
 
 $(thydel):; git clone $($@)
 thydel: $(thydel);

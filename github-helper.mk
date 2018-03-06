@@ -97,6 +97,8 @@ private-journals    := Various private notes
 private-journals-indexed := Various private notes wrapped up
 ssh-config          := Try to factorize ssh configs
 tmp                 := Temporary zone
+tst		    := Test zone
+private-bookmarks   := Private bookmarks
 
 ~  := thy-repos
 $~ :=
@@ -145,6 +147,8 @@ $~ += private-journals
 $~ += private-journals-indexed
 $~ += ssh-config
 $~ += tmp
+$~ += tst
+$~ += private-bookmarks
 
 ####
 
