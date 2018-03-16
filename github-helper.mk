@@ -52,6 +52,7 @@ $~ += misc-play
 $~ += rsync-pair
 $~ += sort-error-log
 
+
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-add-users-to-group := Ansible role to add users to a group
 ar-automysqlbackup  := Ansible role to install and configure automysqlbackup
@@ -90,6 +91,8 @@ WIP                 := Work in progress
 packer-infra        := Uses packer to build vmware debian images
 ar-rename-user      := Ansible role to rename a user account
 mini-play	    := misc tentatively autonomous plays
+pysphere-scripts    := misc pysphere scripts
+pyvmomi-scripts     := misc pyvmomi scripts
 
 # Privates repos
 
@@ -140,6 +143,10 @@ $~ += WIP
 $~ += packer-infra
 $~ += ar-rename-user
 $~ += mini-play
+$~ += pysphere-scripts
+$~ += pyvmomi-scripts
+
+$~ += $(epi-repos)
 
 # Privates repos
 
