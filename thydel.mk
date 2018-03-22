@@ -78,12 +78,13 @@ $~ += private-journals
 $~ += private-journals-indexed
 $~ += propagate-date
 $~ += pysphere-scripts
-$~ += pyvmomi-scripts
+$~ += pyvmomi-community-samples
 $~ += rsync-pair
 $~ += sort-error-log
 $~ += ssh-config
 $~ += tmp
 $~ += tst
+$~ += vmware-pyvmomi-examples
 
 WIP                                :=  git@thydel.github.com:thydel/WIP.git
 amr-disk-part                      :=  git@thydel.github.com:thydel/amr-disk-part.git
@@ -156,12 +157,13 @@ private-journals                   :=  git@thydel.github.com:thydel/private-jour
 private-journals-indexed           :=  git@thydel.github.com:thydel/private-journals-indexed.git
 propagate-date                     :=  git@thydel.github.com:thydel/propagate-date.git
 pysphere-scripts                   :=  git@thydel.github.com:thydel/pysphere-scripts.git
-pyvmomi-scripts                    :=  git@thydel.github.com:thydel/pyvmomi-scripts.git
+pyvmomi-community-samples          :=  git@thydel.github.com:thydel/pyvmomi-community-samples.git
 rsync-pair                         :=  git@thydel.github.com:thydel/rsync-pair.git
 sort-error-log                     :=  git@thydel.github.com:thydel/sort-error-log.git
 ssh-config                         :=  git@thydel.github.com:thydel/ssh-config.git
 tmp                                :=  git@thydel.github.com:thydel/tmp.git
 tst                                :=  git@thydel.github.com:thydel/tst.git
+vmware-pyvmomi-examples            :=  git@thydel.github.com:thydel/vmware-pyvmomi-examples.git
 
 $(thydel):; git clone $($@)
 thydel: $(thydel);
