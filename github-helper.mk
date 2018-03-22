@@ -149,7 +149,7 @@ $~ += packer-infra
 $~ += ar-rename-user
 $~ += mini-play
 $~ += pysphere-scripts
-$~ += pyvmomi-scripts
+#$~ += pyvmomi-scripts
 
 $~ += $(epi-repos)
 
