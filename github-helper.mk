@@ -103,6 +103,11 @@ tmp                 := Temporary zone
 tst		    := Test zone
 private-bookmarks   := Private bookmarks
 
+# Cloned repos
+
+pyvmomi-community-samples := git@github.com:vmware/pyvmomi-community-samples.git
+vmware-pyvmomi-examples   := git@github.com:rreubenur/vmware-pyvmomi-examples.git
+
 ~  := thy-repos
 $~ :=
 $~ += ap-vmware-utils
@@ -156,6 +161,11 @@ $~ += ssh-config
 $~ += tmp
 $~ += tst
 $~ += private-bookmarks
+
+# Cloned repos
+
+$~ += pyvmomi-community-samples
+$~ += vmware-pyvmomi-examples
 
 ####
 
@@ -250,6 +260,12 @@ create/%:; @$(call get-repos,$*) > /dev/null || $(strip $(call create-repos,$*))
 
 clone = test -d $* || git clone git@$(user).github.com:$(user)/$*.git
 clone/%:; $($(@D))
+
+####
+
+upstream  = (git remote -v | grep '$($*)' || git remote add upstream $($*));
+upstream += git fetch upstream
+upstream/%:; $($(@D))
 
 ####
 
