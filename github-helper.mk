@@ -105,6 +105,8 @@ private-bookmarks   := Private bookmarks
 
 # Cloned repos
 
+pyvmomi                   := git@github.com:vmware/pyvmomi.git
+pyvmomi-tools		  := git@github.com:vmware/pyvmomi-tools.git
 pyvmomi-community-samples := git@github.com:vmware/pyvmomi-community-samples.git
 vmware-pyvmomi-examples   := git@github.com:rreubenur/vmware-pyvmomi-examples.git
 
@@ -164,6 +166,8 @@ $~ += private-bookmarks
 
 # Cloned repos
 
+$~ += pyvmomi
+$~ += pyvmomi-tools
 $~ += pyvmomi-community-samples
 $~ += vmware-pyvmomi-examples
 
