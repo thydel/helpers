@@ -2,7 +2,7 @@
 
 make := $(lastword $(MAKEFILE_LIST))
 $(make):;
-SHELL := bash
+SHELL := /bin/bash -o pipefail
 .DEFAULT_GOAL := main
 
 main:; @date
@@ -263,8 +263,10 @@ clone/%:; $($(@D))
 
 ####
 
-upstream  = (git remote -v | grep '$($*)' || git remote add upstream $($*));
-upstream += git fetch upstream
+upstream  = test -d .git && git remote -v | grep '$*' &&
+upstream += (git remote -v | grep '$($*)' || git remote add upstream $($*)) &&
+upstream += git fetch upstream &&
+upstream += (git branch | grep tde || (git branch tde; git checkout tde; git push -u origin tde))
 upstream/%:; $($(@D))
 
 ####
