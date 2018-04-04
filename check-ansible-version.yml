@@ -5,12 +5,12 @@
   gather_facts: False
   tags: check-version
   vars:
-    default_min_ansible_version: 2.3.0
+    default_min_ansible_version: 2.5
     local_min_ansible_version: '{{ min_ansible_version | default(default_min_ansible_version) }}'
   tasks:
     - fail:
         msg: min ansible version is {{ local_min_ansible_version }}, ansible version is {{ ansible_version.string }}
-      when: ansible_version.string | version_compare(local_min_ansible_version, 'lt')
+      when: ansible_version.string is version_compare(local_min_ansible_version, 'lt')
       check_mode: False
       run_once: True
       delegate_to: localhost

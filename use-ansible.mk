@@ -9,14 +9,11 @@ $(self):;
 # get various ansible versions
 
 base := $(or $(GIT_CLONE_BASE), ~/usr/ext)
-version := devel
-version := stable-2.2
-version := stable-2.3
-version := stable-2.4
-version := stable-2.3 stable-2.4 devel
 
-stables  := 1.9 2.0 2.1 2.2 2.3 2.4
-versions := $(stables:%=stable-%) devel
+stables        := 1.9 2.0 2.1 2.2 2.3 2.4 2.5
+versions       := $(stables:%=stable-%) devel
+stables.short  := 2.3 2.4 2.5
+versions.short := $(stables.short:%=stable-%) devel
 
 url := git://github.com/ansible/ansible.git
 
@@ -41,8 +38,8 @@ help:
 	@echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
 
 short:
-	@$(foreach version,$(version),echo '$(pull)';)
-	@$(foreach version,$(version),echo '$(setup)';)
+	@$(foreach version,$(versions.short),echo '$(pull)';)
+	@$(foreach version,$(versions.short),echo '$(setup)';)
 	@echo 'source <(< ~/.gpg-agent-info xargs -i echo export {})'
 
 clone pull setup:; @echo '$($@)'

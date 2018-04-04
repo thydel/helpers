@@ -7,7 +7,7 @@
 
   vars:
 
-    default_min_git_version: 2.11.0
+    default_min_git_version: 2.11
     local_min_git_version: '{{ min_git_version | default(default_min_git_version) }}'
 
   tasks:
@@ -21,7 +21,7 @@
 
     - fail:
         msg: min git version is {{ local_min_git_version }}, git version is {{ git_version }}
-      when: git_version | version_compare(local_min_git_version, 'lt')
+      when: git_version is version_compare(local_min_git_version, 'lt')
       check_mode: False
       run_once: True
       delegate_to: localhost
