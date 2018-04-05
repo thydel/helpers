@@ -81,6 +81,7 @@ journals            := Various notes
 journals-indexed    := Various notes wrapped up
 legacy-infra        := Obsolet tools, may contains useful traces
 mail-wrapper	    := Filter input lines for patterns then invoque mail with pattern count in subject
+misc-notes	    := Various notes
 misc-script	    := Various scripts
 git-store-dates	    := Store and restore files modification date
 ifdef NEVER
@@ -102,6 +103,7 @@ ssh-config          := Try to factorize ssh configs
 tmp                 := Temporary zone
 tst		    := Test zone
 private-bookmarks   := Private bookmarks
+private-misc-notes  := Private various notes
 
 # Cloned repos
 
@@ -140,6 +142,7 @@ $~ += journals
 $~ += journals-indexed
 $~ += legacy-infra
 $~ += mail-wrapper
+$~ += misc-notes
 $~ += misc-script
 $~ += git-store-dates
 ifdef NEVER
@@ -163,6 +166,7 @@ $~ += ssh-config
 $~ += tmp
 $~ += tst
 $~ += private-bookmarks
+$~ += private-misc-notes
 
 # Cloned repos
 
