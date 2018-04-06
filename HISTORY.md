@@ -142,3 +142,44 @@ make -C ~/usr/thydel.d -f helpers/thydel.mk thydel
 ```
 
 ## Swap primary and secondary and synchronize again
+
+# Add private-misc-notes
+
+Use [helpers][]
+and edit [github-helper.mk][]
+to [Add private-misc-notes misc-notes][]
+
+Note:
+
+> `misc-notes` was already created but not declared in
+> `github-helper.mk`.  Adding it allows to use `make thydel` on a new
+> node to create all declared repos
+
+[helpers]:
+	https://github.com/thydel/helpers "github.com repos"
+
+[github-helper.mk]:
+	https://github.com/thydel/helpers/blob/master/github-helper.mk "github.com file"
+
+[Add private-misc-notes misc-notes]:
+	https://github.com/thydel/helpers/commit/27bde59c2be6f7dd9c5ea3d4beca2271233ab50f "github.com commit"
+
+```
+./helper.mk install
+github thy create/private-misc-notes
+proot -w ~/usr/thydel.d github thy clone/private-misc-notes
+mk-thydel.mk clean main # Generate thyde.mk from cloned ones
+make -C ~/usr/thydel.d thydel
+```
+
+Use [github.com settings][] to declare [private-misc-notes][] private
+
+TODO:
+
+> Use github API to make a private repos
+
+[github.com settings]:
+	https://github.com/thydel/private-misc-notes/settings "github.com ops"
+
+[private-misc-notes]:
+	https://github.com/thydel/private-misc-notes "github.com repos"
