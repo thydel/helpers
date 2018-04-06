@@ -11,6 +11,7 @@
     - [On primary workstation](#on-primary-workstation)
     - [On secondary workstation](#on-secondary-workstation)
     - [Swap primary and secondary and synchronize again](#swap-primary-and-secondary-and-synchronize-again)
+- [Add private-misc-notes](#add-private-misc-notes)
 
 <!-- markdown-toc end -->
 
