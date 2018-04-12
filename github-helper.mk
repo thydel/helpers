@@ -104,6 +104,7 @@ tmp                 := Temporary zone
 tst		    := Test zone
 private-bookmarks   := Private bookmarks
 private-misc-notes  := Private various notes
+private-plays       := Private plays
 
 # Cloned repos
 
@@ -167,6 +168,7 @@ $~ += tmp
 $~ += tst
 $~ += private-bookmarks
 $~ += private-misc-notes
+$~ += private-plays
 
 # Cloned repos
 
