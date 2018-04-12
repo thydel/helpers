@@ -86,7 +86,7 @@ git-md git-dates:; $@ help
 init-play-dir: .ansible.cfg
 .ansible.cfg  = $(<F) -i localhost, -c local -e repo=$(CURDIR)
 .ansible.cfg += -e use_ssh_config=True
-.ansible.cfg += -e vault_pass=$(or $(vault_pass),vault/epi)
+.ansible.cfg += $(if $(vault), -e vault=$(vault))
 .ansible.cfg += $(if $(use_merge_hash), -e use_merge_hash=True)
 .ansible.cfg += -e use_filter_plugins=True
 .ansible.cfg += $(DRY) $(DIF)

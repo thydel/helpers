@@ -36,7 +36,8 @@
           
           import sys, subprocess
           
-          sys.stdout.write(subprocess.check_output(['pass', '{{ vault_pass | default("vault/epi") }}']))
+          sys.stdout.write(subprocess.check_output(['pass', '{{ "vault/" ~ vault | default(lookup("env", "USER")) }}']))
+
         dest: '{{ repo | default(".") }}/vault-pass.py'
         mode: 0755
       name: Create ansible vault-pass
