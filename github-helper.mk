@@ -31,6 +31,7 @@ ar-vsphere-disk-add := Ansible role to add a disk to a VM via pysphere, then par
 ar-vsphere-if-add   := Ansible role to add an eth iface to a VM via pysphere, then configure it.
 innobackupx-wrapper := Use innobackupx via cron
 misc-play           := Various playbooks
+infra-plays-18      := Infra playbooks public parts, reboot
 
 ~  := epi-repos
 $~ :=
@@ -45,6 +46,7 @@ $~ += ar-vsphere-if-add
 $~ += dispatch-log
 $~ += infra-misc
 $~ += infra-misc-plays
+$~ += infra-plays-18
 $~ += infra-upgrade
 $~ += infra-upgrade.wiki
 $~ += innobackupx-wrapper
