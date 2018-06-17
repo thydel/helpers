@@ -251,6 +251,8 @@ endef
 help += git
 
 define ssh-agent
+echo 'ssh-add ~/.ssh/t.delamare@laposte.net';
+echo 'ssh-add ~/.ssh/t.delamare@epiconcept.fr';
 echo 'env SSH_AUTH_SOCK=/run/user/$$(id -u thy)/user-ssh-agent.socket ssh-add -l';
 echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u thy)/user-ssh-agent.socket';
 echo;
