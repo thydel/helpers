@@ -1,7 +1,8 @@
-<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
 - [To serve as action templates](#to-serve-as-action-templates)
+- [New trim-dupli repos](#new-trim-dupli-repos)
 - [Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`](#migrate-local-mercurial-nsf-pair-to-github-ar-nfs-pair)
 - [Migrate a local mercurial repo to local git repo](#migrate-a-local-mercurial-repo-to-local-git-repo)
 - [Merge selected files from local migrated repo into reorganized git repo](#merge-selected-files-from-local-migrated-repo-into-reorganized-git-repo)
@@ -16,6 +17,17 @@
 <!-- markdown-toc end -->
 
 # To serve as action templates
+
+# New trim-dupli repos
+
+- Edit [github-helper.mk](https://github.com/thydel/helpers/commit/bc0294c691ea5aba195eefd6994f00b73fc016c1)
+
+```bash
+./helper.mk install
+proot -w ~/usr/thydel.d github create/trim-dupli
+proot -w ~/usr/thydel.d github clone/trim-dupli
+mk-thydel.mk clean main
+```
 
 # Migrate local mercurial `nsf-pair` to github `ar-nfs-pair`
 
