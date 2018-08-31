@@ -97,6 +97,8 @@ mini-play	    := misc tentatively autonomous plays
 pysphere-scripts    := misc pysphere scripts
 pyvmomi-scripts     := misc pyvmomi scripts
 
+trim-dupli          := trim duplicity backups
+
 # Privates repos
 
 private-journals    := Various private notes
@@ -158,6 +160,7 @@ $~ += ar-rename-user
 $~ += mini-play
 $~ += pysphere-scripts
 #$~ += pyvmomi-scripts
+$~ += trim-dupli
 
 $~ += $(epi-repos)
 
