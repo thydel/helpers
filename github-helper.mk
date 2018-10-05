@@ -99,6 +99,7 @@ pyvmomi-scripts     := misc pyvmomi scripts
 
 #trim-dupli          := trim duplicity backups
 dupli-tools         := Various duplicity tools
+dupli-node	    := install and configure duplicity
 
 # Privates repos
 
@@ -163,6 +164,7 @@ $~ += pysphere-scripts
 #$~ += pyvmomi-scripts
 #$~ += trim-dupli
 $~ += dupli-tools
+$~ += dupli-node
 
 $~ += $(epi-repos)
 
