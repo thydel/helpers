@@ -38,6 +38,8 @@ $(awk):;
 python :=
 chdir.py := chdir
 python += chdir.py
+yaml2yaml.py := yaml2yaml
+python += yaml2yaml.py
 $(python):;
 
 yml :=
