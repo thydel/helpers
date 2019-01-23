@@ -112,6 +112,7 @@ tst		    := Test zone
 private-bookmarks   := Private bookmarks
 private-misc-notes  := Private various notes
 private-plays       := Private plays
+jsonnet-lib         := Jsonnet lib
 
 # Cloned repos
 
@@ -180,6 +181,7 @@ $~ += tst
 $~ += private-bookmarks
 $~ += private-misc-notes
 $~ += private-plays
+$~ += jsonnet-lib
 
 # Cloned repos
 
