@@ -101,6 +101,7 @@ pyvmomi-scripts     := misc pyvmomi scripts
 dupli-tools         := Various duplicity tools
 dupli-node	    := install and configure duplicity
 gpg-tools           := Various gpg tools
+jsonnet-mab         := Match and bind
 
 # Privates repos
 
@@ -168,6 +169,7 @@ $~ += pysphere-scripts
 $~ += dupli-tools
 $~ += dupli-node
 $~ += gpg-tools
+$~ += jsonnet-mab
 
 $~ += $(epi-repos)
 
