@@ -32,6 +32,7 @@ ar-vsphere-if-add   := Ansible role to add an eth iface to a VM via pysphere, th
 innobackupx-wrapper := Use innobackupx via cron
 misc-play           := Various playbooks
 infra-plays-18      := Infra playbooks public parts, reboot
+infra-play-users    := Plays for infra-data-users
 
 ~  := epi-repos
 $~ :=
@@ -46,6 +47,8 @@ $~ += ar-vsphere-if-add
 $~ += dispatch-log
 $~ += infra-misc
 $~ += infra-misc-plays
+$~ += infra-play-users
+$~ += infra-play-users.wiki
 $~ += infra-plays-18
 $~ += infra-upgrade
 $~ += infra-upgrade.wiki
