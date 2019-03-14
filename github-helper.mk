@@ -35,6 +35,8 @@ misc-play           := Various playbooks
 infra-plays-18      := Infra playbooks public parts, reboot
 infra-play-users    := Plays for infra-data-users
 
+infra-ar-user-create := Ansible role to create a user account and manage user keys
+
 ~  := epi-repos
 $~ :=
 $~ += amr-disk-part
@@ -59,6 +61,9 @@ $~ += innobackupx-wrapper
 $~ += misc-play
 $~ += rsync-pair
 $~ += sort-error-log
+
+$~ += infra-ar-user-create
+$~ += infra-ar-user-create.wiki
 
 
 ap-vmware-utils     := Various ansible playbooks for vmware
