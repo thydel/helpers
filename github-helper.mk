@@ -40,6 +40,7 @@ infra-ar-user-create := Ansible role to create a user account and manage user ke
 infra-remote-logs-FIC := File Integrity Checker for remote logs
 
 ansible-cfg         := Generate ansible.cfg
+ansible-get-priv-repos := Get private data repos
 
 ~  := epi-repos
 $~ :=
@@ -74,6 +75,7 @@ $~ += infra-remote-logs-FIC
 $~ += infra-remote-logs-FIC.wiki
 
 $~ += ansible-cfg
+$~ += ansible-get-priv-repos
 
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-add-users-to-group := Ansible role to add users to a group
