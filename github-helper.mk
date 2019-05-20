@@ -35,6 +35,7 @@ misc-play           := Various playbooks
 infra-plays-18      := Infra playbooks public parts, reboot
 infra-plays-19      := Infra playbooks public parts, reboot
 infra-play-users    := Plays for infra-data-users
+infra-play-clone    := PLay to clone a VM, public parts
 
 infra-ar-user-create := Ansible role to create a user account and manage user keys
 infra-remote-logs-FIC := File Integrity Checker for remote logs
@@ -58,6 +59,7 @@ $~ += dispatch-log
 $~ += infra-misc
 $~ += infra-misc-plays
 $~ += infra-play-users
+$~ += infra-play-clone
 $~ += infra-play-users.wiki
 $~ += infra-plays-18
 $~ += infra-plays-19
