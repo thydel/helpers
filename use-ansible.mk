@@ -10,9 +10,9 @@ $(self):;
 
 base := $(or $(GIT_CLONE_BASE), ~/usr/ext)
 
-stables        := 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7
+stables.short  := 2.4 2.5 2.6 2.7 2.8
+stables        := 1.9 2.0 2.1 2.2 2.3 $(stables.short)
 versions       := $(stables:%=stable-%) devel
-stables.short  := 2.4 2.5 2.6 2.7
 versions.short := $(stables.short:%=stable-%) devel
 
 url := git://github.com/ansible/ansible.git
