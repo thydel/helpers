@@ -252,6 +252,7 @@ echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} pull | dash
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 echo;
 echo "propagate-date --update --verbose --skipd .git .";
+echo 'find -maxdepth 1 -type l | xargs -i echo echo "test -e \$$(readlink {}) \&\& touch -hr \$$(readlink {}) {}" | dash';
 echo;
 echo "parallel echo git {2} {1} master ::: manin wato  ::: pull push"
 endef
