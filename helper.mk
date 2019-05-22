@@ -251,6 +251,8 @@ echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | das
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} pull | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 echo;
+echo "propagate-date --update --verbose --skipd .git .";
+echo;
 echo "parallel echo git {2} {1} master ::: manin wato  ::: pull push"
 endef
 help += git
