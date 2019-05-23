@@ -43,6 +43,8 @@ infra-remote-logs-FIC := File Integrity Checker for remote logs
 ansible-cfg         := Generate ansible.cfg
 ansible-get-priv-repos := Get private data repos
 
+ar-named            := Ansible role to generate named conf
+
 ~  := epi-repos
 $~ :=
 $~ += amr-disk-part
@@ -78,6 +80,8 @@ $~ += infra-remote-logs-FIC.wiki
 
 $~ += ansible-cfg
 $~ += ansible-get-priv-repos
+
+$~ += ar-named
 
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-add-users-to-group := Ansible role to add users to a group
