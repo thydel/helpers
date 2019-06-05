@@ -44,6 +44,7 @@ ansible-cfg         := Generate ansible.cfg
 ansible-get-priv-repos := Get private data repos
 
 ar-named            := Ansible role to generate named conf
+infra-ips           := Manipulates private infra-data-ips
 
 ~  := epi-repos
 $~ :=
@@ -82,6 +83,7 @@ $~ += ansible-cfg
 $~ += ansible-get-priv-repos
 
 $~ += ar-named
+$~ += infra-ips
 
 ap-vmware-utils     := Various ansible playbooks for vmware
 ar-add-users-to-group := Ansible role to add users to a group
