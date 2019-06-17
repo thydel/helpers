@@ -251,6 +251,7 @@ echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} fetch | das
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo echo {}\; git -C {} pull | dash";
 echo "ls -d */.git | cut -d/ -f1 | xargs -i echo git-dates run dates repo={} | dash";
 echo;
+echo "find -maxdepth 1 -type d | xargs touch -d @0";
 echo "propagate-date --update --verbose --skipd .git .";
 echo 'find -maxdepth 1 -type l | xargs -i echo echo "test -e \$$(readlink {}) \&\& touch -hr \$$(readlink {}) {}" | dash';
 echo;
