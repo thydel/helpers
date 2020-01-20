@@ -8,7 +8,7 @@ $(ultimo):;
 
 old-or-young := && echo .adam || echo $(ultimo)
 
-need-adam  = $(or $($(strip $1-need-adam)), $(eval $(strip $1-need-adam := _)) $(eval $(strip $1:: .adam)))
+need-adam  = $(if $($(strip $1-need-adam)),, $(eval $(strip $1-need-adam := _)) $(eval $(strip $1:: .adam)))
 
 lineinfile = $(eval $(strip $2:: $(shell grep -q $1 $2 $(old-or-young)); echo $1 >> $$@))
 lineinfile += $(call need-adam, $2)
