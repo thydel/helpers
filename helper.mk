@@ -103,6 +103,7 @@ define self-help
 echo '$(helper) base-help';
 echo '$(helper) more-help';
 echo '$(helper) env';
+echo 'source <(use-ansible)';
 echo 'source <(helper env)';
 endef
 help += self-help
