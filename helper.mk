@@ -263,10 +263,11 @@ help += git
 
 define git2
 echo;
-echo "find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname | xargs -i echo echo {}\; git -C {} status -sb | dash";
-echo "find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname | xargs -i echo echo {}\; git -C {} fetch | dash";
-echo "find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname | xargs -i echo echo {}\; git -C {} pull | dash";
-echo "find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname | xargs -i echo git-dates run dates repo={} | dash";
+echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
+echo "f | xargs -i echo echo {}\; git -C {} status -sb | dash";
+echo "f | xargs -i echo echo {}\; git -C {} fetch | dash";
+echo "f | xargs -i echo echo {}\; git -C {} pull | dash";
+echo "f | xargs -i echo git-dates run dates repo={} | dash";
 echo;
 endef
 help += git2
