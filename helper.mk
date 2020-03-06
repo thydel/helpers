@@ -134,6 +134,7 @@ echo '$(helper) xrandr';
 echo '$(helper) aptitude';
 echo '$(helper) screen';
 echo '$(helper) x2x';
+echo '$(helper) rg';
 endef
 help += more-help
 
@@ -324,6 +325,11 @@ echo 'ssh -X right.lan x2x -to :0 -east';
 echo 'ssh -X left.lan  x2x -to :0 -west';
 endef
 help += x2x
+
+define rg
+echo 'rgf() { rg -L --no-messages "$$1" | cut -c-$${2:-96}; }';
+endef
+help += rg
 
 $(help):; @$(strip $($@))
 help: $(help);
