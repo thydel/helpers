@@ -262,9 +262,10 @@ echo "parallel echo git {2} {1} master ::: manin wato  ::: pull push"
 endef
 help += git
 
+#echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
 echo;
-echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
+echo "f() { touch .hide.txt; find -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
 echo "f | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "f | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "f | xargs -i echo echo {}\; git -C {} pull | dash";
