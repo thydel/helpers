@@ -115,6 +115,7 @@ echo '$(helper) env';
 echo '$(helper) ansible';
 echo '$(helper) git';
 echo '$(helper) git2';
+echo '$(helper) gh';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) git-dates';
@@ -273,6 +274,13 @@ echo "f | xargs -i echo git-dates run dates repo={} | dash";
 echo;
 endef
 help += git2
+
+define gh
+echo;
+echo "gh() { ln -sf config.yml.${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$@"; }";
+echo;
+endef
+help += gh
 
 define ssh-agent
 echo 'ssh-add ~/.ssh/t.delamare@laposte.net';
