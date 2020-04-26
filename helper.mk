@@ -277,7 +277,11 @@ help += git2
 
 define gh
 echo;
-echo "gh() { ln -sf config.yml.${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$@"; }";
+echo 'gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; }';
+echo 'export GITHUB_USER=thydel';
+echo 'export GITHUB_USER=thyepi';
+echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@laposte.net -F /dev/null'";
+echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@epiconcept.fr -F /dev/null'";
 echo;
 endef
 help += gh
