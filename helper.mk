@@ -115,6 +115,7 @@ echo '$(helper) env';
 echo '$(helper) ansible';
 echo '$(helper) git';
 echo '$(helper) git2';
+echo '$(helper) git3';
 echo '$(helper) gh';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
@@ -267,6 +268,7 @@ help += git
 define git2
 echo;
 echo "f() { touch .hide.txt; find -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
+echo "f | xargs -i echo echo {}\; git -C {} branch -vv | dash";
 echo "f | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "f | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "f | xargs -i echo echo {}\; git -C {} pull | dash";
@@ -274,6 +276,23 @@ echo "f | xargs -i echo git-dates run dates repo={} | dash";
 echo;
 endef
 help += git2
+
+define git3
+echo;
+echo "f() { touch .hide.txt; find -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
+echo "f | xargs -i echo echo {}\; git -C {} branch -vv | dash";
+echo "remote=origin";
+echo "remote=manin";
+echo "remote=wato";
+echo 'f | xargs -i echo echo {}\; git -C {} remote add $$remote git.$$remote:usr/perso.d/{}.git | dash;';
+echo 'f | xargs -i echo echo {}\; git -C {} remote set-head $$remote master | dash';
+echo 'f | xargs -i echo echo {}\; git -C {} branch -u $$remote | dash';
+echo;
+endef
+help += git3
+
+git -C ~/usr/perso.d/$r remote add manin tdews2.manin:usr/perso.d/$r.git
+
 
 define gh
 echo;
