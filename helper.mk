@@ -116,6 +116,7 @@ echo '$(helper) ansible';
 echo '$(helper) git';
 echo '$(helper) git2';
 echo '$(helper) git3';
+echo '$(helper) git-out';
 echo '$(helper) gh';
 echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
@@ -291,8 +292,20 @@ echo;
 endef
 help += git3
 
-git -C ~/usr/perso.d/$r remote add manin tdews2.manin:usr/perso.d/$r.git
-
+git-out.f := git-out() {
+git-out.f += git rev-parse --is-inside-work-tree >&- || return;
+git-out.f += LR=$${LOC_ROOT:?};
+git-out.f += test -d $$LR || { 2>&1 echo no $$LR; return 1; };
+git-out.f += git -C $$LR pull;
+git-out.f += target=$${1:install};
+git-out.f += make $$target LOC_ROOT=$$LR;
+git-out.f += git -C $$LR add .;
+git-out.f += repo=$$(basename -s .git $$(git config --get remote.origin.url));
+git-out.f += git -C $$LR commit -am "Uses make install $$target LOC_ROOT=$$LR from $$repo";
+git-out.f += git -C $$LR push;
+git-out.f += }
+git-out := echo; echo '$(git-out.f)'; echo;
+help += git-out
 
 define gh
 echo;
