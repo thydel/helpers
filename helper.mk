@@ -149,6 +149,7 @@ help += more-help
 define env
 echo 'echo $$PATH | grep ":\.:*" | read || export PATH=$$PATH:~/.local/bin:.';
 echo '# source <(< ~/.gpg-agent-info xargs -i echo export {})';
+echo 'load () { source <(helper $1); }';
 echo 'export TERM=eterm-color';
 echo 'export PAGER=cat';
 echo "export EDITOR='emacsclient -s thy -c'";
