@@ -101,6 +101,7 @@ hg2git:; $($@)
 
 define self-help
 echo '$(helper) base-help';
+echo '$(helper) git-help';
 echo '$(helper) more-help';
 echo '$(helper) env';
 echo 'source <(use-ansible)';
@@ -113,6 +114,13 @@ echo '$(helper) start';
 echo '$(helper) ssh-agent';
 echo '$(helper) env';
 echo '$(helper) ansible';
+echo '$(helper) init-play-dir';
+echo '$(helper) help';
+endef
+help += base-help
+
+define git-help
+echo '$(helper) git-env';
 echo '$(helper) git';
 echo '$(helper) git2';
 echo '$(helper) git3';
@@ -122,15 +130,12 @@ echo '$(helper) git-index-filter';
 echo '$(helper) git-config';
 echo '$(helper) git-dates';
 echo '$(helper) git-md';
-echo '$(helper) init-play-dir';
 echo '$(helper) hg2git hg="" 2git=""';
-echo '$(helper) help';
 endef
-help += base-help
+help += git-help
 
 define more-help
-echo '$(helper) git_env';
-echo '$(helper) ansible_env';
+echo '$(helper) ansible-env';
 echo '$(helper) ansible/help GIT_CLONE_BASE=';
 echo '$(helper) hist';
 echo '$(helper) xrandr';
@@ -194,14 +199,16 @@ help += screen
 
 ################
 
-define git_env
+define git-env
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo "export GIT_EDITOR='emacsclient -s thy -c'";
+echo 'env GIT_SSH_COMMAND="ssh -i $$EPI_SSH_KEY_FILE -F /dev/null" git clone ';
+echo 'env GIT_SSH_COMMAND="ssh -i $$THY_SSH_KEY_FILE -F /dev/null" git clone ';
 endef
-help += git_env
+help += git-env
 
-define ansible_env
+define ansible-env
 echo 'export ANSIBLE_STDOUT_CALLBACK=debug';
 echo 'export ANSIBLE_STDOUT_CALLBACK=default';
 echo 'export ANSIBLE_STDOUT_CALLBACK=dense';
@@ -211,7 +218,7 @@ echo 'export ANSIBLE_STDOUT_CALLBACK=oneline';
 echo 'export ANSIBLE_STDOUT_CALLBACK=selective';
 echo 'unset ANSIBLE_STDOUT_CALLBACK';
 endef
-help += ansible_env
+help += ansible-env
 
 define git-index-filter
 echo 'git-move-whole-tree-in-subdir $$subdir show=1';
