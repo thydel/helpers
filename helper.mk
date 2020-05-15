@@ -306,7 +306,7 @@ git-out.f += git rev-parse --is-inside-work-tree >&- || return;
 git-out.f += LR=$${LOC_ROOT:?};
 git-out.f += test -d $$LR || { 2>&1 echo no $$LR; return 1; };
 git-out.f += git -C $$LR pull;
-git-out.f += target=$${1:install};
+git-out.f += target=$${1:-install};
 git-out.f += make $$target LOC_ROOT=$$LR;
 git-out.f += git -C $$LR add .;
 git-out.f += repo=$$(basename -s .git $$(git config --get remote.origin.url));
