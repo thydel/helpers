@@ -312,7 +312,10 @@ git-out.f += repo=$$(basename -s .git $$(git config --get remote.origin.url));
 git-out.f += git -C $$LR commit -am "Uses make install $$target LOC_ROOT=$$LR from $$repo";
 git-out.f += git -C $$LR push;
 git-out.f += }
-git-out := echo; echo '$(git-out.f)'; echo;
+git-out-func := echo; echo '$(git-out.f)'; echo;
+help += git-out-func
+git-out := echo; echo 'source <(helper git-out-func)';
+git-out += echo declare -f git-out; echo;
 help += git-out
 
 define gh
