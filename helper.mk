@@ -284,6 +284,7 @@ echo "f | xargs -i echo echo {}\; git -C {} fetch | dash";
 echo "f | xargs -i echo echo {}\; git -C {} pull | dash";
 echo "f | xargs -i echo git-dates run dates repo={} | dash";
 echo;
+echo '$$ grep -v "#" /etc/local/peers | xargs -i echo ssh {} git -C $$(pwd) st';
 endef
 help += git2
 
