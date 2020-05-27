@@ -327,6 +327,8 @@ echo 'export GITHUB_USER=thydel';
 echo 'export GITHUB_USER=thyepi';
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@laposte.net -F /dev/null'";
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@epiconcept.fr -F /dev/null'";
+echo "gh issue list -a thyepi -L 99";
+echo "gh issue list -a thyepi -L 99 -l Priority:High";
 echo;
 endef
 help += gh
