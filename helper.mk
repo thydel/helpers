@@ -324,6 +324,9 @@ git-out-help += echo 'source <(helper git-out)';
 git-out-help += echo declare -f git-out; echo;
 help += git-out-help
 
+in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
+GH_LINES := 55
 define gh
 echo;
 echo 'gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; }';
@@ -331,11 +334,28 @@ echo 'export GITHUB_USER=thydel';
 echo 'export GITHUB_USER=thyepi';
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@laposte.net -F /dev/null'";
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@epiconcept.fr -F /dev/null'";
-echo "gh issue list -a thyepi -L 99";
-echo "gh issue list -a thyepi -L 99 -l Priority:High";
+echo;
+echo 'helper color';
+echo 'source ~/usr/extern/nachoparker/xcol/xcol.sh'
+echo;
+echo "GH_LINES=99";
+echo "$(in-emacs)column() { command column -s $$'\t' -t; }";
+echo "color() { xcolorize green '^[[:digit:]]+' red 'Priority:\/[[:alpha:]]+'; }";
+echo;
+echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} | column | color';
+echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l Priority:High | column | color';
 echo;
 endef
 help += gh
+
+define color
+echo;
+echo 'test -d ~/usr/extern/nachoparker/xcol || git -C ~/usr/extern clone git@github.com:nachoparker/xcol.git nachoparker/xcol';
+echo 'proot -w ~/usr/extern ln -sf nachoparker/xcol';
+echo 'source ~/usr/extern/nachoparker/xcol/xcol.sh';
+echo;
+endef
+help += color
 
 define ssh-agent
 echo 'ssh-add ~/.ssh/t.delamare@laposte.net';
