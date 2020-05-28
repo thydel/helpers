@@ -312,7 +312,7 @@ in-emacs := $(and $(INSIDE_EMACS),$$$(space))
 define gc2md
 echo;
 echo "gr2url() { git config --get remote.origin.url | sed -re 's;git@github.com:(.*)[.]git;https://github.com/\1;'; }";
-echo '$(in-emacs)gc2md() { git log -1 --pretty="[%s]:%n$(call spaces,____)$$(gr2url)/commit/%H"; }';
+echo '$(in-emacs)gc2md() { git log -1 --pretty="[%s]:%n$(call spaces,____)$$(gr2url)/commit/%H \"github.com commit\""; }';
 echo;
 endef
 help += gc2md
