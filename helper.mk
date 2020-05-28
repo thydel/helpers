@@ -5,6 +5,7 @@ SHELL := $(shell which bash)
 
 space :=
 space +=
+spaces = $(subst _,$(space),$1)
 
 top: self-help;
 
@@ -127,6 +128,7 @@ echo '$(helper) git-env';
 echo '$(helper) git';
 echo '$(helper) git2';
 echo '$(helper) git3';
+echo '$(helper) gc2md';
 echo '$(helper) git-out';
 echo '$(helper) git-out-help';
 echo '$(helper) gh';
@@ -305,6 +307,17 @@ echo;
 endef
 help += git3
 
+in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
+define gc2md
+echo;
+echo "gr2url() { git config --get remote.origin.url | sed -re 's;git@github.com:(.*)[.]git;https://github.com/\1;'; }";
+echo '$(in-emacs)gc2md() { git log -1 --pretty="[%s]:%n$(call spaces,____)$$(gr2url)/commit/%H"; }';
+echo;
+endef
+help += gc2md
+no-strip += gc2md
+
 git-out.f := git-out() {
 git-out.f += git rev-parse --is-inside-work-tree >&- || return;
 git-out.f += LR=$${LOC_ROOT:?};
@@ -324,14 +337,13 @@ git-out-help += echo 'source <(helper git-out)';
 git-out-help += echo declare -f git-out; echo;
 help += git-out-help
 
-in-emacs := $(and $(INSIDE_EMACS),$$$(space))
-
 GH_LINES := 55
 define gh
 echo;
-echo 'gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; }';
+echo '$(in-emacs)gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; }';
 echo 'export GITHUB_USER=thydel';
 echo 'export GITHUB_USER=thyepi';
+echo 'git config core.sshCommand';
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@laposte.net -F /dev/null'";
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@epiconcept.fr -F /dev/null'";
 echo;
@@ -342,6 +354,7 @@ echo "GH_LINES=99";
 echo "$(in-emacs)column() { command column -s $$'\t' -t; }";
 echo "color() { xcolorize green '^[[:digit:]]+' red 'Priority:\/[[:alpha:]]+'; }";
 echo;
+echo 'gh repo view';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} | column | color';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l Priority:High | column | color';
 echo;
@@ -415,7 +428,7 @@ echo 'rgf() { rg -L --no-messages "$$1" | cut -c-$${2:-96}; }';
 endef
 help += rg
 
-$(help):; @$(strip $($@))
+$(help):; @$(if $(filter $@,$(no-strip)),$($@),$(strip $($@)))
 help: $(help);
 
 .PHONY: top install git-config ansible help $(help)
