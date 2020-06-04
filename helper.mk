@@ -341,6 +341,7 @@ GH_LINES := 55
 define gh
 echo;
 echo '$(in-emacs)gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; }';
+echo 'export -f gh';
 echo 'export GITHUB_USER=thydel';
 echo 'export GITHUB_USER=thyepi';
 echo 'git config core.sshCommand';
