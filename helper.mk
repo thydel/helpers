@@ -282,7 +282,7 @@ help += git
 #echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
 echo;
-echo "f() { touch .hide.txt; find -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
+echo "f() { touch .hide.txt; find -L -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
 echo "f | xargs -i echo echo {}\; git -C {} branch -vv | dash";
 echo "f | xargs -i echo echo {}\; git -C {} status -sb | dash";
 echo "f | xargs -i echo echo {}\; git -C {} fetch | dash";
@@ -293,21 +293,21 @@ echo '$(and $(INSIDE_EMACS),$$$(space))grep -v "#" /etc/local/peers | xargs -i e
 endef
 help += git2
 
+in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
 define git3
 echo;
-echo "f() { touch .hide.txt; find -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
+echo "f() { touch .hide.txt; find -L -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
 echo "f | xargs -i echo echo {}\; git -C {} branch -vv | dash";
 echo "remote=origin";
 echo "remote=manin";
 echo "remote=wato";
-echo 'f | xargs -i echo echo {}\; git -C {} remote add $$remote git.$$remote:usr/perso.d/{}.git | dash;';
-echo 'f | xargs -i echo echo {}\; git -C {} remote set-head $$remote master | dash';
-echo 'f | xargs -i echo echo {}\; git -C {} branch -u $$remote | dash';
+echo '$(in-emacs)f | xargs -i echo echo {}\; git -C {} remote add $$remote git.$$remote:usr/perso.d/{}.git | dash;';
+echo '$(in-emacs)f | xargs -i echo echo {}\; git -C {} remote set-head $$remote master | dash';
+echo '$(in-emacs)f | xargs -i echo echo {}\; git -C {} branch -u $$remote | dash';
 echo;
 endef
 help += git3
-
-in-emacs := $(and $(INSIDE_EMACS),$$$(space))
 
 define gc2md
 echo;
