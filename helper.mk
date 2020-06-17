@@ -360,6 +360,7 @@ echo;
 echo 'gh repo view';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} | column | color';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l Priority:High | column | color';
+echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l sprint | column | color';
 echo;
 endef
 help += gh
