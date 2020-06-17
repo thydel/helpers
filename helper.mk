@@ -351,11 +351,11 @@ echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@laposte.net -F /dev/n
 echo "git config core.sshCommand 'ssh -i ~/.ssh/t.delamare@epiconcept.fr -F /dev/null'";
 echo;
 echo 'helper color';
-echo 'source ~/usr/extern/nachoparker/xcol/xcol.sh'
+echo 'source ~/usr/extern/nachoparker/xcol/xcol.sh';
 echo;
 echo "GH_LINES=99";
 echo "$(in-emacs)column() { command column -s $$'\t' -t; }";
-echo "color() { xcolorize green '^[[:digit:]]+' red 'Priority:\/[[:alpha:]]+'; }";
+echo "$(in-emacs)color() { xcolorize green '^[[:digit:]]+' red 'Priority:\/[[:alpha:]]+' blue '\<sprint\>'; }";
 echo;
 echo 'gh repo view';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} | column | color';
@@ -366,7 +366,7 @@ help += gh
 
 define color
 echo;
-echo 'test -d ~/usr/extern/nachoparker/xcol || git -C ~/usr/extern clone git@github.com:nachoparker/xcol.git nachoparker/xcol';
+echo '$(in-emacs)test -d ~/usr/extern/nachoparker/xcol || git -C ~/usr/extern clone -b xcol_bash git@github.com:nachoparker/xcol.git nachoparker/xcol';
 echo 'proot -w ~/usr/extern ln -sf nachoparker/xcol';
 echo 'source ~/usr/extern/nachoparker/xcol/xcol.sh';
 echo;
