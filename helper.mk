@@ -279,6 +279,8 @@ echo "parallel echo git {2} {1} master ::: manin wato  ::: pull push"
 endef
 help += git
 
+in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
 #echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
 echo;
@@ -290,11 +292,10 @@ echo "f | xargs -i echo echo {}\; git -C {} pull | dash";
 echo "f | xargs -i echo echo {}\; git -C {} config pull.rebase false | dash";
 echo "f | xargs -i echo git-dates run dates repo={} | dash";
 echo;
-echo '$(and $(INSIDE_EMACS),$$$(space))grep -v "#" /etc/local/peers | xargs -i echo ssh {} git -C $$(pwd) st';
+echo "$(in-emacs)grep -q '^# .~$$' .git/info/exclude && echo -e '/^# .~$$/s/..//\nwq' | ed .git/info/exclude";
+echo '$(in-emacs)grep -v "#" /etc/local/peers | xargs -i echo ssh {} git -C $$(pwd) st';
 endef
 help += git2
-
-in-emacs := $(and $(INSIDE_EMACS),$$$(space))
 
 define git3
 echo;
