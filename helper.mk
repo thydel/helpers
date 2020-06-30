@@ -339,6 +339,8 @@ git-out-help += echo 'source <(helper git-out)';
 git-out-help += echo declare -f git-out; echo;
 help += git-out-help
 
+gh-commit-md := [\(.commit.message)]: \(.html_url) \\"github.com commit\\"
+gh-commit-jq := jq -r \'.[0] | \"$(gh-commit-md)\"\'
 GH_LINES := 55
 define gh
 echo;
@@ -361,6 +363,9 @@ echo 'gh repo view';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} | column | color';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l Priority:High | column | color';
 echo '$(in-emacs)gh issue list -a thyepi -L $${GH_LINES:-$(GH_LINES)} -l sprint | column | color';
+echo;
+echo 'gh api';
+echo $$'$(in-emacs)gh api repos/:owner/:repo/commits | $(gh-commit-jq)';
 echo;
 endef
 help += gh
