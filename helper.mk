@@ -126,6 +126,7 @@ help += base-help
 define git-help
 echo '$(helper) git-env';
 echo '$(helper) git';
+echo '$(helper) git+';
 echo '$(helper) git2';
 echo '$(helper) git3';
 echo '$(helper) gc2md';
