@@ -345,8 +345,8 @@ gh-commit-jq := jq -r \'.[0] | \"$(gh-commit-md)\"\'
 GH_LINES := 55
 define gh
 echo;
-echo '$(in-emacs)gh() { ln -sf hosts.$${GITHUB_USER:-Epiconcept-Paris}.yml ~/.config/gh/hosts.yml; command gh "$$@"; echo '$(in-emacs)gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; } # WARNING obsolet';
-}';
+echo '$(in-emacs)gh() { ln -sf hosts.$${GITHUB_USER:-Epiconcept-Paris}.yml ~/.config/gh/hosts.yml; command gh "$$@"; }';
+echo '$(in-emacs)gh() { ln -sf config.yml.$${GITHUB_USER:-thyepi} ~/.config/gh/config.yml; command gh "$$@"; } # WARNING obsolet';
 echo 'export -f gh';
 echo 'export GITHUB_USER=thydel';
 echo 'export GITHUB_USER=Epiconcept-Paris';
