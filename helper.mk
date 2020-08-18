@@ -117,6 +117,7 @@ define base-help
 echo '$(helper) start';
 echo '$(helper) ssh-agent';
 echo '$(helper) env';
+echo '$(helper) path';
 echo '$(helper) ansible';
 echo '$(helper) init-play-dir';
 echo '$(helper) help';
@@ -281,6 +282,14 @@ endef
 help += git
 
 in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
+define path
+echo 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/games';
+echo '$(in-emacs)add_path() { echo $$PATH | grep ":$${1:?}:*" | tr -d : | read || echo PATH=$$PATH:$${1:?}; }';
+echo '$(in-emacs)clean_path() { echo $$PATH | tr : "\n" | grep -v $${1:-ansible} | tr "\n" : | echo PATH=$$(cat); }';
+echo '. <(clean_path)';
+endef
+help += path
 
 #echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
