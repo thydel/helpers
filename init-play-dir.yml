@@ -50,6 +50,7 @@
           [defaults]
           
           # column -t
+          interpreter_python       = auto_legacy_silent
           inventory                = inventory
           hosts                    = default
           vault_password_file      = vault-pass.py
