@@ -115,6 +115,7 @@ help += self-help
 
 define base-help
 echo '$(helper) start';
+echo '$(helper) passi';
 echo '$(helper) ssh-agent';
 echo '$(helper) env';
 echo '$(helper) path';
@@ -282,6 +283,12 @@ endef
 help += git
 
 in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+
+define passi
+echo '$(in-emacs)passi() { env PASSWORD_STORE_GIT=~/.password-store-infra PASSWORD_STORE_DIR=~/.password-store-infra/password-store pass "$$@"; }';
+echo 'untree() { tr -cd [:graph:][:cntrl:] | tail -n +2; }';
+endef
+help += passi
 
 define path
 echo 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/games';
