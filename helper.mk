@@ -116,6 +116,7 @@ help += self-help
 define base-help
 echo '$(helper) start';
 echo '$(helper) passi';
+echo '$(helper) rg';
 echo '$(helper) ssh-agent';
 echo '$(helper) env';
 echo '$(helper) path';
@@ -456,7 +457,7 @@ endef
 help += x2x
 
 define rg
-echo 'rgf() { rg -L --no-messages "$$1" | cut -c-$${2:-96}; }';
+echo '$(in-emacs)rg () { : $${1:?}; local c=96; echo $$1 | grep -E "^[[:digit:]]+$$" && { c=$$1; shift; }; command rg -L --no-messages "$$@" | cut -c-$$c; }';
 endef
 help += rg
 
