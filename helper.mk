@@ -151,6 +151,7 @@ echo '$(helper) hist';
 echo '$(helper) xrandr';
 echo '$(helper) aptitude';
 echo '$(helper) screen';
+echo '$(helper) du-root';
 echo '$(helper) x2x';
 echo '$(helper) rg';
 endef
@@ -206,6 +207,11 @@ define screen
 echo 'pgrep screen | xargs ps hukstart_time | tail -n+2';
 endef
 help += screen
+
+define du-root
+echo 'find / -xdev -mindepth 1 -maxdepth 2 -type d | grep "/.*/" | cut -d/ -f2 | sort -u | xargs du -sh';
+endef
+help += du-root
 
 ################
 
