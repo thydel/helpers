@@ -308,6 +308,7 @@ help += path
 #echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
 echo;
+echo "ls -d */.gmk | cut -d/ -f1 | xargs -i echo gmk -C {} pull | dash";
 echo "f() { touch .hide.txt; find -L -name .hide -prune -o -name .git | grep -v -f .hide.txt | xargs dirname; }";
 echo "f | xargs -i echo echo {}\; git -C {} branch -vv | dash";
 echo "f | xargs -i echo echo {}\; git -C {} status -sb | dash";
