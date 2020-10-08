@@ -339,7 +339,7 @@ help += git3
 define gc2md
 echo;
 echo "gr2url() { git config --get remote.origin.url | sed -re 's;git@github.com:(.*)[.]git;https://github.com/\1;'; }";
-echo '$(in-emacs)gc2md() { git log -1 --pretty="[%s]:%n$(call spaces,____)$$(gr2url)/commit/%H \"github.com commit\""; }';
+echo '$(in-emacs)gc2md() { git log -$${1:-1} --pretty="[%s]:%n$(call spaces,____)$$(gr2url)/commit/%H \"github.com commit\""; }';
 echo '$(in-emacs)gf2url() { git config --get remote.origin.url | cut -d: -f2 | cut -d. -f-1 | xargs -i echo https://github.com/{}/blob/$$(git branch --show-current)/$${1:?}; }';
 echo;
 endef
