@@ -121,6 +121,7 @@ echo '$(helper) ssh-agent';
 echo '$(helper) env';
 echo '$(helper) path';
 echo '$(helper) ansible';
+echo '$(helper) choose-python';
 echo '$(helper) init-play-dir';
 echo '$(helper) help';
 endef
@@ -289,7 +290,7 @@ echo "parallel echo git {2} {1} master ::: manin wato  ::: pull push"
 endef
 help += git
 
-in-emacs := $(and $(INSIDE_EMACS),$$$(space))
+in-emacs = $(and $(INSIDE_EMACS),$(in-tty),$$$(space))
 
 define passi
 echo '$(in-emacs)passi() { env PASSWORD_STORE_GIT=~/.password-store-infra PASSWORD_STORE_DIR=~/.password-store-infra/password-store pass "$$@"; }';
@@ -304,6 +305,16 @@ echo '$(in-emacs)clean_path() { echo $$PATH | tr : "\n" | grep -v $${1:-ansible}
 echo '. <(clean_path)';
 endef
 help += path
+
+define choose-python
+echo;
+echo "version () { ansible --version | cut -d. -f-2 | line | fmt -1 | sed -n 2p; }";
+echo '$(in-emacs)versions () { version | xargs -i echo $${1:?} {} | fmt -1 | sort -V; }';
+echo '$(in-emacs)min-version () { versions $${1:?} | line | xargs -i test $$1 = {}; }';
+echo '$(in-emacs)choose-python () { min-version 2.9 && env ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3 "$$@" || "$$@"; }';
+echo;
+endef
+help += choose-python
 
 #echo "f() { find -name .hide -prune -o -name .git | grep -v .hide | xargs dirname; }";
 define git2
@@ -476,10 +487,12 @@ help: $(help);
 
 DRY := -C
 DIF :=
+in-tty := Y
 
 run := DRY :=
 dif := DIF := -D
+p   := in-tty :=
 
-vartar := run dif
+vartar := run dif p
 
 $(vartar):; @: $(eval $($@))
