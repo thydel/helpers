@@ -28,7 +28,7 @@ github-repo-and-commit-to-js () { (github-repo-to-js; git-commit-to-json "$@") |
 
 github-repo-to-md () { github-repo-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com \(.type) repo\""'; }
 github-commit-to-md () { github-repo-and-commit-to-js "$@" | jq-md-url '"[\(.comment)]:\($s)\(.url)/commit/\(.commit)\($s)\"github.com commit\"\n"'; }
-alias ghc2dm=github-commit-to-md
+alias ghc2md=github-commit-to-md
 
 declare -f
 declare -F | awk '{ print $NF }' | xargs echo export -f
