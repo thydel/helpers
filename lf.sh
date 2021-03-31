@@ -13,7 +13,7 @@ git-branch-or-tag () { if [ "$1" ]; then git tag | grep $1 || fail no $1 tag; el
 git-file-to-url() { xargs -ri echo https://github.com/$(git-repo)/blob/$(git-branch-or-tag "$@")/{}; }
 git-url-to-markdown () { jq -Rr '"\n    " as $s | split("/")[-1] as $p | "[\($p)]:\($s)\(.)\($s)\"github.com file\""'; }
 git-file-to-markdown () { check-tty; git-file-to-url "$@" | git-url-to-markdown; }
-alias gf2url2=git-file-to-markdown
+alias gf2url=git-file-to-markdown
 
 declare -f
 declare -F | awk '{ print $NF }' | xargs echo export -f
