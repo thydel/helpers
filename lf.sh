@@ -27,6 +27,8 @@ git-commit-to-js () { git log -${1:-1} --pretty='{ "comment": "%s", "commit": "%
 github-repo-and-commit-to-js () { (github-repo-to-js; git-commit-to-js "$@") | jq -n 'input as $r | [inputs] | map([$r, .] | add)[]'; }
 
 github-repo-to-md () { github-repo-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com \(.type) repo\""'; }
+alias ghr2md=github-repo-to-md
+
 github-commit-to-md () { github-repo-and-commit-to-js "$@" | jq-md-url '"[\(.comment)]:\($s)\(.url)/commit/\(.commit)\($s)\"github.com commit\"\n"'; }
 alias ghc2md=github-commit-to-md
 
