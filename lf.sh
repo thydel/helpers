@@ -30,6 +30,10 @@ github-repo-to-md () { github-repo-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\(
 github-commit-to-md () { github-repo-and-commit-to-js "$@" | jq-md-url '"[\(.comment)]:\($s)\(.url)/commit/\(.commit)\($s)\"github.com commit\"\n"'; }
 alias ghc2md=github-commit-to-md
 
+relative-file-to-js () { jq -R '{ url: ., name: split(".")[0] | split("_")[2] }'; }
+relative-file-to-md () { check-tty; relative-file-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com relative file\"\n"'; }
+alias rf2md=relative-file-to-md
+
 declare -f
 declare -F | awk '{ print $NF }' | xargs echo export -f
 alias
