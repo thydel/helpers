@@ -36,6 +36,20 @@ relative-file-to-js () { jq -R '{ url: ., name: split(".")[0] | split("_")[2] }'
 relative-file-to-md () { check-tty; relative-file-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com relative file\"\n"'; }
 alias ghrf2md=relative-file-to-md
 
-declare -f
-declare -F | awk '{ print $NF }' | xargs echo export -f
+run-func () { : ${1:?}; declare -f $1; echo "$@"; }
+ssh-run-func () { : ${2:?}; local n=$1; shift; run-func "$@" | ssh $n ${RUN:-bash}; }
+alias srf=ssh-run-func
+
+list () { fmt -1; }
+args () { tr '\n' ' '; }
+apply () { : ${1:?}; read; ${ECHO:+echo} "$@" $REPLY; }
+map () { : ${1:?}; while read; do "$@" ${ECHO:+echo} $REPLY; done; }
+
+func-on-a-line () { declare -f ${1:?} | tac | sed -re '2s/$/;/' -e 's/^ +//' -e 's/ +$//' | tac | args; echo; }
+list-all-func () { declare -F | awk '{ print $NF }'; }
+
+(($#)) && "$@" && exit 0
+
+list-all-func | map func-on-a-line
+list-all-func | args | apply echo export -f
 alias
