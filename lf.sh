@@ -8,7 +8,7 @@ jq-md-url () { jq --argjson s '"\n    "' -r "$1"; }
 github-files () { gh api /repos/:owner/:repo/git/trees/$(git branch --show-current)?recursive=1 | jq -r '.tree|map(.path)[]'; }
 
 github-file-content () { xargs -ri gh api repos/:owner/:repo/contents/{}${1+?ref=$1}; }
-github-url-to-markdown () { jq-md-url '"[\(.path)]:\($s)\(._links.html)\($s)\"github.com file\""'; }
+github-url-to-markdown () { jq-md-url '"[\(.path)]:\($s)\(._links.html)\($s)\"github.com file\"\n"'; }
 github-file-to-markdown () { check-tty; github-file-content "$@" | github-url-to-markdown; }
 alias ghf2md=github-file-to-markdown
 
