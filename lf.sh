@@ -37,9 +37,24 @@ relative-file-to-md () { check-tty; relative-file-to-js | jq-md-url '"[\(.name)]
 alias ghrf2md=relative-file-to-md
 
 list () { fmt -1; }
+lista() { for i in "$@"; do echo "$i"; done; }
+
 args () { tr '\n' ' '; }
 apply () { : ${1:?}; read; ${ECHO:+echo} "$@" $REPLY; }
-map () { : ${1:?}; while read; do "$@" ${ECHO:+echo} $REPLY; done; }
+map () { : ${1:?}; while read; do ${ECHO:+echo} "$@" $REPLY; done; }
+
+macro () { local a=("$@"); declare -f ${a[0]} | sed -e 1s/^${a[0]}/${a[1]}/ -e "$(for ((i=2; i < $#; i++)) { echo s_{$(($i-1))}_${a[$i]}_g; })"; }
+
+load () { source <($@); }
+call () { echo ${1:?} '"$@"'; }
+define () { echo -e ${1:?} "() {"; for i in "${@:2:$(($# - 2))}"; do $i; done; call ${@:$#} ;echo "}"; }
+
+map.arg.in () { for i in "${@:2}"; do [[ "$i" = "$1" ]] && return 0; done; return 1; }
+mapa.arg.replace () { for i in "${@:2}"; do if [ "$i" == '{}' ]; then echo "$1"; else echo "$i"; fi; done ; }
+mapa.arg () { if map.arg.in "$@"; then echo "$@" "$1"; else mapa.arg.replace "$@"; fi; }
+mapa.main () { : ${1:?}; while read; do ${ECHO:+echo} $(mapa.arg "$REPLY" "$@"); done; }
+mapa.lib () { with-funcs map.arg.in mapa.arg.replace mapa.arg mapa.main; }
+load define mapa mapa.lib mapa.main
 
 func-name () { echo ${BASH_ALIASES[${1:?}]:-$1}; }
 show-func-maybe-export () { func-name $1 | { read f; declare -f $f; (($t)) && echo export -f $f || true; }; }
@@ -53,7 +68,9 @@ ssh-forget-ip () { (cd; ssh-keygen -f .ssh/known_hosts -R ${1:?}); }
 ssh-learn-ip () { (cd; ssh-keyscan -H ${1:?} | tee -a .ssh/known_hosts); }
 an-ip-changed () { ssh-forget-ip $1; ssh-learn-ip $1; }
 
-func-on-a-line.awk () { awk 'NR == 1 { ++f; print; next } /; *$/ || /^{/ { --f } f == 1 { print $0 ";"; next } 1'; }
+#func-on-a-line.awk () { awk 'NR == 1 { ++f; print; next } /; *$/ || /^{/ { --f } f == 1 { print $0 ";"; next } 1'; }
+#func-on-a-line.awk () { awk 'NR == 1 || /^ +};$/ { print; getline; print $0 ";"; next } 1'; }
+func-on-a-line.awk () { awk 'f && /^ +};?$/ { print $0 ";"; next } f { --f; print $0 ";"; next } NR == 1 || /^ +};?$/ { print; ++f; next } 1'; }
 func-on-a-line.sed () { sed -r -e 's/^ +//' -e 's/ +$//'; }
 func-on-a-line () { show-func $1 | tac | func-on-a-line.awk | func-on-a-line.sed | tac | args; echo; }
 alias short=func-on-a-line
