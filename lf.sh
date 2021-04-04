@@ -41,7 +41,7 @@ lista() { for i in "$@"; do echo "$i"; done; }
 
 args () { tr '\n' ' '; }
 apply () { : ${1:?}; read; ${ECHO:+echo} "$@" $REPLY; }
-map () { : ${1:?}; while read; do ${ECHO:+echo} "$@" $REPLY; done; }
+map () { : ${1:?}; while read; do ${ECHO:+echo} "$@" "$REPLY"; done; }
 
 macro () { local a=("$@"); declare -f ${a[0]} | sed -e 1s/^${a[0]}/${a[1]}/ -e "$(for ((i=2; i < $#; i++)) { echo s_{$(($i-1))}_${a[$i]}_g; })"; }
 
