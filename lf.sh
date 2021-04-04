@@ -54,7 +54,6 @@ mapa.arg.replace () { for i in "${@:2}"; do if [ "$i" == '{}' ]; then echo "$1";
 mapa.arg () { if map.arg.in "$@"; then echo "$@" "$1"; else mapa.arg.replace "$@"; fi; }
 mapa.main () { : ${1:?}; while read; do ${ECHO:+echo} $(mapa.arg "$REPLY" "$@"); done; }
 mapa.lib () { with-funcs map.arg.in mapa.arg.replace mapa.arg mapa.main; }
-load define mapa mapa.lib mapa.main
 
 func-name () { echo ${BASH_ALIASES[${1:?}]:-$1}; }
 show-func-maybe-export () { func-name $1 | { read f; declare -f $f; (($t)) && echo export -f $f || true; }; }
@@ -63,6 +62,8 @@ export-func () { t=1 show-func-maybe-export $1; }
 run-func () { show-func $1; echo "$@"; }
 with-funcs () { echo "$@" | list | map export-func; }
 alias show=show-func shox=export-func run=run-func with=with-funcs
+
+load define mapa mapa.lib mapa.main
 
 ssh-forget-ip () { (cd; ssh-keygen -f .ssh/known_hosts -R ${1:?}); }
 ssh-learn-ip () { (cd; ssh-keyscan -H ${1:?} | tee -a .ssh/known_hosts); }
