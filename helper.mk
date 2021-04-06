@@ -163,6 +163,12 @@ help += more-help
 # but "head -1" is not similar to "line" because it always exit 0
 #echo 'echo $$PATH | grep ":\.:*" | head -1 > /dev/null || export PATH=$$PATH:~/.local/bin:.';
 
+ifneq ($(HOST), tdelt5)
+SSH_AUTH_SOCK := echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u $$USER)/user-ssh-agent.socket';
+else
+SSH_AUTH_SOCK :=
+endif
+
 define env
 echo 'echo $$PATH | grep ":\.:*" | read || export PATH=$$PATH:~/.local/bin:.';
 echo '# source <(< ~/.gpg-agent-info xargs -i echo export {})';
@@ -173,7 +179,7 @@ echo "export EDITOR='emacsclient -s thy -c'";
 echo 'export GIT_PAGER=cat';
 echo "export GIT_EDITOR='emacsclient -s epi -c'";
 echo "export PASSWORD_STORE_DIR=~/.password-store/";
-echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u $$USER)/user-ssh-agent.socket';
+$(SSH_AUTH_SOCK)
 echo 'export EPI_SSH_KEY_FILE=~/.ssh/t.delamare@epiconcept.fr';
 echo 'export THY_SSH_KEY_FILE=~/.ssh/t.delamare@laposte.net';
 echo '# echo export SSH_AUTH_SOCK=/$$(sudo lsof -a -U -u $$USER -c ssh-agent -Fn -w | tail -1 | cut -d/ -f2-)';
