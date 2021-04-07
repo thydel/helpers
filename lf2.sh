@@ -3,10 +3,14 @@
 declare -A import
 declare -a narg
 declare -A assert
+declare -A awk
 
 f.import () { import[$1]="${@:2:$#}"; }
 f.narg() { narg[$1]+=" ${@:2:$#}"; }
 f.assert() { assert[$1]+="${@:2:$#} "; }
+
+f.awk () { awk[$1]+="${@:2:$#} "; }
+awk.f () { echo "$1 () { awk '${awk[$1]}'; }"; }
 
 fail() { unset -v fail; : "${fail:?$@}"; }
 at-least-one-arg () { (($# - 1 > 0)) || fail ${FUNCNAME[0]} "$@"; }
@@ -19,6 +23,8 @@ lista () { for i in "$@"; do echo "$i"; done; }
 listi () { while read; do for i in $REPLY; do echo "$i"; done; done; }
 list () { (($#)) && lista "$@" || listi; }
 f.import list lista listi
+
+args () { while read; do echo -n "$REPLY "; done; }
 
 map () { while read; do ${ECHO:+echo} "$@" "$REPLY"; done; }
 f.assert at-least-one-arg map
@@ -33,9 +39,17 @@ f.narg 1 an-ip-changed ssh-forget-ip ssh-learn-ip
 show () { declare -f $1; }
 f.narg 1 run
 
+f.awk func-on-a-line.awk 'f && /^ +};?$/ { print $0 ";"; next }'
+f.awk func-on-a-line.awk 'f { --f; print $0 ";"; next } NR == 1 || /^ +};?$/ { print; ++f; next } 1'
+load awk.f func-on-a-line.awk
+func-on-a-line.sed () { sed -r -e 's/^ +//' -e 's/ +$//'; }
+func-on-a-line () { show $1 | tac | func-on-a-line.awk | func-on-a-line.sed | tac | args; echo; }
+
 list-all-func () { declare -F | awk '{ print $NF }'; }
 show-all-func () { list-all-func | map show; }
 f.import show-all-func map show
+
+show-all-func-on-a-line () { list-all-func | map func-on-a-line; }
 
 closure () { { for i in "$@"; do echo $i; closure ${import[$i]}; done; } | sort -u; }
 use () { closure "$@" | map show; }
@@ -59,7 +73,9 @@ load asserts
 
 (($#)) && { "$@"; exit $?; }
 
-show-all-func
+# show-all-func
+show-all-func-on-a-line
 declare -p import
 declare -p narg
 declare -p assert
+declare -p awk
