@@ -44,6 +44,7 @@ f.awk func-on-a-line.awk 'f { --f; print $0 ";"; next } NR == 1 || /^ +};?$/ { p
 load awk.f func-on-a-line.awk
 func-on-a-line.sed () { sed -r -e 's/^ +//' -e 's/ +$//'; }
 func-on-a-line () { show $1 | tac | func-on-a-line.awk | func-on-a-line.sed | tac | args; echo; }
+alias short=func-on-a-line
 
 list-all-func () { declare -F | awk '{ print $NF }'; }
 show-all-func () { list-all-func | map show; }
@@ -57,6 +58,9 @@ f.import use closure map show
 
 run () { use $1; echo "$@"; }
 f.narg 1 run
+
+rem () { run "${@:2:$#}" | ssh $1 bash; }
+f.import rem run
 
 narg () { show $2 | { mapfile; echo "${MAPFILE[@]:0:2}"; echo ': ${'$1':?};'; echo "${MAPFILE[@]:2}"; }; }
 f.narg 2 narg
@@ -79,3 +83,4 @@ declare -p import
 declare -p narg
 declare -p assert
 declare -p awk
+alias
