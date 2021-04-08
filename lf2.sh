@@ -10,11 +10,8 @@ put2 () { local -n __=$1; echo ${__[$2]}; }
 put3 () { local -n __=$1; [[ "$3" ]] && __[$2]+="${@:3:$#} " || unset __[$2]; }
 put () { put1 "$@" && { (($# == 2)) && put2 $1 "${@:2:$#}"; } || { (($# > 2)) && put3 $1 $2 "${@:3:$#}"; }; }
 
-#f.import () { import[$1]="${@:2:$#}"; }
 f.narg() { narg[$1]+=" ${@:2:$#}"; }
-#f.assert() { assert[$1]+="${@:2:$#} "; }
 
-#f.awk () { awk[$1]+="${@:2:$#} "; }
 awk.f () { echo "$1 () { awk '${awk[$1]}'; }"; }
 
 at-least-one-arg () { (($# - 1 > 0)) || fail ${FUNCNAME[0]} "$@"; }
@@ -62,6 +59,7 @@ put import use closure map show
 
 run () { use $1; echo "$@"; }
 f.narg 1 run
+put import run use
 
 rem () { run "${@:2:$#}" | ssh $1 bash; }
 put import rem run
