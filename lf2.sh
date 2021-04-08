@@ -11,6 +11,8 @@ put () { put1 "$@" && { (($# == 2)) && put2 $1 "${@:2:$#}"; } || { (($# > 2)) &&
 txt () { txt= "$@"; }
 cmnt='txt put comment'
 
+import='put import'
+
 $cmnt fail 'fail with an error message without exiting current shell'
 fail() { unset -v fail; : "${fail:?$@}"; }
 
@@ -35,7 +37,7 @@ $cmnt join 'by joining IFS separated words from input whith "$1" (default " ").'
 $cmnt join 'When "$1" is "\n" acts as "split($join)"'
 join () { while read -r; do echo -n "${REPLY}"; echo -ne "${1:-${IFS:0:1}}"; done; }
 args () { join; }
-put import args join
+$import args join
 
 $cmnt split 'converts args to lines of arg'
 split () { for i in "$@"; do echo "$i"; done; }
@@ -43,7 +45,7 @@ put assert check-tty split
 
 $cmnt list 'convert args or lines of args to line of args'
 list () { (($#)) && split "$@"; [[ -t 0 ]] || join '\n'; }
-put import list split join
+$import list split join
 
 ####
 
@@ -54,14 +56,18 @@ ssh-forget-ip () { (cd; ssh-keygen -f .ssh/known_hosts -R $1); }
 ssh-learn-ip () { (cd; ssh-keyscan -H $1 | tee -a .ssh/known_hosts); }
 an-ip-changed () { ssh-forget-ip $1; ssh-learn-ip $1; }
 
-put import an-ip-changed ssh-forget-ip ssh-learn-ip
+$import an-ip-changed ssh-forget-ip ssh-learn-ip
 f.narg 1 an-ip-changed ssh-forget-ip ssh-learn-ip
 
 func-name () { echo ${BASH_ALIASES[${1:?}]:-$1}; }
 show-func-maybe-export () { func-name $1 | { read f; declare -f $f; (($t)) && echo export -f $f || true; }; }
+$import show-func-maybe-export func-name
 show-func () { t=0 show-func-maybe-export $1; }
+$import show-func show-func-maybe-export
 export-func () { t=1 show-func-maybe-export $1; }
+$import export-func show-func-maybe-export
 run-func () { show-func $1; echo "$@"; }
+$import run-func show-func
 with-funcs () { echo "$@" | list | map export-func; }
 alias show=show-func shox=export-func run=run-func with=with-funcs
 
@@ -74,20 +80,24 @@ alias short=func-on-a-line
 
 list-all-func () { declare -F | awk '{ print $NF }'; }
 show-all-func () { list-all-func | map show-func; }
-put import show-all-func map show-func
+$import show-all-func map show-func
 
 show-all-func-on-a-line () { list-all-func | map func-on-a-line; }
 
 closure () { { for i in "$@"; do echo $i; closure ${import[$i]}; done; } | sort -u; }
 use () { closure "$@" | map show-func; }
-put import use closure map show-func
+$import use closure map show-func
+
+use-in-md () { closure "$@" | map func-on-a-line; }
 
 run () { use $1; echo "$@"; }
 f.narg 1 run
-put import run use
+$import run use
 
-rem () { run "${@:2:$#}" | ssh $1 bash; }
-put import rem run
+play () { play=bash "$@"; }
+
+rem () { run "${@:2:$#}" | ssh $1 ${play:-cat}; }
+$import rem run
 
 narg () { show-func $2 | { mapfile; echo "${MAPFILE[@]:0:2}"; echo ': ${'$1':?};'; echo "${MAPFILE[@]:2}"; }; }
 f.narg 2 narg
