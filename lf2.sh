@@ -1,7 +1,10 @@
 #!/bin/bash
 
-declare -A import=() assert=() awk=() help=() comment=()
+#declare -A import=() assert=() awk=() help=() comment=() group=()
 declare -a narg=()
+
+arrays=(import assert awk help comment group)
+for i in ${arrays[@]}; do eval "declare -A $i=()"; done
 
 put1 () { (($# > 1)) || fail "$@" put array var [val]; }
 put2 () { local -n __=$1; echo "${__[$2]}"; }
@@ -39,12 +42,14 @@ join () { while read -r; do echo -n "${REPLY}"; echo -ne "${1:-${IFS:0:1}}"; don
 args () { join; }
 $import args join
 
+words () { while read -r; do split ${REPLY}; done; }
+
 $cmnt split 'converts args to lines of arg'
 split () { for i in "$@"; do echo "$i"; done; }
-put assert check-tty split
+#put assert check-tty split
 
 $cmnt list 'convert args or lines of args to line of args'
-list () { (($#)) && split "$@"; [[ -t 0 ]] || join '\n'; }
+list () { (($#)) && split "$@"; [[ -t 0 ]] || words '\n'; }
 $import list split join
 
 ####
@@ -114,10 +119,14 @@ load asserts
 
 ################
 
+group () { put group ${1:?} | list | map use-in-md; }
+
 apt-alien () { aptitude search '~i(!~ODebian)'; }
 put help apt-alien show installed package not from Debian
 apt-held () { aptitude search "~ahold"; }
 put help apt-held package on hold
+
+put group apt apt-alien apt-held
 
 ################
 
@@ -158,5 +167,6 @@ alias ghrf2md=relative-file-to-md
 
 # show-all-func
 show-all-func-on-a-line
-declare -p import narg assert awk help comment
+#declare -p import narg assert awk help comment
+declare -p ${arrays[@]}
 alias
