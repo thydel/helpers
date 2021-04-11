@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#declare -A import=() assert=() awk=() help=() comment=() group=()
 declare -a narg=()
 
 arrays=(import assert awk help comment group)
@@ -34,7 +33,6 @@ put assert at-least-one-arg load
 
 ####
 
-
 $cmnt join 'convert lines of args to line of args '
 $cmnt join 'by joining IFS separated words from input whith "$1" (default " ").'$'\n'
 $cmnt join 'When "$1" is "\n" acts as "split($join)"'
@@ -57,6 +55,12 @@ $import list split join
 map () { while read; do ${ECHO:+echo} "$@" "$REPLY"; done; }
 put assert at-least-one-arg map
 
+mapr.arg.in () { for i in "${@:2}"; do [[ "$i" = "$1" ]] && return 0; done; return 1; }
+mapr.arg.replace () { for i in "${@:2}"; do if [ "$i" == '{}' ]; then echo "$1"; else echo "$i"; fi; done ; }
+mapr.arg () { if mapr.arg.in "$@"; then echo "$@" "$1"; else mapr.arg.replace "$@"; fi; }
+mapr () {  while read; do ${ECHO:+echo} $(mapr.arg "$REPLY" "$@"); done; }
+$import mapr mapr.arg mapr.arg.replace mapr.arg.in
+
 ssh-forget-ip () { (cd; ssh-keygen -f .ssh/known_hosts -R $1); }
 ssh-learn-ip () { (cd; ssh-keyscan -H $1 | tee -a .ssh/known_hosts); }
 an-ip-changed () { ssh-forget-ip $1; ssh-learn-ip $1; }
@@ -74,7 +78,7 @@ $import export-func show-func-maybe-export
 run-func () { show-func $1; echo "$@"; }
 $import run-func show-func
 with-funcs () { echo "$@" | list | map export-func; }
-alias show=show-func shox=export-func run=run-func with=with-funcs
+alias show=show-func shox=export-func with=with-funcs
 
 put awk func-on-a-line.awk 'f && /^ +};?/ { print $0 ";"; next }'
 put awk func-on-a-line.awk 'f { --f; print $0 ";"; next } NR == 1 || /^ +};?/ { print; ++f; next } 1'
@@ -88,6 +92,11 @@ show-all-func () { list-all-func | map show-func; }
 $import show-all-func map show-func
 
 show-all-func-on-a-line () { list-all-func | map func-on-a-line; }
+
+with-var () { declare -n v=$1; echo $1=${v@Q}; shift; "$@"; }
+
+local-vars () { for n in "$@"; do declare -n v=$n; echo local $n=${v@Q}; done; }
+add-vars () { declare -f $1 | { mapfile; echo "${MAPFILE[@]:0:2}"; local-vars "${@:2:$#}"; echo "${MAPFILE[@]:2}"; }; }
 
 closure () { { for i in "$@"; do echo $i; closure ${import[$i]}; done; } | sort -u; }
 use () { closure "$@" | map show-func; }
