@@ -172,6 +172,21 @@ relative-file-to-js () { jq -R '{ url: ., name: split(".")[0] | split("_")[2] }'
 relative-file-to-md () { check-tty; relative-file-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com relative file\"\n"'; }
 alias ghrf2md=relative-file-to-md
 
+################
+
+edit-func () { local a=("$@"); source <(declare -f ${a[0]} | sed -e "$(for ((i=1; i < $#; i++)) { echo s_{$i}_${a[$i]}_g; })"); }
+new () { local w={1} g={2} t={3} r=$1 d=$2; (cd $w; gh repo create $g/$r --private -y -p $g/$t; gh api /repos/$g/$r --raw-field description="$d"); }
+unset -f edit-func new
+
+in-dir () { (cd $1; shift; "$@"); }
+
+gh-private () { local gh_private=--private; "$@"; }
+gh-create-repo () { gh repo create $1/$2 -y ${gh_private---public} -p $1/$3 -d "${4:-No description yet}"; }
+gh-create-thydel-repo () { in-dir ~/tmp gh-create-repo thydel "$1" template-minimal "$2" "$3"; }
+gh-create-thyepi-repo () { in-dir ~/tmp gh-private gh-create-repo Epiconcept-Paris "$1" thy-template "$2" "$3"; }
+
+################
+
 (($#)) && { "$@"; exit $?; }
 
 # show-all-func
