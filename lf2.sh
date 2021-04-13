@@ -159,7 +159,7 @@ git-file-to-markdown () { check-tty; git-file-to-url "$@" | git-url-to-markdown;
 alias gf2md=git-file-to-markdown
 
 github-repo-to-js () { gh api repos/:owner/:repo | jq '{ name, user: .owner.login, url: .html_url, type: (if .private then "private" else "public" end) }'; }
-git-commit-to-js () { git log -${1:-1} --pretty='{ "comment": "%s", "commit": "%H" }'; }
+git-commit-to-js () { git log -${1:-1} --pretty='%s%n%H' | jq -Rn '[inputs] | { comment: .[0], commit: .[1] }'; }
 github-repo-and-commit-to-js () { (github-repo-to-js; git-commit-to-js "$@") | jq -n 'input as $r | [inputs] | map([$r, .] | add)[]'; }
 
 github-repo-to-md () { github-repo-to-js | jq-md-url '"[\(.name)]:\($s)\(.url)\($s)\"github.com \(.type) repo\""'; }
