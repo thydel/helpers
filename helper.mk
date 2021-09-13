@@ -163,7 +163,7 @@ help += more-help
 # but "head -1" is not similar to "line" because it always exit 0
 #echo 'echo $$PATH | grep ":\.:*" | head -1 > /dev/null || export PATH=$$PATH:~/.local/bin:.';
 
-ifneq ($(HOST), tdelt5)
+ifneq (T, $(if $(filter $(HOST), tdelt5, tdelt2),T))
 SSH_AUTH_SOCK := echo 'export SSH_AUTH_SOCK=/run/user/$$(id -u $$USER)/user-ssh-agent.socket';
 else
 SSH_AUTH_SOCK :=
